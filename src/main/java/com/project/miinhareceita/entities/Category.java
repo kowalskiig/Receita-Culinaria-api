@@ -4,6 +4,9 @@ package com.project.miinhareceita.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +22,6 @@ public class Category {
 
     private String name;
 
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes = new HashSet<>();
 }
