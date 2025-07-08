@@ -60,7 +60,7 @@ public class UserServiceTest {
             }
         };
         existsUserProjection.add(detailsProjection);
-        
+
         Mockito.when(repository.searchUserAndRolesByEmail(existingEmail)).thenReturn(existsUserProjection);
 
         Mockito.when(repository.searchUserAndRolesByEmail(nonExistingEmail)).thenThrow(UsernameNotFoundException.class);
