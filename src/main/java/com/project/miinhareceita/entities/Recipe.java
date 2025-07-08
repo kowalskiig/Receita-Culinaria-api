@@ -46,6 +46,10 @@ public class Recipe {
     @OneToMany(mappedBy = "id.recipe")
     private Set<RecipeIngredients> ingredients = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 
 

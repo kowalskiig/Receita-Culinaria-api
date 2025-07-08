@@ -1,12 +1,12 @@
 package com.project.miinhareceita.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +27,16 @@ public class User {
 	private String email;
 	private String password;
 
+	@ManyToMany
+	@JoinTable(name = "tb_user_role",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+
+	@OneToMany(mappedBy = "user")
+	private List<Review> reviews = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user")
+	private List<Recipe> recipes = new ArrayList<>();
 }
 	

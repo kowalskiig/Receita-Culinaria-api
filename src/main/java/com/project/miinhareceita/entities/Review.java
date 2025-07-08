@@ -33,6 +33,10 @@ public class Review {
     @JoinColumn(name = "recipe_id")
     private Recipe recipes;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 
 }
