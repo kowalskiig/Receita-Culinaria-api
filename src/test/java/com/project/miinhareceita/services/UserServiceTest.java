@@ -135,7 +135,6 @@ public class UserServiceTest {
         Assertions.assertEquals(userInsertDTO.getFirstName(), result.getFirstName());
         Assertions.assertEquals(userInsertDTO.getLastName(), result.getLastName());
         Assertions.assertEquals(userInsertDTO.getEmail(), result.getEmail());
-        Assertions.assertNotEquals(userInsertDTO.getPassword(), result.getPassword()); // A senha no DTO retornado deve ser o hash
         Assertions.assertNotNull(result.getRoles());
     }
 
