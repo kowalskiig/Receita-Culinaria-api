@@ -27,6 +27,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired AuthService authService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -58,6 +60,12 @@ public class UserService implements UserDetailsService {
         return new UserDTO(recieveUser);
     }
 
+    @Transactional(readOnly = true)
+    public UserDTO findMe() {
+        User obj = authService.authenticated();
+        return new UserDTO(obj);
+    }
+
 
 
     private User copyDtoToEntity(UserDTO dto){
@@ -73,4 +81,6 @@ public class UserService implements UserDetailsService {
         Role role = roleRepository.findByAuthority(roleName);
         return role;
     }
+
+
 }
