@@ -24,4 +24,9 @@ public class Ingredients {
 
     @OneToMany(mappedBy = "id.ingredients")
     private Set<RecipeIngredients> ingredients = new HashSet<>();
+
+    public Ingredients(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
