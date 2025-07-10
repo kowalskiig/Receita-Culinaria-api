@@ -1,6 +1,7 @@
 package com.project.miinhareceita.dtos;
 
 import com.project.miinhareceita.entities.User;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

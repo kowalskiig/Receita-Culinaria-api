@@ -4,8 +4,13 @@ import com.project.miinhareceita.dtos.IngredientDTO;
 import com.project.miinhareceita.entities.Ingredients;
 import com.project.miinhareceita.projections.IngredientProjection;
 import com.project.miinhareceita.repositories.IngredientsRepository;
+import com.project.miinhareceita.services.exceptions.DatabaseException;
+import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
@@ -19,7 +24,9 @@ public class IngredientService {
 
     @Transactional
     public IngredientDTO insertIngredient(IngredientDTO dto){
-        Ingredients entity = copyDTODataToEntity(dto);
+        Ingredients entity = new Ingredients();
+        copyDTODataToEntity(dto, entity);
+
         entity = repository.save(entity);
         return  new IngredientDTO(entity);
     }
@@ -34,12 +41,35 @@ public class IngredientService {
                 .collect(Collectors.toList());
     }
 
-
-
-    private Ingredients copyDTODataToEntity(IngredientDTO dto){
-        Ingredients ingredients = new Ingredients();
-        ingredients.setId(dto.getId());
-        ingredients.setName(dto.getName());
-        return ingredients;
+    @Transactional(readOnly = false)
+    public IngredientDTO updateIngredient(Long id,IngredientDTO dto) {
+        try {
+            Ingredients entity = repository.getReferenceById(id);
+            copyDTODataToEntity(dto,entity);
+            entity = repository.save(entity);
+            return new IngredientDTO(entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id não encontrado " + id);
+        }
     }
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void deleteIngredientById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
+        try {
+            repository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
+        }
+    }
+
+    private void copyDTODataToEntity(IngredientDTO dto, Ingredients entity){
+        entity.setName(dto.getName());
+    }
+
+
+
 }
