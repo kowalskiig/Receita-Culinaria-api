@@ -81,6 +81,14 @@ public class RecipeService {
         return new RecipeDTO(recipe);
     }
 
+    @Transactional
+    public RecipeDTO findRecipeById(Long recipeId){
+        Recipe recipe =  repository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
+
+        return new RecipeDTO(recipe);
+    }
+
     private void copyDtoToEntity(Recipe recipe,RecipeDTO dto){
         recipe.setId(dto.getId());
         recipe.setTitle(dto.getTitle());

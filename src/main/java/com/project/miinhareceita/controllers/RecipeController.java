@@ -37,4 +37,10 @@ public class RecipeController {
         return ResponseEntity.created(uri).body(result);
 
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RecipeDTO> findReceiveById(@PathVariable Long id){
+        RecipeDTO result = recipeService.findRecipeById(id);
+        return ResponseEntity.ok(result);
+    }
 }

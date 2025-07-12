@@ -1,6 +1,7 @@
 package com.project.miinhareceita.controllers;
 
 import com.project.miinhareceita.dtos.IngredientDTO;
+import com.project.miinhareceita.dtos.RecipeDTO;
 import com.project.miinhareceita.services.IngredientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,7 @@ public class IngredientController {
        service.deleteIngredientById(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
 
