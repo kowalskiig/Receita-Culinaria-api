@@ -4,7 +4,9 @@ package com.project.miinhareceita.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -23,10 +25,12 @@ public class Ingredients {
 
 
     @OneToMany(mappedBy = "id.ingredients")
-    private Set<RecipeIngredients> ingredients = new HashSet<>();
+    private List<RecipeIngredients> ingredients = new ArrayList<>();
 
     public Ingredients(Long id, String name) {
         this.id = id;
         this.name = name;
     }
+
+
 }

@@ -5,17 +5,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+
+
 @Entity
 @Table(name ="tb_recipe")
 public class Recipe {
@@ -46,11 +40,122 @@ public class Recipe {
     @OneToMany(mappedBy = "id.recipe")
     private Set<RecipeIngredients> ingredients = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Recipe(){
+
+    }
+
+    public Recipe(User user, String urlImg, Instant publicationDate, Integer rendiment, String instructions, Integer timeMinutes, String shortDescription, String title, Long id) {
+        this.user = user;
+        this.urlImg = urlImg;
+        this.publicationDate = publicationDate;
+        this.rendiment = rendiment;
+        this.instructions = instructions;
+        this.timeMinutes = timeMinutes;
+        this.shortDescription = shortDescription;
+        this.title = title;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<RecipeIngredients> getIngredients() {
+        return ingredients;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
 
 
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
+    }
+
+    public Instant getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(Instant publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public Integer getRendiment() {
+        return rendiment;
+    }
+
+    public void setRendiment(Integer rendiment) {
+        this.rendiment = rendiment;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public Integer getTimeMinutes() {
+        return timeMinutes;
+    }
+
+    public void setTimeMinutes(Integer timeMinutes) {
+        this.timeMinutes = timeMinutes;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(id, recipe.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

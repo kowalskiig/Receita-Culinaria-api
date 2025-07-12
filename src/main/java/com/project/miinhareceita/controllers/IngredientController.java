@@ -48,6 +48,5 @@ public class IngredientController {
        service.deleteIngredientById(id);
         return ResponseEntity.noContent().build();
     }
-
 }
 

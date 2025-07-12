@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,14 +27,6 @@ public class User implements UserDetails {
 	private String email;
 	private String password;
 
-	public User(Long id, String firstName, String lastName, String email, String password) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-	}
-
 	@ManyToMany
 	@JoinTable(name = "tb_user_role",
 			joinColumns = @JoinColumn(name = "user_id"),
@@ -45,6 +38,15 @@ public class User implements UserDetails {
 
 	@OneToMany(mappedBy = "user")
 	private List<Recipe> recipes = new ArrayList<>();
+
+
+	public User(Long id, String firstName, String lastName, String email, String password) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

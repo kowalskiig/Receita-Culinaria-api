@@ -5,14 +5,10 @@ import com.project.miinhareceita.entities.Recipe;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+import java.util.Objects;
+
 @Embeddable
-@EqualsAndHashCode
 public class RecipeIngredientsPk {
 
         @ManyToOne
@@ -23,6 +19,35 @@ public class RecipeIngredientsPk {
         @JoinColumn(name = "ingredients_id")
         private Ingredients ingredients;
 
+        public RecipeIngredientsPk() {
+        }
 
 
-    }
+        public Recipe getRecipe() {
+                return recipe;
+        }
+
+        public void setRecipe(Recipe recipe) {
+                this.recipe = recipe;
+        }
+
+        public Ingredients getIngredients() {
+                return ingredients;
+        }
+
+        public void setIngredients(Ingredients ingredients) {
+                this.ingredients = ingredients;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+                if (o == null || getClass() != o.getClass()) return false;
+                RecipeIngredientsPk that = (RecipeIngredientsPk) o;
+                return Objects.equals(recipe, that.recipe) && Objects.equals(ingredients, that.ingredients);
+        }
+
+        @Override
+        public int hashCode() {
+                return Objects.hash(recipe, ingredients);
+        }
+}
