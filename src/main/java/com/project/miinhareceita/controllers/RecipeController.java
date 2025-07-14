@@ -39,8 +39,14 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RecipeDTO> findReceiveById(@PathVariable Long id){
+    public ResponseEntity<RecipeDTO> findRecipeById(@PathVariable Long id){
         RecipeDTO result = recipeService.findRecipeById(id);
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RecipeDTO> updateRecipeById(@PathVariable Long id, @Valid @RequestBody RecipeDTO dto){
+        RecipeDTO result = recipeService.updateRecipe(id, dto);
         return ResponseEntity.ok(result);
     }
 }

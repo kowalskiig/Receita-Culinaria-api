@@ -7,9 +7,6 @@ import lombok.*;
 import java.time.Instant;
 import java.util.*;
 
-
-
-
 @Entity
 @Table(name ="tb_recipe")
 public class Recipe {
@@ -37,7 +34,7 @@ public class Recipe {
     @OneToMany(mappedBy = "recipes")
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.recipe")
+    @OneToMany(mappedBy = "id.recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RecipeIngredients> ingredients = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
