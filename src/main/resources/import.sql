@@ -107,18 +107,18 @@ INSERT INTO tb_recipe_ingredients (recipe_id, ingredients_id, quantity, price) V
 INSERT INTO tb_recipe_ingredients (recipe_id, ingredients_id, quantity, price) VALUES (6, 4, 3, 1.80);    -- Ovo (ID 4)
 INSERT INTO tb_recipe_ingredients (recipe_id, ingredients_id, quantity, price) VALUES (6, 6, 150, 4.50);  -- Manteiga (ID 6)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Muito bom para um lanche rápido e diferente!', '2025-07-07T23:30:00Z', 1, 1); -- Onigiri (User 1)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Muito bom para um lanche rápido e diferente!', TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 1); -- Onigiri (User 1)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5, 'Receita de tacos perfeita! Fácil de fazer e super saborosa para a família.', '2025-07-07T23:45:00Z', 2, 2); -- Tacos de Carne Moída (User 2)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5, 'Receita de tacos perfeita! Fácil de fazer e super saborosa para a família.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 2, 2); -- Tacos de Carne Moída (User 2)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5, 'A lasanha ficou incrível, um verdadeiro almoço de domingo! Valeu cada minuto.', '2025-07-08T10:00:00Z', 3, 1); -- Lasanha à Bolonhesa (User 1)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5, 'A lasanha ficou incrível, um verdadeiro almoço de domingo! Valeu cada minuto.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 3, 1); -- Lasanha à Bolonhesa (User 1)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Smoothie refrescante e saudável. Adorei a combinação de frutas.', '2025-07-08T08:15:00Z', 4, 2); -- Smoothie de Frutas Vermelhas (User 2)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Smoothie refrescante e saudável. Adorei a combinação de frutas.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 4, 2); -- Smoothie de Frutas Vermelhas (User 2)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Sopa de lentilha muito reconfortante, ótima para um dia frio.', '2025-07-08T17:00:00Z', 5, 1); -- Sopa de Lentilha (User 1)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Sopa de lentilha muito reconfortante, ótima para um dia frio.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 5, 1); -- Sopa de Lentilha (User 1)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5, 'O brownie ficou sensacional, exatamente como eu gosto: crocante por fora e macio por dentro!', '2025-07-08T20:30:00Z', 6, 2); -- Brownie de Chocolate (User 2)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5, 'O brownie ficou sensacional, exatamente como eu gosto: crocante por fora e macio por dentro!',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 6, 2); -- Brownie de Chocolate (User 2)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (3, 'O Onigiri é bom, mas o recheio não me agradou muito. Prefiro simples.', '2025-07-08T11:00:00Z', 1, 2); -- Onigiri (segunda review - User 2)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (3, 'O Onigiri é bom, mas o recheio não me agradou muito. Prefiro simples.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 2); -- Onigiri (segunda review - User 2)
 
-INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Demorou um pouco para preparar, mas o resultado final da lasanha compensou.', '2025-07-08T15:00:00Z', 3, 1); -- Lasanha à Bolonhesa (segunda review - User 1)
+INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Demorou um pouco para preparar, mas o resultado final da lasanha compensou.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 3, 1); -- Lasanha à Bolonhesa (segunda review - User 1)

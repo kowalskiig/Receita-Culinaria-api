@@ -47,6 +47,7 @@ public class RecipeService {
         if(!"".equals(categoriesId)){
             listCat = Arrays.asList(categoriesId.split(",")).stream().map(Long::parseLong).toList();
         }
+
         List<Long> listIngred = Arrays.asList();
         if(!"".equals(ingredientsId)){
             listIngred = Arrays.asList(ingredientsId.split(",")).stream().map(Long::parseLong).toList();
