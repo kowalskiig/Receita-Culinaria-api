@@ -8,6 +8,8 @@ import com.project.miinhareceita.projections.ReviewProjections;
 import com.project.miinhareceita.repositories.RecipeRepository;
 import com.project.miinhareceita.repositories.ReviewRepository;
 import com.project.miinhareceita.repositories.UserRepository;
+import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,9 +17,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -29,6 +31,9 @@ public class ReviewService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthService authService;
 
 
     @Transactional(readOnly = true)
@@ -56,6 +61,33 @@ public class ReviewService {
 
 
         return new PageImpl<>(result, pageable, pageable.getPageSize());
+    }
+
+    @Transactional(readOnly = false)
+    public ReviewDTO insertReview(Long recipeId, ReviewDTO dto){
+        try{
+
+            Review review = new Review();
+            review.setRecipes(recipeRepository.getReferenceById(recipeId));
+
+            review.setDataReview(Instant.now());
+            review.setUser(authService.authenticated());
+            copyToEntity(review, dto);
+
+            review = repository.save(review);
+            return new ReviewDTO(review);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + recipeId);
+        }
+
+
+
+    }
+
+    private void copyToEntity(Review review, ReviewDTO dto){
+        review.setNota(dto.getNota());
+        review.setComment(dto.getComment());
     }
 
 }

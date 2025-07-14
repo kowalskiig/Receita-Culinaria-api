@@ -1,6 +1,9 @@
 package com.project.miinhareceita.dtos;
 
 import com.project.miinhareceita.entities.Review;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +14,12 @@ import java.time.Instant;
 public class ReviewDTO {
     private Long id;
 
-
+    @Min(value = 1, message = "A nota deve ser no mínimo 1")
+    @Max(value = 5, message = "A nota deve ser no máximo 5")
     private Integer nota;
+    @NotBlank
     private String comment ;
+
     private Instant data_review;
     private RecipeMinDTO recipe;
     private UserMinDTO user;
