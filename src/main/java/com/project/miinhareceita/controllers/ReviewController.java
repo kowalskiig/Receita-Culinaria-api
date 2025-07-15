@@ -1,6 +1,5 @@
 package com.project.miinhareceita.controllers;
 
-import com.project.miinhareceita.dtos.RecipeDTO;
 import com.project.miinhareceita.dtos.ReviewDTO;
 import com.project.miinhareceita.services.ReviewService;
 import jakarta.validation.Valid;
@@ -33,6 +32,12 @@ public class ReviewController {
                 .buildAndExpand(result.getId()).toUri();
         return ResponseEntity.created(uri).body(result);
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> findReviewByRecipeId(@PathVariable Long id){
+         service.deleteReview(id);
+        return ResponseEntity.noContent().build();
     }
 }
 

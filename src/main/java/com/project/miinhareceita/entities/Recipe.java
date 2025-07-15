@@ -37,7 +37,7 @@ public class Recipe {
     @OneToMany(mappedBy = "id.recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RecipeIngredients> ingredients = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 

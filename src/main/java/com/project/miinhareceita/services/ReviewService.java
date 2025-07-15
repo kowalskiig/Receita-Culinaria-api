@@ -8,13 +8,17 @@ import com.project.miinhareceita.projections.ReviewProjections;
 import com.project.miinhareceita.repositories.RecipeRepository;
 import com.project.miinhareceita.repositories.ReviewRepository;
 import com.project.miinhareceita.repositories.UserRepository;
+import com.project.miinhareceita.services.exceptions.DatabaseException;
+import com.project.miinhareceita.services.exceptions.ForbiddenException;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
@@ -84,6 +88,23 @@ public class ReviewService {
 
 
     }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteReview(Long id){
+        Review review = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+            if(!authService.authenticated().getId().equals(review.getUser().getId())){
+                throw new ForbiddenException("Não tem permissão para isso");
+            }
+            
+            try {
+                repository.deleteById(id);
+            }
+            catch (DataIntegrityViolationException e) {
+                throw new DatabaseException("Falha de integridade referencial");
+            }
+    }
+
 
     private void copyToEntity(Review review, ReviewDTO dto){
         review.setNota(dto.getNota());
