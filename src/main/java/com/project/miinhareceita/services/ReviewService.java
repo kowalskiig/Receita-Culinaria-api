@@ -96,13 +96,27 @@ public class ReviewService {
             if(!authService.authenticated().getId().equals(review.getUser().getId())){
                 throw new ForbiddenException("Não tem permissão para isso");
             }
-            
+
             try {
                 repository.deleteById(id);
             }
             catch (DataIntegrityViolationException e) {
                 throw new DatabaseException("Falha de integridade referencial");
             }
+    }
+
+    @Transactional
+    public ReviewDTO updateReview(Long id, ReviewDTO dto){
+        Review review = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        if(!authService.authenticated().getId().equals(review.getUser().getId())){
+            throw new ForbiddenException("Não tem permissão para isso");
+        }
+            review = repository.getReferenceById(id);
+            copyToEntity(review,dto);
+            review = repository.save(review);
+            return new ReviewDTO(review);
+
     }
 
 
