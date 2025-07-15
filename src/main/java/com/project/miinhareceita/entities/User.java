@@ -39,6 +39,8 @@ public class User implements UserDetails {
 	@OneToMany(mappedBy = "user")
 	private List<Recipe> recipes = new ArrayList<>();
 
+	@OneToMany(mappedBy = "id.user")
+	private List<Favorite> favorites = new ArrayList<>();
 
 	public User(Long id, String firstName, String lastName, String email, String password) {
 		this.id = id;

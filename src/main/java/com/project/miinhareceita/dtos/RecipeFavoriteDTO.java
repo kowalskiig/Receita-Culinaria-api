@@ -1,0 +1,39 @@
+package com.project.miinhareceita.dtos;
+
+
+import com.project.miinhareceita.entities.Recipe;
+
+import java.time.Instant;
+
+public class RecipeFavoriteDTO {
+        private Long id;
+        private String title;
+        private Instant publicationDate;
+        private String urlImg;
+
+
+        public RecipeFavoriteDTO(){}
+
+        public RecipeFavoriteDTO(Recipe recipe) {
+            id = recipe.getId();
+            title = recipe.getTitle();
+            publicationDate = recipe.getPublicationDate();
+            urlImg = recipe.getUrlImg();
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public String getUrlImg() {
+            return urlImg;
+        }
+
+        public Instant getPublicationDate() {
+            return publicationDate;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+}

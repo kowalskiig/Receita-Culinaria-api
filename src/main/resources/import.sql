@@ -122,3 +122,11 @@ INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (5
 INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (3, 'O Onigiri é bom, mas o recheio não me agradou muito. Prefiro simples.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 2); -- Onigiri (segunda review - User 2)
 
 INSERT INTO tb_review (nota, comment, data_review, recipe_id, user_id) VALUES (4, 'Demorou um pouco para preparar, mas o resultado final da lasanha compensou.',  TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 3, 1); -- Lasanha à Bolonhesa (segunda review - User 1)
+
+INSERT INTO tb_favorite (user_id, recipe_id) VALUES (1, 1);
+INSERT INTO tb_favorite (user_id, recipe_id) VALUES (1, 3);
+
+
+INSERT INTO tb_favorite (user_id, recipe_id) VALUES (2, 2);
+INSERT INTO tb_favorite (user_id, recipe_id) VALUES (2, 4);
+INSERT INTO tb_favorite (user_id, recipe_id) VALUES (2, 6);

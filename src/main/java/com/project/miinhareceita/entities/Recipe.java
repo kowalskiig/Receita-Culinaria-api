@@ -37,6 +37,9 @@ public class Recipe {
     @OneToMany(mappedBy = "id.recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RecipeIngredients> ingredients = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.recipe")
+    private List<Favorite> favorites = new ArrayList<>();
+
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
