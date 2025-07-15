@@ -1,13 +1,16 @@
 package com.project.miinhareceita.repositories;
 
+import com.project.miinhareceita.dtos.RecipeMinDTO;
 import com.project.miinhareceita.entities.Recipe;
 import com.project.miinhareceita.projections.RecipeProjections;
+import com.project.miinhareceita.projections.RecipeWithAverageProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.util.List;
 
 @Repository
@@ -37,7 +40,16 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
             """)
     Page<RecipeProjections> searchRecipesByCategoriesIngredientsAndName(List<Long> categoryIds, List<Long> ingredientsId, String name, Pageable pageable);
 
-    @Query("SELECT obj FROM Recipe obj  "
-            + "WHERE obj.id IN :recipeIds")
-    List<Recipe> searchRecipeByCategoryIngredient(List<Long> recipeIds);
+    @Query("""
+    SELECT new com.project.miinhareceita.dtos.RecipeMinDTO(
+        r.id, r.title, r.timeMinutes, r.publicationDate,r.urlImg, COALESCE(AVG(rv.nota), 0.0)
+    )
+    FROM Recipe r
+    LEFT JOIN r.reviews rv
+    WHERE r.id IN :recipeIds
+    GROUP BY r.id, r.title, r.timeMinutes, r.publicationDate,r.urlImg
+    """)
+    List<RecipeMinDTO> searchRecipeByCategoryIngredient(List<Long> recipeIds);
+
+
 }

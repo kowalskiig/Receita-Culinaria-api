@@ -44,23 +44,21 @@ public class RecipeService {
     public Page<RecipeMinDTO> searchRecipesByCategoriesIngredientsAndName(String categoriesId, String ingredientsId, String name, Pageable pageable){
 
         List<Long> listCat= Arrays.asList();
-        if(!"".equals(categoriesId)){
-            listCat = Arrays.asList(categoriesId.split(",")).stream().map(Long::parseLong).toList();
-        }
+        verificationReceiveIdAndSendToList(listCat, categoriesId);
 
         List<Long> listIngred = Arrays.asList();
-        if(!"".equals(ingredientsId)){
-            listIngred = Arrays.asList(ingredientsId.split(",")).stream().map(Long::parseLong).toList();
-        }
+        verificationReceiveIdAndSendToList(listIngred, ingredientsId);
 
-        Page<RecipeProjections> page = repository.searchRecipesByCategoriesIngredientsAndName(listCat, listIngred, name, pageable);
-        List<Long> recipeId = page.map(RecipeProjections::getId).toList();
+        Page<RecipeProjections> page = repository
+                .searchRecipesByCategoriesIngredientsAndName(listCat, listIngred, name, pageable);
 
-        List<Recipe> recipe = repository.searchRecipeByCategoryIngredient(recipeId);
+        List<Long> recipeId = page
+                .map(RecipeProjections::getId).toList();
 
-        List<RecipeMinDTO> dto = recipe.stream().map(RecipeMinDTO::new).toList();
+        List<RecipeMinDTO> recipe = repository.searchRecipeByCategoryIngredient(recipeId);
 
-        return new PageImpl<>(dto, page.getPageable(), page.getTotalElements());
+
+        return new PageImpl<>(recipe, page.getPageable(), page.getTotalElements());
     }
 
     @Transactional(readOnly = false)
@@ -135,6 +133,12 @@ public class RecipeService {
         recipe.setRendiment(dto.getRendiment());
         recipe.setUrlImg(dto.getUrlImg());
 
+    }
+
+    private void verificationReceiveIdAndSendToList(List<Long> list, String idReceive){
+        if(!"".equals(idReceive)){
+            list = Arrays.asList(idReceive.split(",")).stream().map(Long::parseLong).toList();
+        }
     }
 }
 

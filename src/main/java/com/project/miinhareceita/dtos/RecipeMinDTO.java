@@ -2,9 +2,11 @@ package com.project.miinhareceita.dtos;
 
 import com.project.miinhareceita.entities.Recipe;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+@NoArgsConstructor
 @Getter
 public class RecipeMinDTO {
     private Long id;
@@ -12,6 +14,17 @@ public class RecipeMinDTO {
     private Integer timeMinutes;
     private Instant publicationDate;
     private String urlImg;
+    private Double media;
+
+
+    public RecipeMinDTO(Long id, String title, Integer timeMinutes, Instant publicationDate, String urlImg, Double media) {
+        this.id = id;
+        this.title = title;
+        this.timeMinutes = timeMinutes;
+        this.publicationDate = publicationDate;
+        this.urlImg = urlImg;
+        this.media = media;
+    }
 
 
     public RecipeMinDTO(Recipe recipe) {
@@ -20,6 +33,7 @@ public class RecipeMinDTO {
         this.timeMinutes = recipe.getTimeMinutes();
         this.publicationDate = recipe.getPublicationDate();
         this.urlImg = recipe.getUrlImg();
+
     }
 
 }
