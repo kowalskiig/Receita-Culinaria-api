@@ -3,6 +3,7 @@ package com.project.miinhareceita.controllers;
 import com.project.miinhareceita.dtos.UserDTO;
 import com.project.miinhareceita.dtos.UserInsertDTO;
 import com.project.miinhareceita.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +20,7 @@ public class UserControler {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> insertUser(@RequestBody UserInsertDTO dto){
+    public ResponseEntity<UserDTO> insertUser(@Valid @RequestBody UserInsertDTO dto){
         UserDTO receiveUser = userService.insertUser(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(receiveUser.getId()).toUri();
