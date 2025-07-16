@@ -1,7 +1,6 @@
 package com.project.miinhareceita.dtos;
 
 import com.project.miinhareceita.entities.Category;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
