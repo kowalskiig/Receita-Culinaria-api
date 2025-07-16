@@ -4,6 +4,7 @@ import com.project.miinhareceita.dtos.FavoriteDTO;
 import com.project.miinhareceita.entities.Favorite;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +34,11 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     """)
     boolean existsByUserIdAndRecipeId(Long userId, Long recipeId);
 
+    @Modifying
+    @Query(nativeQuery = true, value = """
+    DELETE
+    FROM tb_favorite
+    WHERE tb_favorite.recipe_id = :recipeId AND tb_favorite.user_id = :userId
+    """)
+    void deleteByRecipeIdAndUser(Long recipeId, Long userId);
 }

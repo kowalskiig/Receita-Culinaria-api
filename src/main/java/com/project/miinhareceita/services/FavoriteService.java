@@ -5,14 +5,18 @@ import com.project.miinhareceita.dtos.FavoriteInsertDTO;
 import com.project.miinhareceita.dtos.UserDTO;
 import com.project.miinhareceita.entities.Favorite;
 import com.project.miinhareceita.entities.Recipe;
+import com.project.miinhareceita.entities.Review;
 import com.project.miinhareceita.entities.User;
 import com.project.miinhareceita.repositories.FavoriteRepository;
 import com.project.miinhareceita.repositories.RecipeRepository;
 import com.project.miinhareceita.services.exceptions.DatabaseException;
+import com.project.miinhareceita.services.exceptions.ForbiddenException;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -56,9 +60,30 @@ public class FavoriteService {
         return new FavoriteDTO(favorite);
     }
 
+    @Transactional
+    public void deleteFavoriteByRecipeId(Long recipeId) {
+        User user = authService.authenticated();
+        Recipe recipe = recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Receita não existe"));
+
+        if (!repository.existsByUserIdAndRecipeId(user.getId(), recipeId)) {
+            throw new ForbiddenException("Não tem permissão para isso");
+        }
+        try {
+            repository.deleteByRecipeIdAndUser(recipeId, user.getId());
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
+        }
+    }
+
+  
+
     private Favorite RecipeFromDTOToNewEntity(FavoriteInsertDTO dto){
         Favorite favorite = new Favorite();
         favorite.getId().setRecipe(recipeRepository.getReferenceById(dto.getRecipeId()));
         return favorite;
     }
+
+
 }

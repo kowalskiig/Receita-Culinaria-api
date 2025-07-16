@@ -36,6 +36,13 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @DeleteMapping("/{recipeId}")
+    public ResponseEntity<Void> deleteFavorite(@PathVariable Long recipeId){
+        service.deleteFavoriteByRecipeId(recipeId);
+        return ResponseEntity.noContent().build();
+    }
+
     }
 
 
