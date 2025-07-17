@@ -16,7 +16,6 @@ import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -31,17 +30,22 @@ import java.util.List;
 
 @Service
 public class ReviewService {
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
+    private final RecipeRepository recipeRepository;
+    private final UserRepository userRepository;
+    private final AuthService authService;
 
-    @Autowired
-    private RecipeRepository recipeRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AuthService authService;
+    public ReviewService(
+            ReviewRepository reviewRepository,
+            RecipeRepository recipeRepository,
+            UserRepository userRepository,
+            AuthService authService
+    ) {
+        this.reviewRepository = reviewRepository;
+        this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
+        this.authService = authService;
+    }
 
 
     @Transactional(readOnly = true)
