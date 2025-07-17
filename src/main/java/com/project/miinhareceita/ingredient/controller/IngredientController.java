@@ -1,6 +1,8 @@
 package com.project.miinhareceita.ingredient.controller;
 
 import com.project.miinhareceita.ingredient.dto.IngredientDTO;
+import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
 import com.project.miinhareceita.ingredient.service.IngredientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,10 @@ public class IngredientController {
     @Autowired
     private IngredientService service;
 
-    @PostMapping
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<IngredientDTO> insertUser( @Valid @RequestBody IngredientDTO dto){
+    @PostMapping
+    public ResponseEntity<IngredientDTO> insertIngredient(@Valid @RequestBody InsertIngredientDTO dto){
         IngredientDTO ingredientDTO = service.insertIngredient(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(ingredientDTO.getId()).toUri();
@@ -37,14 +40,14 @@ public class IngredientController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<IngredientDTO> updateUser(@PathVariable Long id,@Valid @RequestBody IngredientDTO dto){
+    public ResponseEntity<IngredientDTO> updateIngredient(@PathVariable Long id,@Valid @RequestBody UpdateIngredientDTO dto){
         IngredientDTO ingredientDTO = service.updateIngredient(id, dto);
         return ResponseEntity.ok(ingredientDTO);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Void> deleteIngredient(@PathVariable Long id){
        service.deleteIngredientById(id);
         return ResponseEntity.noContent().build();
     }

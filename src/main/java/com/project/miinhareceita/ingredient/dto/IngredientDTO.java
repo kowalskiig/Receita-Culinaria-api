@@ -1,8 +1,6 @@
 package com.project.miinhareceita.ingredient.dto;
 
 import com.project.miinhareceita.ingredient.domain.Ingredients;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IngredientDTO {
     private Long id;
-    @NotBlank(message = "O campo é obrigatório")
-    @Size(min = 2, message = "Requer pelo menos 2 caracteres")
+
     private String name;
 
     public IngredientDTO(Ingredients ingredient){

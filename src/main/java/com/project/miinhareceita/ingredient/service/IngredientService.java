@@ -2,6 +2,9 @@ package com.project.miinhareceita.ingredient.service;
 
 import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.ingredient.dto.IngredientDTO;
+import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
+import com.project.miinhareceita.ingredient.dto.ValidIngredientDTO;
 import com.project.miinhareceita.ingredient.projection.IngredientProjection;
 import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
@@ -10,7 +13,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
@@ -23,9 +25,9 @@ public class IngredientService {
     private IngredientsRepository repository;
 
     @Transactional
-    public IngredientDTO insertIngredient(IngredientDTO dto){
+    public IngredientDTO insertIngredient(InsertIngredientDTO dto){
         Ingredients entity = new Ingredients();
-        copyDTODataToEntity(dto, entity);
+        mapDTODataToEntity(dto, entity);
 
         entity = repository.save(entity);
         return  new IngredientDTO(entity);
@@ -42,10 +44,10 @@ public class IngredientService {
     }
 
     @Transactional(readOnly = false)
-    public IngredientDTO updateIngredient(Long id,IngredientDTO dto) {
+    public IngredientDTO updateIngredient(Long id, UpdateIngredientDTO dto) {
         try {
             Ingredients entity = repository.getReferenceById(id);
-            copyDTODataToEntity(dto,entity);
+            mapDTODataToEntity(dto,entity);
             entity = repository.save(entity);
             return new IngredientDTO(entity);
         }
@@ -53,7 +55,7 @@ public class IngredientService {
             throw new ResourceNotFoundException("Id não encontrado " + id);
         }
     }
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = false)
     public void deleteIngredientById(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Recurso não encontrado");
@@ -66,8 +68,10 @@ public class IngredientService {
         }
     }
 
-    private void copyDTODataToEntity(IngredientDTO dto, Ingredients entity){
-        entity.setName(dto.getName());
+    private void mapDTODataToEntity(ValidIngredientDTO dto, Ingredients entity) {
+        if (dto.getName() != null && !dto.getName().isBlank()) {
+            entity.setName(dto.getName());
+        }
     }
 
 
