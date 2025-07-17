@@ -12,7 +12,6 @@ import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.user.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -27,20 +26,26 @@ import java.util.List;
 @Service
 public class RecipeService {
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+        private final RecipeRepository recipeRepository;
+        private final AuthService authService;
+        private final IngredientsRepository ingredientsRepository;
+        private final RecipeIngredientsRepository recipeIngredientsRepository;
 
-    @Autowired
-    private AuthService authService;
+        public RecipeService(
+                RecipeRepository recipeRepository,
+                AuthService authService,
+                IngredientsRepository ingredientsRepository,
+                RecipeIngredientsRepository recipeIngredientsRepository
+        ) {
+            this.recipeRepository = recipeRepository;
+            this.authService = authService;
+            this.ingredientsRepository = ingredientsRepository;
+            this.recipeIngredientsRepository = recipeIngredientsRepository;
+        }
 
-    @Autowired
-    private IngredientsRepository ingredientsRepository;
-
-    @Autowired
-    private RecipeIngredientsRepository recipeIngredientsRepository;
 
 
-    @Transactional(readOnly = true)
+        @Transactional(readOnly = true)
     public Page<RecipeMinDTO> searchRecipesByCategoriesIngredientsAndName(String categoriesId, String ingredientsId, String name, Pageable pageable) {
 
         List<Long> catIds = verificationReceiveIdAndSendToList(categoriesId);
@@ -64,6 +69,7 @@ public class RecipeService {
         mapInsertDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
+        
         recipe.setUser(authService.authenticated());
 
         recipe = recipeRepository.save(recipe);
