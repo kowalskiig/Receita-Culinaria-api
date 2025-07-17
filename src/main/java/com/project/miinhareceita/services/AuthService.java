@@ -15,7 +15,7 @@ public class AuthService {
     @Autowired
     private UserRepository repository;
 
-    protected User authenticated() {
+    public User authenticated() {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
