@@ -1,7 +1,7 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.entities.User;
 import com.project.miinhareceita.repositories.UserRepository;
+import com.project.miinhareceita.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

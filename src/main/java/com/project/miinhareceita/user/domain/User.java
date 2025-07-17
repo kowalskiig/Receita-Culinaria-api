@@ -1,5 +1,8 @@
-package com.project.miinhareceita.entities;
+package com.project.miinhareceita.user.domain;
 
+import com.project.miinhareceita.favorite.domain.Favorite;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.review.domain.Review;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

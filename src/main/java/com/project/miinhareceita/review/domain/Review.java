@@ -1,8 +1,9 @@
-package com.project.miinhareceita.entities;
+package com.project.miinhareceita.review.domain;
 
 
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.user.domain.User;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.Instant;
 

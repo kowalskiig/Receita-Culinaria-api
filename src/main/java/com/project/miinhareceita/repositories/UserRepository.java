@@ -1,7 +1,7 @@
 package com.project.miinhareceita.repositories;
 
-import com.project.miinhareceita.entities.User;
 import com.project.miinhareceita.projections.UserDetailsProjection;
+import com.project.miinhareceita.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,13 +1,12 @@
-package com.project.miinhareceita.entities;
+package com.project.miinhareceita.ingredient.domain;
 
 
+import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @AllArgsConstructor

@@ -1,16 +1,16 @@
 package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.dtos.ReviewDTO;
-import com.project.miinhareceita.entities.Recipe;
-import com.project.miinhareceita.entities.Review;
-import com.project.miinhareceita.entities.User;
 import com.project.miinhareceita.projections.ReviewProjections;
+import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.repositories.RecipeRepository;
 import com.project.miinhareceita.repositories.ReviewRepository;
 import com.project.miinhareceita.repositories.UserRepository;
+import com.project.miinhareceita.review.domain.Review;
 import com.project.miinhareceita.services.exceptions.DatabaseException;
 import com.project.miinhareceita.services.exceptions.ForbiddenException;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
+import com.project.miinhareceita.user.domain.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

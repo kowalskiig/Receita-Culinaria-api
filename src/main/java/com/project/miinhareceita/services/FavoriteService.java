@@ -2,23 +2,18 @@ package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.dtos.FavoriteDTO;
 import com.project.miinhareceita.dtos.FavoriteInsertDTO;
-import com.project.miinhareceita.dtos.UserDTO;
-import com.project.miinhareceita.entities.Favorite;
-import com.project.miinhareceita.entities.Recipe;
-import com.project.miinhareceita.entities.Review;
-import com.project.miinhareceita.entities.User;
+import com.project.miinhareceita.favorite.domain.Favorite;
+import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.repositories.FavoriteRepository;
 import com.project.miinhareceita.repositories.RecipeRepository;
 import com.project.miinhareceita.services.exceptions.DatabaseException;
 import com.project.miinhareceita.services.exceptions.ForbiddenException;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
-import jakarta.validation.Valid;
+import com.project.miinhareceita.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

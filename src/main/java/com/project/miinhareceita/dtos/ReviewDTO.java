@@ -1,6 +1,6 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.Review;
+import com.project.miinhareceita.review.domain.Review;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

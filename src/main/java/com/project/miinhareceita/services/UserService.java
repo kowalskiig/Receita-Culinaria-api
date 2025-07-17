@@ -2,11 +2,11 @@ package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.dtos.UserDTO;
 import com.project.miinhareceita.dtos.UserInsertDTO;
-import com.project.miinhareceita.entities.Role;
-import com.project.miinhareceita.entities.User;
 import com.project.miinhareceita.projections.UserDetailsProjection;
 import com.project.miinhareceita.repositories.RoleRepository;
 import com.project.miinhareceita.repositories.UserRepository;
+import com.project.miinhareceita.user.domain.Role;
+import com.project.miinhareceita.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

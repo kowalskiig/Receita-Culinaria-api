@@ -1,6 +1,6 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.Category;
+import com.project.miinhareceita.category.domain.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -1,6 +1,7 @@
-package com.project.miinhareceita.entities;
+package com.project.miinhareceita.favorite.domain;
 
-import com.project.miinhareceita.entities.entitiespk.FavoritePk;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.user.domain.User;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

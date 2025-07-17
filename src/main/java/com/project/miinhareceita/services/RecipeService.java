@@ -3,17 +3,15 @@ package com.project.miinhareceita.services;
 import com.project.miinhareceita.dtos.RecipeDTO;
 import com.project.miinhareceita.dtos.RecipeIngredientsDTO;
 import com.project.miinhareceita.dtos.RecipeMinDTO;
-import com.project.miinhareceita.entities.Ingredients;
-import com.project.miinhareceita.entities.Recipe;
-import com.project.miinhareceita.entities.RecipeIngredients;
+import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.projections.RecipeProjections;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import com.project.miinhareceita.repositories.IngredientsRepository;
 import com.project.miinhareceita.repositories.RecipeIngredientsRepository;
 import com.project.miinhareceita.repositories.RecipeRepository;
-import com.project.miinhareceita.services.exceptions.DatabaseException;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -125,7 +123,7 @@ public class RecipeService {
     }
 
 
-    private void copyDtoToEntity(Recipe recipe,RecipeDTO dto){
+    private void copyDtoToEntity(Recipe recipe, RecipeDTO dto){
         recipe.setTitle(dto.getTitle());
         recipe.setShortDescription(dto.getShortDescription());
         recipe.setInstructions(dto.getInstructions());

@@ -1,9 +1,8 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.User;
+import com.project.miinhareceita.user.domain.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;

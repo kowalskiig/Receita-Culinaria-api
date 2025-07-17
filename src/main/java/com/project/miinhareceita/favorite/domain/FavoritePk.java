@@ -1,7 +1,7 @@
-package com.project.miinhareceita.entities.entitiespk;
+package com.project.miinhareceita.favorite.domain;
 
-import com.project.miinhareceita.entities.Recipe;
-import com.project.miinhareceita.entities.User;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.user.domain.User;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

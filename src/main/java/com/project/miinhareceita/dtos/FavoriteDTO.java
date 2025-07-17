@@ -1,6 +1,6 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.Favorite;
+import com.project.miinhareceita.favorite.domain.Favorite;
 
 public class FavoriteDTO {
     private RecipeFavoriteDTO recipeFavoriteDTO;

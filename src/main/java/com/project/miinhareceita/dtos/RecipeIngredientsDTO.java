@@ -1,6 +1,6 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.RecipeIngredients;
+import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 
 public class RecipeIngredientsDTO {
     private Long recipeId;

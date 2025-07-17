@@ -1,6 +1,6 @@
 package com.project.miinhareceita.repositories;
 
-import com.project.miinhareceita.entities.Ingredients;
+import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.projections.IngredientProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

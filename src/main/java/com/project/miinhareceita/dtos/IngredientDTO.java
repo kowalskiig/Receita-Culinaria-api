@@ -1,8 +1,7 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.Ingredients;
+import com.project.miinhareceita.ingredient.domain.Ingredients;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,18 +1,15 @@
 package com.project.miinhareceita.services.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.project.miinhareceita.controllers.exceptions.FieldMessage;
 import com.project.miinhareceita.dtos.UserInsertDTO;
-import com.project.miinhareceita.entities.User;
 import com.project.miinhareceita.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-
+import com.project.miinhareceita.user.domain.User;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {
 	

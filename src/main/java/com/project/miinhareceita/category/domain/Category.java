@@ -1,6 +1,7 @@
-package com.project.miinhareceita.entities;
+package com.project.miinhareceita.category.domain;
 
 
+import com.project.miinhareceita.recipe.domain.Recipe;
 import jakarta.persistence.*;
 import lombok.*;
 

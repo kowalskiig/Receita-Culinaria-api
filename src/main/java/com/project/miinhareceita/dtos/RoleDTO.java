@@ -1,6 +1,6 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.Role;
+import com.project.miinhareceita.user.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

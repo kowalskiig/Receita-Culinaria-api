@@ -1,10 +1,11 @@
-package com.project.miinhareceita.entities;
+package com.project.miinhareceita.recipe.domain;
 
-import com.project.miinhareceita.entities.entitiespk.RecipeIngredientsPk;
+import com.project.miinhareceita.ingredient.domain.Ingredients;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ public class RecipeIngredients {
 
     }
 
-    public RecipeIngredients (Recipe recipe, Ingredients ingredients, Integer quantity, Double price){
+    public RecipeIngredients(Recipe recipe, Ingredients ingredients, Integer quantity, Double price){
         id.setRecipe(recipe);
         id.setIngredients(ingredients);
         this.quantity = quantity;

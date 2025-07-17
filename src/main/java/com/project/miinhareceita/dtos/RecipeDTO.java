@@ -1,9 +1,9 @@
 package com.project.miinhareceita.dtos;
 
 
-import com.project.miinhareceita.entities.Recipe;
-import com.project.miinhareceita.entities.RecipeIngredients;
-import com.project.miinhareceita.entities.User;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.recipe.domain.RecipeIngredients;
+import com.project.miinhareceita.user.domain.User;
 import jakarta.validation.constraints.*;
 
 import java.time.Instant;

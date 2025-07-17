@@ -1,6 +1,6 @@
 package com.project.miinhareceita.dtos;
 
-import com.project.miinhareceita.entities.User;
+import com.project.miinhareceita.user.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
