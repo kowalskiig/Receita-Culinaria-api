@@ -69,7 +69,7 @@ public class RecipeService {
         mapInsertDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
-        
+
         recipe.setUser(authService.authenticated());
 
         recipe = recipeRepository.save(recipe);

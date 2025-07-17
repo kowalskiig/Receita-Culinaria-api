@@ -3,15 +3,17 @@ package com.project.miinhareceita.recipe.dto;
 
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
-import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.dto.UserMinDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 
-
+@NoArgsConstructor
+@Getter
 public class RecipeDTO {
     private Long id;
 
@@ -40,9 +42,7 @@ public class RecipeDTO {
 
     private UserMinDTO user;
 
-    public RecipeDTO(){
 
-    }
 
     public RecipeDTO (Recipe recipe){
         this.id = recipe.getId();
@@ -59,46 +59,5 @@ public class RecipeDTO {
         this.user = new UserMinDTO(recipe.getUser());
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public UserMinDTO getUser() {
-        return user;
-    }
-    public UserMinDTO setUser(User user){
-        return this.user = new UserMinDTO(user);
-    }
-
-    public List<RecipeIngredientsDTO> getItems() {
-        return items;
-    }
-
-    public String getUrlImg() {
-        return urlImg;
-    }
-
-    public Integer getRendiment() {
-        return rendiment;
-    }
-
-    public Integer getTimeMinutes() {
-        return timeMinutes;
-    }
-
-    public Instant getPublicationDate() {
-        return publicationDate;
-    }
-
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public String getTitle() {
-        return title;
-    }
 }

@@ -1,15 +1,18 @@
 package com.project.miinhareceita.recipe.dto;
 
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Getter
 public class RecipeIngredientsDTO {
     private Long recipeId;
     private Long ingredientId;
     private Integer quantity;
     private Double price;
 
-    public RecipeIngredientsDTO(){
-    }
+
     public RecipeIngredientsDTO(RecipeIngredients recipeIngredients){
         recipeId = recipeIngredients.getRecipe().getId();
         ingredientId = recipeIngredients.getIngredient().getId();
@@ -17,19 +20,5 @@ public class RecipeIngredientsDTO {
         price=  recipeIngredients.getPrice();
     }
 
-    public Long getRecipeId() {
-        return recipeId;
-    }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public Long getIngredientId() {
-        return ingredientId;
-    }
 }

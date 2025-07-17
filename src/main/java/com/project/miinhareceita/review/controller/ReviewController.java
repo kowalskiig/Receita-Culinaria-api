@@ -1,6 +1,8 @@
 package com.project.miinhareceita.review.controller;
 
+import com.project.miinhareceita.review.dto.InsertReviewDTO;
 import com.project.miinhareceita.review.dto.ReviewDTO;
+import com.project.miinhareceita.review.dto.UpdateReviewDTO;
 import com.project.miinhareceita.review.service.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class ReviewController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/{id}")
-    public ResponseEntity<ReviewDTO> insertRecipe (@PathVariable Long id,@Valid @RequestBody ReviewDTO dto){
+    public ResponseEntity<ReviewDTO> insertRecipe (@PathVariable Long id,@Valid @RequestBody InsertReviewDTO dto){
         ReviewDTO result = service.insertReview( id,dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(result.getId()).toUri();
@@ -45,7 +47,7 @@ public class ReviewController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PutMapping("/{id}")
-    public ResponseEntity<ReviewDTO> updateReview(@PathVariable Long id, @RequestBody ReviewDTO dto){
+    public ResponseEntity<ReviewDTO> updateReview(@PathVariable Long id, @RequestBody UpdateReviewDTO dto){
         ReviewDTO result = service.updateReview(id, dto);
         return ResponseEntity.ok(result);
     }

@@ -4,7 +4,10 @@ import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.review.dto.InsertReviewDTO;
 import com.project.miinhareceita.review.dto.ReviewDTO;
+import com.project.miinhareceita.review.dto.ReviewValidDTO;
+import com.project.miinhareceita.review.dto.UpdateReviewDTO;
 import com.project.miinhareceita.review.projection.ReviewProjections;
 import com.project.miinhareceita.review.repository.ReviewRepository;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
@@ -69,7 +72,7 @@ public class ReviewService {
     }
 
     @Transactional(readOnly = false)
-    public ReviewDTO insertReview(Long recipeId, ReviewDTO dto){
+    public ReviewDTO insertReview(Long recipeId, InsertReviewDTO dto){
         try{
 
             Review review = new Review();
@@ -77,7 +80,7 @@ public class ReviewService {
 
             review.setDataReview(Instant.now());
             review.setUser(authService.authenticated());
-            copyToEntity(review, dto);
+            copyDtoToEntity(review, dto);
 
             review = repository.save(review);
             return new ReviewDTO(review);
@@ -107,23 +110,28 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewDTO updateReview(Long id, ReviewDTO dto){
+    public ReviewDTO updateReview(Long id, UpdateReviewDTO dto){
         Review review = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         if(!authService.authenticated().getId().equals(review.getUser().getId())){
             throw new ForbiddenException("Não tem permissão para isso");
         }
             review = repository.getReferenceById(id);
-            copyToEntity(review,dto);
+            copyDtoToEntity(review,dto);
             review = repository.save(review);
             return new ReviewDTO(review);
 
     }
 
 
-    private void copyToEntity(Review review, ReviewDTO dto){
-        review.setNota(dto.getNota());
-        review.setComment(dto.getComment());
+    private void copyDtoToEntity(Review review, ReviewValidDTO dto){
+        if (dto.getNota() != null && dto.getNota() > 0) {
+            review.setNota(dto.getNota());
+        }
+
+        if (dto.getComment() != null && !dto.getComment().isBlank()) {
+            review.setComment(dto.getComment());
+        }
     }
 
 }

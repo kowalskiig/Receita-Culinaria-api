@@ -2,9 +2,13 @@ package com.project.miinhareceita.recipe.dto;
 
 
 import com.project.miinhareceita.recipe.domain.Recipe;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+@NoArgsConstructor
+@Getter
 public class RecipeFavoriteDTO {
         private Long id;
         private String title;
@@ -12,7 +16,7 @@ public class RecipeFavoriteDTO {
         private String urlImg;
 
 
-        public RecipeFavoriteDTO(){}
+
 
         public RecipeFavoriteDTO(Recipe recipe) {
             id = recipe.getId();
@@ -21,19 +25,5 @@ public class RecipeFavoriteDTO {
             urlImg = recipe.getUrlImg();
         }
 
-        public Long getId() {
-            return id;
-        }
 
-        public String getUrlImg() {
-            return urlImg;
-        }
-
-        public Instant getPublicationDate() {
-            return publicationDate;
-        }
-
-        public String getTitle() {
-            return title;
-        }
 }

@@ -1,11 +1,8 @@
 package com.project.miinhareceita.review.dto;
 
-import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.recipe.dto.RecipeReviewDTO;
 import com.project.miinhareceita.review.domain.Review;
 import com.project.miinhareceita.user.dto.UserMinDTO;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,14 +13,10 @@ import java.time.Instant;
 public class ReviewDTO {
     private Long id;
 
-    @Min(value = 1, message = "A nota deve ser no mínimo 1")
-    @Max(value = 5, message = "A nota deve ser no máximo 5")
     private Integer nota;
-    @NotBlank
     private String comment ;
-
     private Instant data_review;
-    private RecipeMinDTO recipe;
+    private RecipeReviewDTO recipe;
     private UserMinDTO user;
 
     public ReviewDTO(Review review){
@@ -31,7 +24,7 @@ public class ReviewDTO {
         nota = review.getNota();
         comment = review.getComment();
         data_review = review.getDataReview();
-        recipe = new RecipeMinDTO(review.getRecipes());
+        recipe = new RecipeReviewDTO(review.getRecipes());
         user = new UserMinDTO(review.getUser());
     }
 }
