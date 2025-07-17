@@ -1,8 +1,8 @@
 package com.project.miinhareceita.recipe.repository;
 
-import com.project.miinhareceita.dtos.RecipeMinDTO;
-import com.project.miinhareceita.projections.RecipeProjections;
 import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,7 +39,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Page<RecipeProjections> searchRecipesByCategoriesIngredientsAndName(List<Long> categoryIds, List<Long> ingredientsId, String name, Pageable pageable);
 
     @Query("""
-    SELECT new com.project.miinhareceita.dtos.RecipeMinDTO(
+    SELECT new com.project.miinhareceita.recipe.dto.RecipeMinDTO(
         r.id, r.title, r.timeMinutes, r.publicationDate,r.urlImg, COALESCE(AVG(rv.nota), 0.0)
     )
     FROM Recipe r

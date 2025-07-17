@@ -1,7 +1,7 @@
 package com.project.miinhareceita.controllers;
 
-import com.project.miinhareceita.dtos.FavoriteDTO;
-import com.project.miinhareceita.dtos.FavoriteInsertDTO;
+import com.project.miinhareceita.favorite.dto.FavoriteDTO;
+import com.project.miinhareceita.favorite.dto.FavoriteInsertDTO;
 import com.project.miinhareceita.services.FavoriteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

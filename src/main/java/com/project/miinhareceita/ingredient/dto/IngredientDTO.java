@@ -1,4 +1,4 @@
-package com.project.miinhareceita.dtos;
+package com.project.miinhareceita.ingredient.dto;
 
 import com.project.miinhareceita.ingredient.domain.Ingredients;
 import jakarta.validation.constraints.NotBlank;

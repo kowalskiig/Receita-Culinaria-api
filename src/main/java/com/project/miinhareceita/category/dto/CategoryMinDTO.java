@@ -1,4 +1,4 @@
-package com.project.miinhareceita.dtos;
+package com.project.miinhareceita.category.dto;
 
 import com.project.miinhareceita.category.domain.Category;
 import lombok.Getter;

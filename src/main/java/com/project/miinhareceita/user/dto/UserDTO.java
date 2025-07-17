@@ -1,4 +1,4 @@
-package com.project.miinhareceita.dtos;
+package com.project.miinhareceita.user.dto;
 
 import com.project.miinhareceita.user.domain.User;
 import jakarta.validation.constraints.Email;

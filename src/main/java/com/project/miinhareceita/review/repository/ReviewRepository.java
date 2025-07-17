@@ -1,7 +1,7 @@
 package com.project.miinhareceita.review.repository;
 
-import com.project.miinhareceita.projections.ReviewProjections;
 import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.review.projection.ReviewProjections;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

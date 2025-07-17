@@ -1,6 +1,8 @@
-package com.project.miinhareceita.dtos;
+package com.project.miinhareceita.review.dto;
 
+import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
 import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.user.dto.UserMinDTO;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

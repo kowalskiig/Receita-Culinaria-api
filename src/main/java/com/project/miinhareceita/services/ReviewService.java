@@ -1,10 +1,10 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.dtos.ReviewDTO;
-import com.project.miinhareceita.projections.ReviewProjections;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.review.dto.ReviewDTO;
+import com.project.miinhareceita.review.projection.ReviewProjections;
 import com.project.miinhareceita.review.repository.ReviewRepository;
 import com.project.miinhareceita.services.exceptions.DatabaseException;
 import com.project.miinhareceita.services.exceptions.ForbiddenException;

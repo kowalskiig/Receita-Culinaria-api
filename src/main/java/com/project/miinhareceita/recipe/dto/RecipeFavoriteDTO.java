@@ -1,4 +1,4 @@
-package com.project.miinhareceita.dtos;
+package com.project.miinhareceita.recipe.dto;
 
 
 import com.project.miinhareceita.recipe.domain.Recipe;

@@ -1,13 +1,13 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.dtos.RecipeDTO;
-import com.project.miinhareceita.dtos.RecipeIngredientsDTO;
-import com.project.miinhareceita.dtos.RecipeMinDTO;
 import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
-import com.project.miinhareceita.projections.RecipeProjections;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
+import com.project.miinhareceita.recipe.dto.RecipeDTO;
+import com.project.miinhareceita.recipe.dto.RecipeIngredientsDTO;
+import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.recipe.repository.RecipeIngredientsRepository;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;

@@ -1,8 +1,8 @@
 package com.project.miinhareceita.services.validation;
 
 import com.project.miinhareceita.controllers.exceptions.FieldMessage;
-import com.project.miinhareceita.dtos.UserInsertDTO;
 import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.user.dto.UserInsertDTO;
 import com.project.miinhareceita.user.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

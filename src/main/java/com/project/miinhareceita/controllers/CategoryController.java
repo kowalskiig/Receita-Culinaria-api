@@ -1,6 +1,6 @@
 package com.project.miinhareceita.controllers;
 
-import com.project.miinhareceita.dtos.CategoryMinDTO;
+import com.project.miinhareceita.category.dto.CategoryMinDTO;
 import com.project.miinhareceita.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

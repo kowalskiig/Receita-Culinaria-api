@@ -1,6 +1,6 @@
 package com.project.miinhareceita.controllers;
 
-import com.project.miinhareceita.dtos.IngredientDTO;
+import com.project.miinhareceita.ingredient.dto.IngredientDTO;
 import com.project.miinhareceita.services.IngredientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.project.miinhareceita.controllers;
 
-import com.project.miinhareceita.dtos.UserDTO;
-import com.project.miinhareceita.dtos.UserInsertDTO;
 import com.project.miinhareceita.services.UserService;
+import com.project.miinhareceita.user.dto.UserDTO;
+import com.project.miinhareceita.user.dto.UserInsertDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

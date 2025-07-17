@@ -1,8 +1,8 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.dtos.UserDTO;
-import com.project.miinhareceita.dtos.UserInsertDTO;
-import com.project.miinhareceita.projections.UserDetailsProjection;
+import com.project.miinhareceita.user.dto.UserDTO;
+import com.project.miinhareceita.user.dto.UserInsertDTO;
+import com.project.miinhareceita.user.projection.UserDetailsProjection;
 import com.project.miinhareceita.user.repository.RoleRepository;
 import com.project.miinhareceita.user.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;

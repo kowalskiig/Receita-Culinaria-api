@@ -1,6 +1,6 @@
 package com.project.miinhareceita.controllers;
 
-import com.project.miinhareceita.dtos.ReviewDTO;
+import com.project.miinhareceita.review.dto.ReviewDTO;
 import com.project.miinhareceita.services.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
