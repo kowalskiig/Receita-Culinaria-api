@@ -1,8 +1,5 @@
-package com.project.miinhareceita.controllers.exceptions;
+package com.project.miinhareceita.shared.exceptions;
 
-import com.project.miinhareceita.services.exceptions.DatabaseException;
-import com.project.miinhareceita.services.exceptions.ForbiddenException;
-import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services.validation;
+package com.project.miinhareceita.user.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

@@ -1,4 +1,4 @@
-package com.project.miinhareceita.user;
+package com.project.miinhareceita.user.controller;
 
 import com.project.miinhareceita.user.dto.UserDTO;
 import com.project.miinhareceita.user.dto.UserInsertDTO;

@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services.exceptions;
+package com.project.miinhareceita.shared.exceptions;
 
 @SuppressWarnings("serial")
 public class DatabaseException extends RuntimeException {

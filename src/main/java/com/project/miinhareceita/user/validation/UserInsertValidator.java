@@ -1,6 +1,6 @@
-package com.project.miinhareceita.services.validation;
+package com.project.miinhareceita.user.validation;
 
-import com.project.miinhareceita.controllers.exceptions.FieldMessage;
+import com.project.miinhareceita.shared.exceptions.FieldMessage;
 import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.dto.UserInsertDTO;
 import com.project.miinhareceita.user.repository.UserRepository;

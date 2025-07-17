@@ -1,6 +1,6 @@
 package com.project.miinhareceita.user.dto;
 
-import com.project.miinhareceita.services.validation.UserInsertValid;
+import com.project.miinhareceita.user.validation.UserInsertValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

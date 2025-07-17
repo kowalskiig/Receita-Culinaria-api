@@ -11,7 +11,7 @@ import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
 import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.recipe.repository.RecipeIngredientsRepository;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
-import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
+import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

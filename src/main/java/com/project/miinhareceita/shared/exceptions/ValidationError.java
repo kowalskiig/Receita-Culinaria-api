@@ -1,4 +1,4 @@
-package com.project.miinhareceita.controllers.exceptions;
+package com.project.miinhareceita.shared.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;
