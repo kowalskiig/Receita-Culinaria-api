@@ -43,7 +43,7 @@ public class Recipe {
     @OneToMany(mappedBy = "id.recipe")
     private List<Favorite> favorites = new ArrayList<>();
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
