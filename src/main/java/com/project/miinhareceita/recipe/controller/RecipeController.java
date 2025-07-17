@@ -1,8 +1,8 @@
-package com.project.miinhareceita.controllers;
+package com.project.miinhareceita.recipe.controller;
 
 import com.project.miinhareceita.recipe.dto.RecipeDTO;
 import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
-import com.project.miinhareceita.services.RecipeService;
+import com.project.miinhareceita.recipe.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

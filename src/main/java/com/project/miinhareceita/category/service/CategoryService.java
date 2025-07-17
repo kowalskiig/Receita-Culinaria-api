@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services;
+package com.project.miinhareceita.category.service;
 
 import com.project.miinhareceita.category.domain.Category;
 import com.project.miinhareceita.category.dto.CategoryMinDTO;

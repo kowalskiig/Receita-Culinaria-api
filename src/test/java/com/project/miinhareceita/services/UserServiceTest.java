@@ -5,6 +5,7 @@ import com.project.miinhareceita.user.dto.UserInsertDTO;
 import com.project.miinhareceita.user.projection.UserDetailsProjection;
 import com.project.miinhareceita.user.repository.RoleRepository;
 import com.project.miinhareceita.user.repository.UserRepository;
+import com.project.miinhareceita.user.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

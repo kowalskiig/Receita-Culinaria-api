@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services;
+package com.project.miinhareceita.review.service;
 
 import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.recipe.domain.Recipe;

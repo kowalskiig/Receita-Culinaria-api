@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services;
+package com.project.miinhareceita.ingredient.service;
 
 import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.ingredient.dto.IngredientDTO;

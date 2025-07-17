@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services;
+package com.project.miinhareceita.favorite.service;
 
 import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.favorite.domain.Favorite;

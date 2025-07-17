@@ -1,7 +1,7 @@
-package com.project.miinhareceita.controllers;
+package com.project.miinhareceita.category.controller;
 
 import com.project.miinhareceita.category.dto.CategoryMinDTO;
-import com.project.miinhareceita.services.CategoryService;
+import com.project.miinhareceita.category.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
