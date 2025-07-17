@@ -48,7 +48,8 @@ public class IngredientController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteIngredient(@PathVariable Long id){
-       service.deleteIngredientById(id);
+
+        service.deleteIngredientById(id);
         return ResponseEntity.noContent().build();
     }
 

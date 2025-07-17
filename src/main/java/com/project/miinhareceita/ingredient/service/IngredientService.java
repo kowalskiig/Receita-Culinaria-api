@@ -10,9 +10,9 @@ import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
@@ -21,8 +21,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class IngredientService {
-    @Autowired
-    private IngredientsRepository repository;
+    private final IngredientsRepository repository;
+
+    public IngredientService(IngredientsRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     public IngredientDTO insertIngredient(InsertIngredientDTO dto){
@@ -55,7 +58,7 @@ public class IngredientService {
             throw new ResourceNotFoundException("Id não encontrado " + id);
         }
     }
-    @Transactional(readOnly = false)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void deleteIngredientById(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Recurso não encontrado");
