@@ -11,7 +11,6 @@ import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.user.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +19,20 @@ import java.util.List;
 
 @Service
 public class FavoriteService {
-    @Autowired
-    private FavoriteRepository repository;
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+    private final FavoriteRepository repository;
+    private final RecipeRepository recipeRepository;
+    private final AuthService authService;
 
-    @Autowired
-    private AuthService authService;
+    public FavoriteService(
+            FavoriteRepository repository,
+            RecipeRepository recipeRepository,
+            AuthService authService
+    ) {
+        this.repository = repository;
+        this.recipeRepository = recipeRepository;
+        this.authService = authService;
+    }
 
     @Transactional(readOnly = true)
     public List<FavoriteDTO> getFavoriteRecipesByUser() {
@@ -48,7 +53,7 @@ public class FavoriteService {
             throw new DatabaseException("Receita já está favoritada");
         }
 
-        Favorite favorite = RecipeFromDTOToNewEntity(dto);
+        Favorite favorite = mapToFavoriteEntity(dto);
         favorite.getId().setUser(user);
 
         favorite = repository.save(favorite);
@@ -75,7 +80,7 @@ public class FavoriteService {
 
   
 
-    private Favorite RecipeFromDTOToNewEntity(FavoriteInsertDTO dto){
+    private Favorite mapToFavoriteEntity(FavoriteInsertDTO dto){
         Favorite favorite = new Favorite();
         favorite.getId().setRecipe(recipeRepository.getReferenceById(dto.getRecipeId()));
         return favorite;
