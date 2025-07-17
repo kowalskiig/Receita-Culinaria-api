@@ -32,7 +32,7 @@ import java.util.List;
 @Service
 public class ReviewService {
     @Autowired
-    private ReviewRepository repository;
+    private ReviewRepository reviewRepository;
 
     @Autowired
     private RecipeRepository recipeRepository;
@@ -46,7 +46,8 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<ReviewDTO> findReviewByRecipeId(Long id, Pageable pageable) {
-        List<ReviewProjections> reviews = repository.findReviewByRecipeId(id);
+
+        List<ReviewProjections> reviews = reviewRepository.findReviewByRecipeId(id);
 
         List<ReviewDTO> result = new ArrayList<>();
 
@@ -74,15 +75,15 @@ public class ReviewService {
     @Transactional(readOnly = false)
     public ReviewDTO insertReview(Long recipeId, InsertReviewDTO dto){
         try{
-
             Review review = new Review();
             review.setRecipes(recipeRepository.getReferenceById(recipeId));
 
             review.setDataReview(Instant.now());
             review.setUser(authService.authenticated());
+
             copyDtoToEntity(review, dto);
 
-            review = repository.save(review);
+            review = reviewRepository.save(review);
             return new ReviewDTO(review);
         }
         catch (EntityNotFoundException e) {
@@ -95,14 +96,11 @@ public class ReviewService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteReview(Long id){
-        Review review = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
-            if(!authService.authenticated().getId().equals(review.getUser().getId())){
-                throw new ForbiddenException("Não tem permissão para isso");
-            }
+            Review review = validationExistsReviewsId(id);
+            validationReviewUserIdEqualsUserId(review);
 
             try {
-                repository.deleteById(id);
+                reviewRepository.deleteById(id);
             }
             catch (DataIntegrityViolationException e) {
                 throw new DatabaseException("Falha de integridade referencial");
@@ -110,18 +108,19 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewDTO updateReview(Long id, UpdateReviewDTO dto){
-        Review review = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
-        if(!authService.authenticated().getId().equals(review.getUser().getId())){
-            throw new ForbiddenException("Não tem permissão para isso");
-        }
-            review = repository.getReferenceById(id);
+    public ReviewDTO updateReview(Long reviewId, UpdateReviewDTO dto){
+            Review review = validationExistsReviewsId(reviewId);
+            validationReviewUserIdEqualsUserId(review);
+
+            review = reviewRepository.getReferenceById(reviewId);
+
             copyDtoToEntity(review,dto);
-            review = repository.save(review);
+
+            review = reviewRepository.save(review);
             return new ReviewDTO(review);
 
     }
+
 
 
     private void copyDtoToEntity(Review review, ReviewValidDTO dto){
@@ -131,6 +130,19 @@ public class ReviewService {
 
         if (dto.getComment() != null && !dto.getComment().isBlank()) {
             review.setComment(dto.getComment());
+        }
+    }
+
+    private Review validationExistsReviewsId(Long reviewId){
+        return reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+    }
+
+
+
+    private void validationReviewUserIdEqualsUserId(Review review){
+        if(!authService.authenticated().getId().equals(review.getUser().getId())){
+            throw new ForbiddenException("Não tem permissão para isso");
         }
     }
 
