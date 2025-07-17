@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.category.repository;
 
 import com.project.miinhareceita.category.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

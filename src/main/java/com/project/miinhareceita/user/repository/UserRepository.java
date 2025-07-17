@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.user.repository;
 
 import com.project.miinhareceita.projections.UserDetailsProjection;
 import com.project.miinhareceita.user.domain.User;

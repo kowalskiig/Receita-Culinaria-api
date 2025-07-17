@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.review.repository;
 
 import com.project.miinhareceita.projections.ReviewProjections;
 import com.project.miinhareceita.review.domain.Review;

@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.recipe.repository;
 
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import org.springframework.data.jpa.repository.JpaRepository;

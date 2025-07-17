@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.recipe.repository;
 
 import com.project.miinhareceita.dtos.RecipeMinDTO;
 import com.project.miinhareceita.projections.RecipeProjections;

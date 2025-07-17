@@ -3,9 +3,8 @@ package com.project.miinhareceita.services;
 import com.project.miinhareceita.dtos.UserDTO;
 import com.project.miinhareceita.dtos.UserInsertDTO;
 import com.project.miinhareceita.projections.UserDetailsProjection;
-import com.project.miinhareceita.repositories.RoleRepository;
-import com.project.miinhareceita.repositories.UserRepository;
-
+import com.project.miinhareceita.user.repository.RoleRepository;
+import com.project.miinhareceita.user.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,8 +2,8 @@ package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.dtos.IngredientDTO;
 import com.project.miinhareceita.ingredient.domain.Ingredients;
+import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
 import com.project.miinhareceita.projections.IngredientProjection;
-import com.project.miinhareceita.repositories.IngredientsRepository;
 import com.project.miinhareceita.services.exceptions.DatabaseException;
 import com.project.miinhareceita.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;

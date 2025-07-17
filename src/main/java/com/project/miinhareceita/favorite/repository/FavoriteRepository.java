@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.favorite.repository;
 
 import com.project.miinhareceita.favorite.domain.Favorite;
 import org.springframework.data.jpa.repository.EntityGraph;

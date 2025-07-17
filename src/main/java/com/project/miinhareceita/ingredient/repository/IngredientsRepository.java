@@ -1,4 +1,4 @@
-package com.project.miinhareceita.repositories;
+package com.project.miinhareceita.ingredient.repository;
 
 import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.projections.IngredientProjection;
