@@ -1,5 +1,6 @@
 package com.project.miinhareceita.services;
 
+import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.user.domain.Role;
 import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.dto.UserDTO;
@@ -27,7 +28,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired AuthService authService;
+    @Autowired
+    AuthService authService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

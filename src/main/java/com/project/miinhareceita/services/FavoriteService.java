@@ -1,5 +1,6 @@
 package com.project.miinhareceita.services;
 
+import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.favorite.domain.Favorite;
 import com.project.miinhareceita.favorite.dto.FavoriteDTO;
 import com.project.miinhareceita.favorite.dto.FavoriteInsertDTO;

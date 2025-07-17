@@ -1,4 +1,4 @@
-package com.project.miinhareceita.services;
+package com.project.miinhareceita.auth.service;
 
 import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.repository.UserRepository;
