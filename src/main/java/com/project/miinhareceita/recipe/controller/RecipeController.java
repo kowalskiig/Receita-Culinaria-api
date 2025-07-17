@@ -1,7 +1,9 @@
 package com.project.miinhareceita.recipe.controller;
 
+import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
 import com.project.miinhareceita.recipe.dto.RecipeDTO;
 import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.recipe.dto.UpdateRecipeDTO;
 import com.project.miinhareceita.recipe.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,14 @@ public class RecipeController {
                                                                     @RequestParam(defaultValue = "") String ingredientsId,
                                                                     @RequestParam(defaultValue = "") String name,
                                                                     Pageable pageable){
+
         Page<RecipeMinDTO> recipePage = recipeService.searchRecipesByCategoriesIngredientsAndName(categoriesId, ingredientsId, name, pageable);
         return ResponseEntity.ok(recipePage);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping
-    public ResponseEntity<RecipeDTO> insertRecipe (@Valid @RequestBody RecipeDTO dto){
+    public ResponseEntity<RecipeDTO> insertRecipe(@Valid @RequestBody InsertRecipeDTO dto){
         RecipeDTO result = recipeService.insertRecipe(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(result.getId()).toUri();
@@ -48,7 +51,7 @@ public class RecipeController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PutMapping("/{id}")
-    public ResponseEntity<RecipeDTO> updateRecipeById(@PathVariable Long id, @Valid @RequestBody RecipeDTO dto){
+    public ResponseEntity<RecipeDTO> updateRecipeById(@PathVariable Long id, @Valid @RequestBody UpdateRecipeDTO dto){
         RecipeDTO result = recipeService.updateRecipe(id, dto);
         return ResponseEntity.ok(result);
     }

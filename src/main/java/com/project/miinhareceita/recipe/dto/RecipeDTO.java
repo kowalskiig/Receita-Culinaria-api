@@ -5,7 +5,6 @@ import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.dto.UserMinDTO;
-import jakarta.validation.constraints.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -15,31 +14,28 @@ import java.util.List;
 
 public class RecipeDTO {
     private Long id;
-    @NotBlank(message = "O título é obrigatório!")
-    @Size(min = 3, max = 100, message = "O título deve ter entre {min} e {max} caracteres.")
+
     private String title;
 
-    @NotBlank(message = "A descrição curta é obrigatória!")
-    @Size(min = 10, max = 255, message = "A descrição curta deve ter entre {min} e {max} caracteres.")
+
     private String shortDescription;
 
-    @NotBlank(message = "As instruções são obrigatórias!")
-    @Size(min = 20, message = "As instruções devem ter no mínimo {min} caracteres.")
+
     private String instructions;
 
-    @NotNull(message = "O tempo de preparo é obrigatório!")
+
     private Integer timeMinutes;
 
-    @NotNull(message = "O rendimento é obrigatório!")
+
     private Integer rendiment;
 
-    @Future(message = "Não deve estar no futuro")
+
     private Instant publicationDate;
 
-    @NotBlank(message = "A URL da imagem é obrigatória!")
+
     private String urlImg;
 
-    @NotEmpty(message = "Deve ter pelo menos 1 ingredient")
+
     private List<RecipeIngredientsDTO> items = new ArrayList<>();
 
     private UserMinDTO user;

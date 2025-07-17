@@ -5,9 +5,7 @@ import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
-import com.project.miinhareceita.recipe.dto.RecipeDTO;
-import com.project.miinhareceita.recipe.dto.RecipeIngredientsDTO;
-import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.recipe.dto.*;
 import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.recipe.repository.RecipeIngredientsRepository;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
@@ -20,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +26,7 @@ import java.util.List;
 public class RecipeService {
 
     @Autowired
-    private RecipeRepository repository;
+    private RecipeRepository recipeRepository;
 
     @Autowired
     private AuthService authService;
@@ -36,108 +35,138 @@ public class RecipeService {
     private IngredientsRepository ingredientsRepository;
 
     @Autowired
-    private RecipeIngredientsRepository riRepository;
+    private RecipeIngredientsRepository recipeIngredientsRepository;
 
 
     @Transactional(readOnly = true)
     public Page<RecipeMinDTO> searchRecipesByCategoriesIngredientsAndName(String categoriesId, String ingredientsId, String name, Pageable pageable){
 
-        List<Long> listCat= Arrays.asList();
-        verificationReceiveIdAndSendToList(listCat, categoriesId);
+        List<Long> catIds = verificationReceiveIdAndSendToList( categoriesId);
+        List<Long> ingredIds = verificationReceiveIdAndSendToList(ingredientsId);
 
-        List<Long> listIngred = Arrays.asList();
-        verificationReceiveIdAndSendToList(listIngred, ingredientsId);
+        Page<RecipeProjections> page = recipeRepository
+                .searchRecipesByCategoriesIngredientsAndName(catIds, ingredIds, name, pageable);
 
-        Page<RecipeProjections> page = repository
-                .searchRecipesByCategoriesIngredientsAndName(listCat, listIngred, name, pageable);
-
-        List<Long> recipeId = page
+        List<Long> recipeIds = page
                 .map(RecipeProjections::getId).toList();
 
-        List<RecipeMinDTO> recipe = repository.searchRecipeByCategoryIngredient(recipeId);
+        List<RecipeMinDTO> result = recipeRepository.searchRecipeByCategoryIngredient(recipeIds);
 
-
-        return new PageImpl<>(recipe, page.getPageable(), page.getTotalElements());
+        return new PageImpl<>(result, page.getPageable(), page.getTotalElements());
     }
 
     @Transactional(readOnly = false)
-    public RecipeDTO insertRecipe(RecipeDTO dto) {
+    public RecipeDTO insertRecipe(InsertRecipeDTO dto) {
 
         Recipe recipe = new Recipe();
-        copyDtoToEntity(recipe, dto);
+        mapInsertDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
         recipe.setUser(authService.authenticated());
-        recipe = repository.save(recipe);
+
+        recipe = recipeRepository.save(recipe);
         for(RecipeIngredientsDTO recipeIngredients: dto.getItems()){
 
-                Ingredients ingredients = ingredientsRepository.findById(recipeIngredients.getIngredientId())
-                        .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
+            Ingredients ingredients = ingredientsRepository.findById(recipeIngredients.getIngredientId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
 
-                RecipeIngredients ri = new RecipeIngredients(recipe, ingredients,
-                        recipeIngredients.getQuantity(), recipeIngredients.getPrice());
-                recipe.getIngredients().add(ri);
+            RecipeIngredients ri = new RecipeIngredients(recipe, ingredients,
+                    recipeIngredients.getQuantity(), recipeIngredients.getPrice());
+            recipe.getIngredients().add(ri);
 
-                riRepository.save(ri);
-            }
+            recipeIngredientsRepository.save(ri);
+        }
 
 
-        recipe = repository.save(recipe);
+        recipe = recipeRepository.save(recipe);
 
         return new RecipeDTO(recipe);
     }
 
     @Transactional
     public RecipeDTO findRecipeById(Long recipeId){
-        Recipe recipe =  repository.findById(recipeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
+        Recipe recipe =  recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Receita não encontrada"));
 
         return new RecipeDTO(recipe);
     }
 
     @Transactional(readOnly = false)
-    public RecipeDTO updateRecipe(Long id ,RecipeDTO dto) {
-        RecipeIngredients ri = new RecipeIngredients();
-        Recipe recipe = repository.getReferenceById(id);
-        copyDtoToEntity(recipe, dto);
+    public RecipeDTO updateRecipe(Long recipeId, UpdateRecipeDTO dto) {
+
+        Recipe recipe = recipeRepository.getReferenceById(recipeId);
+        mapUpdateDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
-        if(dto.getItems() != null){
-            riRepository.deleteByRecipeId(recipe.getId());
+
+        if(!dto.getItems().isEmpty()){
+            recipeIngredientsRepository.deleteByRecipeId(recipe.getId());
             recipe.getIngredients().clear();
+
             for(RecipeIngredientsDTO recipeIngredients: dto.getItems()){
 
                 Ingredients ingredients = ingredientsRepository.findById(recipeIngredients.getIngredientId())
                         .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
 
-                ri = new RecipeIngredients(recipe, ingredients,
+                RecipeIngredients ri = new RecipeIngredients(recipe, ingredients,
                         recipeIngredients.getQuantity(), recipeIngredients.getPrice());
 
-                riRepository.save(ri);
+                recipeIngredientsRepository.save(ri);
                 recipe.getIngredients().add(ri);
             }
-
         }
-        recipe = repository.save(recipe);
+
+        recipe = recipeRepository.save(recipe);
 
         return new RecipeDTO(recipe);
     }
 
 
-    private void copyDtoToEntity(Recipe recipe, RecipeDTO dto){
+    private void mapInsertDtoToEntity(Recipe recipe, InsertRecipeDTO dto) {
         recipe.setTitle(dto.getTitle());
         recipe.setShortDescription(dto.getShortDescription());
         recipe.setInstructions(dto.getInstructions());
         recipe.setTimeMinutes(dto.getTimeMinutes());
         recipe.setRendiment(dto.getRendiment());
         recipe.setUrlImg(dto.getUrlImg());
-
     }
 
-    private void verificationReceiveIdAndSendToList(List<Long> list, String idReceive){
+
+    private void mapUpdateDtoToEntity(Recipe recipe, UpdateRecipeDTO dto) {
+        if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
+            recipe.setTitle(dto.getTitle());
+        }
+
+        if (dto.getShortDescription() != null && !dto.getShortDescription().isBlank()) {
+            recipe.setShortDescription(dto.getShortDescription());
+        }
+
+        if (dto.getInstructions() != null && !dto.getInstructions().isBlank()) {
+            recipe.setInstructions(dto.getInstructions());
+        }
+
+        if (dto.getTimeMinutes() != null && dto.getTimeMinutes() > 0) {
+            recipe.setTimeMinutes(dto.getTimeMinutes());
+        }
+
+        if (dto.getRendiment() != null && dto.getRendiment() > 0) {
+            recipe.setRendiment(dto.getRendiment());
+        }
+
+        if (dto.getUrlImg() != null && !dto.getUrlImg().isBlank()) {
+            recipe.setUrlImg(dto.getUrlImg());
+        }
+    }
+
+
+
+
+    private List<Long> verificationReceiveIdAndSendToList(String idReceive){
+        List<Long> list = new ArrayList<>();
         if(!"".equals(idReceive)){
             list = Arrays.asList(idReceive.split(",")).stream().map(Long::parseLong).toList();
         }
+        return list;
     }
 }
 
