@@ -36,6 +36,17 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
+	@ExceptionHandler(ConflictException.class)
+	public ResponseEntity<StandardError> conflict(ConflictException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.CONFLICT;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Conflict");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
 
 	@ExceptionHandler(DatabaseException.class)
 	public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request) {
