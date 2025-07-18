@@ -35,7 +35,7 @@ public class FavoriteController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @GetMapping("/me")
+    @GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FavoriteDTO>> getFavoriteRecipesMe(){
         List<FavoriteDTO> result = service.getFavoriteRecipesMe();
         return ResponseEntity.ok(result);
@@ -73,7 +73,7 @@ public class FavoriteController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @DeleteMapping("/{recipeId}")
+    @DeleteMapping(value = "/{recipeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteFavorite(@PathVariable Long recipeId){
         service.deleteFavoriteByRecipeId(recipeId);
         return ResponseEntity.noContent().build();

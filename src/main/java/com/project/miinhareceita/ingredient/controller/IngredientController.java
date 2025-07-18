@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class IngredientController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IngredientDTO> insertIngredient(@Valid @RequestBody InsertIngredientDTO dto){
         IngredientDTO ingredientDTO = service.insertIngredient(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -58,7 +59,7 @@ public class IngredientController {
                     @ApiResponse(description = "NotFound", responseCode = "400")
             }
     )
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<IngredientDTO>> findByIngredientName( @RequestParam (defaultValue = "") String name) {
         List<IngredientDTO> dto = service.findByIngredientName(name);
         return ResponseEntity.ok(dto);
@@ -79,7 +80,7 @@ public class IngredientController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IngredientDTO> updateIngredient(@PathVariable Long id,@Valid @RequestBody UpdateIngredientDTO dto){
         IngredientDTO ingredientDTO = service.updateIngredient(id, dto);
         return ResponseEntity.ok(ingredientDTO);
@@ -98,7 +99,7 @@ public class IngredientController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteIngredient(@PathVariable Long id){
 
         service.deleteIngredientById(id);
