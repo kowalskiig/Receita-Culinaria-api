@@ -53,15 +53,15 @@ public class IngredientController {
 
 
     @Operation(
-            description = "FindById Ingredient",
-            summary = "Find Ingredient by Id",
+            description = "Find by Ingredient Name (Sorted), (aceppts empty values)",
+            summary = "Find Ingredient by IngredientName",
             responses = {
                     @ApiResponse(description = "OK", responseCode = "200"),
                     @ApiResponse(description = "NotFound", responseCode = "400")
             }
     )
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<IngredientDTO>> findByIngredientName( @RequestParam (defaultValue = "") String name) {
+    public ResponseEntity<List<IngredientDTO>> findByIngredientName(@RequestParam (defaultValue = "") String name) {
         List<IngredientDTO> dto = service.findByIngredientName(name);
         return ResponseEntity.ok(dto);
     }
@@ -69,7 +69,7 @@ public class IngredientController {
 
     @Operation(
             description = "Update Ingredient",
-            summary = "Update Ingredient with ingredientId only Admin",
+            summary = "Update Ingredient with ingredientId only Admin ",
             responses = {
                     @ApiResponse(description = "Ok", responseCode = "200"),
                     @ApiResponse(description = "Bad Request", responseCode = "400"),
@@ -81,9 +81,9 @@ public class IngredientController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @PutMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IngredientDTO> updateIngredient(@PathVariable Long id,@Valid @RequestBody UpdateIngredientDTO dto){
-        IngredientDTO ingredientDTO = service.updateIngredient(id, dto);
+    @PutMapping(value = "/{ingredientId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<IngredientDTO> updateIngredient(@PathVariable Long ingredientId,@Valid @RequestBody UpdateIngredientDTO dto){
+        IngredientDTO ingredientDTO = service.updateIngredient(ingredientId, dto);
         return ResponseEntity.ok(ingredientDTO);
     }
 
@@ -100,10 +100,10 @@ public class IngredientController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteIngredient(@PathVariable Long id){
+    @DeleteMapping(value = "/{ingredientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteIngredient(@PathVariable Long ingredientId){
 
-        service.deleteIngredientById(id);
+        service.deleteIngredientById(ingredientId);
         return ResponseEntity.noContent().build();
     }
 
