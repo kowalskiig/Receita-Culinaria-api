@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ import java.util.List;
                     @ApiResponse(description = "Ok", responseCode = "200"),
             }
     )
-        @GetMapping
+        @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<List<CategoryMinDTO>> findAll() {
             List<CategoryMinDTO> dto = service.findAll();
             return ResponseEntity.ok(dto);
