@@ -21,15 +21,15 @@ public class FavoriteController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/me")
-    public ResponseEntity<List<FavoriteDTO>> getFavoriteRecipesByUser(){
-        List<FavoriteDTO> result = service.getFavoriteRecipesByUser();
+    public ResponseEntity<List<FavoriteDTO>> getFavoriteRecipesMe(){
+        List<FavoriteDTO> result = service.getFavoriteRecipesMe();
         return ResponseEntity.ok(result);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @PostMapping
-    public ResponseEntity<FavoriteDTO> insertFavorite(@Valid @RequestBody FavoriteInsertDTO dto) {
-        FavoriteDTO result = service.insertFavoriteRecipe(dto);
+    @PostMapping("/{recipeId}")
+    public ResponseEntity<FavoriteDTO> insertFavorite(@PathVariable Long recipeId) {
+        FavoriteDTO result = service.insertFavoriteRecipe(recipeId);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 

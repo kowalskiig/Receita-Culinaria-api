@@ -3,10 +3,10 @@ package com.project.miinhareceita.favorite.service;
 import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.favorite.domain.Favorite;
 import com.project.miinhareceita.favorite.dto.FavoriteDTO;
-import com.project.miinhareceita.favorite.dto.FavoriteInsertDTO;
 import com.project.miinhareceita.favorite.repository.FavoriteRepository;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
+import com.project.miinhareceita.shared.exceptions.ConflictException;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
@@ -35,25 +35,25 @@ public class FavoriteService {
     }
 
     @Transactional(readOnly = true)
-    public List<FavoriteDTO> getFavoriteRecipesByUser() {
+    public List<FavoriteDTO> getFavoriteRecipesMe() {
         User user = authService.authenticated();
         List<Favorite> result = repository.findFavoritesByUserId(user.getId());
         return result.stream().map(FavoriteDTO::new).toList();
     }
 
     @Transactional
-    public FavoriteDTO insertFavoriteRecipe(FavoriteInsertDTO dto) {
+    public FavoriteDTO insertFavoriteRecipe(Long recipeId) {
+
         User user = authService.authenticated();
-        List<Favorite> result = repository.findFavoritesByUserId(user.getId());
 
-        Recipe recipe = recipeRepository.findById(dto.getRecipeId())
-                .orElseThrow(() -> new ResourceNotFoundException("Receita não existe"));
+        verificationExistsRecipeId(recipeId);
+        verificationExistsRecipeFavoriteInUserId(user.getId(), recipeId);
 
-        if (repository.existsByUserIdAndRecipeId(user.getId(), dto.getRecipeId())) {
-            throw new DatabaseException("Receita já está favoritada");
-        }
+        Favorite favorite = new Favorite();
 
-        Favorite favorite = mapToFavoriteEntity(dto);
+        Recipe recipe = recipeRepository.getReferenceById(recipeId);
+
+        favorite.getId().setRecipe(recipe);
         favorite.getId().setUser(user);
 
         favorite = repository.save(favorite);
@@ -64,12 +64,13 @@ public class FavoriteService {
     @Transactional
     public void deleteFavoriteByRecipeId(Long recipeId) {
         User user = authService.authenticated();
-        Recipe recipe = recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Receita não existe"));
+
+        verificationExistsRecipeId(recipeId);
 
         if (!repository.existsByUserIdAndRecipeId(user.getId(), recipeId)) {
-            throw new ForbiddenException("Não tem permissão para isso");
+            throw new ResourceNotFoundException("Não existe essa receita nas suas favoritas");
         }
+
         try {
             repository.deleteByRecipeIdAndUser(recipeId, user.getId());
         }
@@ -78,13 +79,16 @@ public class FavoriteService {
         }
     }
 
-  
+    private void verificationExistsRecipeId(Long recipeId){
+        Recipe recipe = recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Receita não existe"));
 
-    private Favorite mapToFavoriteEntity(FavoriteInsertDTO dto){
-        Favorite favorite = new Favorite();
-        favorite.getId().setRecipe(recipeRepository.getReferenceById(dto.getRecipeId()));
-        return favorite;
     }
 
 
+    private void verificationExistsRecipeFavoriteInUserId(Long userId, Long recipeId){
+        if (repository.existsByUserIdAndRecipeId(userId, recipeId)) {
+            throw new ConflictException("Receita já está favoritada");
+        }
+    }
 }
