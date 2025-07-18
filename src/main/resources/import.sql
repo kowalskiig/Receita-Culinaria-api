@@ -35,11 +35,6 @@ INSERT INTO tb_ingredients(name) VALUES ('Pimenta do Reino');
 INSERT INTO tb_ingredients(name) VALUES ('Cheiro Verde (Salsinha e Cebolinha)');
 INSERT INTO tb_ingredients(name) VALUES ('Óleo Vegetal');
 
-INSERT INTO tb_category(name) VALUES ('Fitnes');
-INSERT INTO tb_category(name) VALUES ('Doce');
-INSERT INTO tb_category(name) VALUES ('Salgado');
-INSERT INTO tb_category(name) VALUES ('Rápido');
-INSERT INTO tb_category(name) VALUES ('Devagar');
 
 INSERT INTO tb_recipe(title, short_description, instructions, time_minutes, rendiment, publication_date, url_img, user_id) VALUES ('Onigiri', 'Bolinhos de arroz deliciosos', 'faça bllallba', 30, 5, TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 'https://example.com/onigiri.jpg', 1);
 INSERT INTO tb_recipe(title, short_description, instructions, time_minutes, rendiment, publication_date, url_img, user_id) VALUES ('Tacos de Carne Moída', 'Tacos saborosos com carne moída temperada, perfeitos para uma refeição divertida.', '1. Cozinhe a carne moída com temperos. 2. Aqueça as tortilhas de taco. 3. Monte os tacos com alface, tomate e queijo.', 40, 4, TIMESTAMP WITH TIME ZONE '2025-06-15T19:00:00Z', 'https://example.com/tacos_carne.jpg', 2);
