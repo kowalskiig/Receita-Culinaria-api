@@ -2,7 +2,9 @@ package com.project.miinhareceita.favorite.dto;
 
 import com.project.miinhareceita.favorite.domain.Favorite;
 import com.project.miinhareceita.recipe.dto.RecipeFavoriteDTO;
+import lombok.Getter;
 
+@Getter
 public class FavoriteDTO {
     private RecipeFavoriteDTO recipeFavoriteDTO;
 
