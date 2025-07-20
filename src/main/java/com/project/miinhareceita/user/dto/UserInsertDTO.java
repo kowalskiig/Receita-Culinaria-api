@@ -3,8 +3,10 @@ package com.project.miinhareceita.user.dto;
 import com.project.miinhareceita.user.validation.UserInsertValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 
 
+@Getter
 @UserInsertValid
 public class UserInsertDTO extends UserDTO {
 
@@ -12,12 +14,13 @@ public class UserInsertDTO extends UserDTO {
     @Size(min = 8, message = "No minimo 8 caracteres")
     private String password;
 
-    UserInsertDTO() {
+    public UserInsertDTO() {
         super();
     }
 
-    public String getPassword() {
-        return password;
+    public UserInsertDTO(Long id, String firstName, String lastName, String email, String password) {
+        super(id, firstName, lastName, email);
+        this.password = password;
     }
 
     public void setPassword(String password) {
