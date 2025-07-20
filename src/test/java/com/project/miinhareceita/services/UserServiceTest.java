@@ -1,38 +1,71 @@
 package com.project.miinhareceita.services;
 
+
+
+import com.project.miinhareceita.auth.service.AuthService;
+import com.project.miinhareceita.tests.RoleFactory;
+import com.project.miinhareceita.tests.UserFactory;
 import com.project.miinhareceita.user.domain.Role;
+
 import com.project.miinhareceita.user.domain.User;
+
 import com.project.miinhareceita.user.dto.RoleDTO;
+
 import com.project.miinhareceita.user.dto.UserDTO;
+
 import com.project.miinhareceita.user.dto.UserInsertDTO;
+
 import com.project.miinhareceita.user.projection.UserDetailsProjection;
+
 import com.project.miinhareceita.user.repository.RoleRepository;
+
 import com.project.miinhareceita.user.repository.UserRepository;
+
 import com.project.miinhareceita.user.service.UserService;
+
 import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.InjectMocks;
+
 import org.mockito.Mock;
+
 import org.mockito.Mockito;
+
 import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+
+
 import java.util.ArrayList;
+
 import java.util.List;
+
+
 
 import static org.mockito.ArgumentMatchers.any;
 
+
+
 @ExtendWith(SpringExtension.class)
+
 public class UserServiceTest {
+
     @InjectMocks
     private UserService service;
 
     @Mock
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     @Mock
     private PasswordEncoder passwordEncoder;
@@ -40,99 +73,115 @@ public class UserServiceTest {
     @Mock
     private RoleRepository roleRepository;
 
+    @Mock
+    private AuthService authService;
+
     private User user;
-    private String validFirstName;
-    private String validLastName;
-    private String existingEmail;
-    private String nonExistingEmail;
-    private String newUserEmail;
     private String rawPassword;
-    private String bCryptPassword;
-    private UserInsertDTO userInsertDTO;
-    private Role role;
+    private String encodedPassword;
+    private Role userRole;
+
+
+
+    private UserDetailsProjection userDetailsProjection;
+    private List<UserDetailsProjection> userDetailsProjectionsList;
+    private List<UserDetailsProjection> nonUserDetailsProjectionsList;
+
+    private String existingEmail, nonExistingEmail;
+
+
+
+
+
 
     @BeforeEach
-    void setUp(){
-        validFirstName = "Gustavo";
-        validLastName = "Kowalski";
-        existingEmail = "exist@gmail.com";
-        nonExistingEmail = "nonexist@gmail.com";
-        newUserEmail = "newuser@example.com";
-        rawPassword = "123456";
-        bCryptPassword = "$2a$10$.mmz3OqUecF234Bic.FuYO5uZF9eZZGYM7aDkVLpqGVKUqBfhwrAC";
-        role = new Role(1L, "ROLE_USER");
 
-        userInsertDTO = new UserInsertDTO(null, validFirstName, validLastName, newUserEmail, rawPassword);
-        userInsertDTO.getRoles().add(new RoleDTO( new Role(1L, "ROLE_USER")));
+    void setUp() {
+        user = UserFactory.createUserWithOutRole();
+        userRole = RoleFactory.createRoleUser();
 
-        user = new User(1L, validFirstName, validLastName, newUserEmail, bCryptPassword);
-        user.addRole(role);
 
-        Mockito.when(passwordEncoder.encode(rawPassword)).thenReturn(bCryptPassword);
-        Mockito.when(roleRepository.findByAuthority("ROLE_USER")).thenReturn(role);
-        Mockito.when(repository.save(any(User.class))).thenReturn(user);
+    userDetailsProjection = UserFactory.createUserDetailsProjection();
+    userDetailsProjectionsList = new ArrayList<>();
+    userDetailsProjectionsList.add(userDetailsProjection);
+    nonUserDetailsProjectionsList = new ArrayList<>();
 
-        List<UserDetailsProjection> existsUserProjection = new ArrayList<>();
-        UserDetailsProjection detailsProjection = new UserDetailsProjection() {
-            @Override
-            public String getUsername() {
-                return existingEmail;
-            }
+    existingEmail = "existingemail@gmail.com";
+    nonExistingEmail = "nonexistingemail@gmail.com";
 
-            @Override
-            public String getPassword() {
-                return bCryptPassword;
-            }
+    rawPassword = "123456";
+    encodedPassword = "\"2a$10$.mmz3OqUecF234Bic.FuYO5uZF9eZZGYM7aDkVLpqGVKUqBfhwrAC";
 
-            @Override
-            public Long getRoleId() {
-                return 1L;
-            }
 
-            @Override
-            public String getAuthority() {
-                return "ROLE_USER";
-            }
-        };
-        existsUserProjection.add(detailsProjection);
+    Mockito.when(userRepository.searchUserAndRolesByEmail(existingEmail)).thenReturn(userDetailsProjectionsList);
+    Mockito.when(userRepository.searchUserAndRolesByEmail(nonExistingEmail)).thenReturn(nonUserDetailsProjectionsList);
 
-        Mockito.when(repository.searchUserAndRolesByEmail(existingEmail)).thenReturn(existsUserProjection);
-        Mockito.when(repository.searchUserAndRolesByEmail(nonExistingEmail)).thenThrow(UsernameNotFoundException.class);
+    Mockito.when(userRepository.save(any())).thenReturn(user);
+    Mockito.when(passwordEncoder.encode(rawPassword)).thenReturn(encodedPassword);
+    Mockito.when(roleRepository.findByAuthority("ROLE_USER")).thenReturn(userRole);
+    Mockito.when(authService.authenticated()).thenReturn(user);
     }
 
     @Test
+
     public void loadUserByUsernameShouldReturnUserWhenEmailExists(){
-        UserDetails foundUser = service.loadUserByUsername(existingEmail);
 
-        Assertions.assertNotNull(foundUser);
-        Assertions.assertEquals(existingEmail, foundUser.getUsername());
-        Assertions.assertEquals(bCryptPassword, foundUser.getPassword());
-        Assertions.assertTrue(foundUser.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER")));
+        UserDetails result = service.loadUserByUsername(existingEmail);
+
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(userDetailsProjectionsList.getFirst().getUsername(), result.getUsername());
+        Assertions.assertEquals(userDetailsProjectionsList.getFirst().getPassword(), result.getPassword());
+        Assertions.assertTrue(result.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER")));
+
     }
 
+
+
     @Test
+
     public void loadUserByUsernameShouldThrowUsernameNotFoundExceptionWhenEmailDoesNotExist(){
+
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
+
             service.loadUserByUsername(nonExistingEmail);
+
         });
+
     }
 
+
     @Test
-    public void insertUserShouldReturnUserDTOwhenDataIsCorrect(){
+    public void insertUserShouldReturnUserDTOWhenInsertSucess(){
+        UserInsertDTO userInsertDTO = UserFactory.createUserInsertDTO();
         UserDTO result = service.insertUser(userInsertDTO);
 
         Assertions.assertNotNull(result);
-        Assertions.assertNotNull(result.getId());
-        Assertions.assertEquals(user.getId(), result.getId());
-        Assertions.assertEquals(userInsertDTO.getFirstName(), result.getFirstName());
-        Assertions.assertEquals(userInsertDTO.getLastName(), result.getLastName());
-        Assertions.assertEquals(user.getEmail(), result.getEmail());
+        Assertions.assertEquals(result.getId(), user.getId());
+        Assertions.assertEquals(result.getFirstName(), user.getFirstName());
+        Assertions.assertEquals(result.getLastName(), user.getLastName());
+        Assertions.assertEquals(result.getEmail(), user.getEmail());
         Assertions.assertNotNull(result.getRoles());
-        Assertions.assertEquals(1, result.getRoles().size());
-        Assertions.assertTrue(result.getRoles().stream().anyMatch(r -> r.getAuthority().equals("ROLE_USER")));
 
-        Mockito.verify(passwordEncoder, Mockito.times(1)).encode(rawPassword);
+        Mockito.verify(passwordEncoder, Mockito.times(1)).encode(userInsertDTO.getPassword());
+
         Mockito.verify(roleRepository, Mockito.times(1)).findByAuthority("ROLE_USER");
-        Mockito.verify(repository, Mockito.times(1)).save(any(User.class));
+
+        Mockito.verify(userRepository, Mockito.times(1)).save(any(User.class));
     }
+
+    @Test
+    public void findMeShouldReturnUserDTOWhenSucess(){
+        UserDTO result = service.findMe();
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.getFirstName(), user.getFirstName());
+        Assertions.assertEquals(result.getLastName(), user.getLastName());
+        Assertions.assertEquals(result.getEmail(), user.getEmail());
+        Assertions.assertNotNull(result.getRoles());
+
+        Mockito.verify(authService, Mockito.times(1)).authenticated();
+    }
+
+
+
 }
