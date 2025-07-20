@@ -8,6 +8,7 @@ import com.project.miinhareceita.favorite.service.FavoriteService;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.shared.exceptions.ConflictException;
+import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.FavoriteFactory;
 import com.project.miinhareceita.tests.RecipeFactory;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -83,6 +85,8 @@ public class FavoriteServiceTest {
 
         Mockito.when(favoriteRepository.findFavoritesByUserId(existingUserId)).thenReturn(favoriteList);
 
+        Mockito.doNothing().when(favoriteRepository).deleteByRecipeIdAndUser(existingRecipeId, existingUserId);
+
     }
     @Test
     public void insertFavoriteRecipeShouldReturnFavoriteDtoWhenSucess(){
@@ -127,4 +131,34 @@ public class FavoriteServiceTest {
 
     }
 
+    @Test
+    public void deleteFavoriteByRecipeIdShouldReturnResourceDoesNotFoundExceptionWhenRecipeIdDoesNotInListRecipeFavorite(){
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+
+            favoriteService.deleteFavoriteByRecipeId(existingRecipeId);
+
+        });
+    }
+
+    @Test
+    public void deleteFavoriteByRecipeIdShouldReturnNothingWhenSucess(){
+        Mockito.when(favoriteRepository.existsByUserIdAndRecipeId(existingUserId, existingRecipeId))
+                .thenReturn(true);
+        Assertions.assertDoesNotThrow(() -> {
+            favoriteService.deleteFavoriteByRecipeId(existingRecipeId);
+        });
+
+    }
+
+    @Test
+    public void deleteFavoriteByRecipeIdShouldThrowDataIntegrityViolationExceptionWhenDataBaseIntegrityWasViolated() {
+        Mockito.when(favoriteRepository.existsByUserIdAndRecipeId(existingUserId, existingRecipeId))
+                .thenReturn(true);
+        Mockito.doThrow(DataIntegrityViolationException.class).when(favoriteRepository).deleteByRecipeIdAndUser(existingRecipeId, existingUserId);
+
+        Assertions.assertThrows(DatabaseException.class, () -> {
+            favoriteService.deleteFavoriteByRecipeId(existingRecipeId);
+        });
+    }
 }
