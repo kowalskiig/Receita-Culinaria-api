@@ -113,6 +113,7 @@
 				<configuration>
 					<excludes>
 						<exclude>com/project/miinhareceita/config/**</exclude>
+						<exclude>com/project/miinhareceita</exclude>
 						<exclude>com/project/miinhareceita/recipe/domain/**</exclude>
 						<exclude>com/project/miinhareceita/shared/exceptions/**</exclude>
 						<exclude>com/project/miinhareceita/recipe/dto/**</exclude>
@@ -130,8 +131,11 @@
 						<exclude>com/project/miinhareceita/favorite/controller/**</exclude>
 						<exclude>com/project/miinhareceita/user/dto/**</exclude>
 						<exclude>com/project/miinhareceita/ingredient/domain/**</exclude>
+						<exclude>com/project/miinhareceita/category/domain/**</exclude>
 						<exclude>com/project/miinhareceita/category/dto/**</exclude>
 						<exclude>com/project/miinhareceita/category/controller/**</exclude>
+						<exclude>com/project/miinhareceita/auth/util/**</exclude>
+
 					</excludes>
 				</configuration>
 				<executions>
