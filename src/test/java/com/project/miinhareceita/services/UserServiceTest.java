@@ -9,8 +9,6 @@ import com.project.miinhareceita.user.domain.Role;
 
 import com.project.miinhareceita.user.domain.User;
 
-import com.project.miinhareceita.user.dto.RoleDTO;
-
 import com.project.miinhareceita.user.dto.UserDTO;
 
 import com.project.miinhareceita.user.dto.UserInsertDTO;
@@ -58,7 +56,6 @@ import static org.mockito.ArgumentMatchers.any;
 
 
 @ExtendWith(SpringExtension.class)
-
 public class UserServiceTest {
 
     @InjectMocks
