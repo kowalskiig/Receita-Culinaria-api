@@ -4,11 +4,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @NoArgsConstructor
 public class InsertRecipeDTO implements ValidRecipeDTO{
 
@@ -38,7 +40,14 @@ public class InsertRecipeDTO implements ValidRecipeDTO{
     @NotEmpty(message = "Deve ter pelo menos 1 ingredient")
     private List<RecipeIngredientsDTO> items = new ArrayList<>();
 
-
+    public InsertRecipeDTO(String title, String urlImg, Integer rendiment, Integer timeMinutes, String instructions, String shortDescription) {
+        this.title = title;
+        this.urlImg = urlImg;
+        this.rendiment = rendiment;
+        this.timeMinutes = timeMinutes;
+        this.instructions = instructions;
+        this.shortDescription = shortDescription;
+    }
 
     @Override
     public String getTitle() {
