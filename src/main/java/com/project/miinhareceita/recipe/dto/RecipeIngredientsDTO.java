@@ -1,9 +1,11 @@
 package com.project.miinhareceita.recipe.dto;
 
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class RecipeIngredientsDTO {

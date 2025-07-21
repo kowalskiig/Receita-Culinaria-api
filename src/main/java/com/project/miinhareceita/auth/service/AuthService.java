@@ -1,5 +1,6 @@
 package com.project.miinhareceita.auth.service;
 
+import com.project.miinhareceita.auth.util.UtilAuth;
 import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,13 @@ public class AuthService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private UtilAuth utilAuth;
+
     public User authenticated() {
         try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
-            String username = jwtPrincipal.getClaim("username");
-            return repository.findByEmail(username);
+            String username = utilAuth.getLoggedToken();
+            return repository.findByEmail(username).get();
         }
         catch (Exception e) {
             throw new UsernameNotFoundException("Invalid user");

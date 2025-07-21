@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
         recieveUser.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         recieveUser.getRoles().clear();
-        recieveUser.getRoles().add(createRoleByRoleName("ROLE_USER"));
+        recieveUser.getRoles().add(getRoleByRoleName("ROLE_USER"));
 
         recieveUser = repository.save(recieveUser);
 
@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    private Role createRoleByRoleName(String roleName){
+    private Role getRoleByRoleName(String roleName){
         Role role = roleRepository.findByAuthority(roleName);
         return role;
     }
