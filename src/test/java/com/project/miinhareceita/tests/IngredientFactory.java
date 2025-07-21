@@ -2,6 +2,7 @@ package com.project.miinhareceita.tests;
 
 import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
 import com.project.miinhareceita.ingredient.projection.IngredientProjection;
 
 public class IngredientFactory {
@@ -30,5 +31,13 @@ public class IngredientFactory {
             }
         };
     }
+
+    public static UpdateIngredientDTO createUpdateIngredientDTO() {
+        return new UpdateIngredientDTO("Frango");
+    }
+    public static UpdateIngredientDTO createUpdateIngredientDTOWithOutData() {
+        return new UpdateIngredientDTO();
+    }
+
 
 }
