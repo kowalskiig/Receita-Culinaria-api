@@ -8,7 +8,6 @@ import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.shared.exceptions.ConflictException;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
-import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.user.domain.User;
 import org.springframework.dao.DataIntegrityViolationException;
