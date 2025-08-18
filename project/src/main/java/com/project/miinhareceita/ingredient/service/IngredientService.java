@@ -32,42 +32,39 @@ public class IngredientService {
         Ingredients entity = new Ingredients();
         mapDTODataToEntity(dto, entity);
 
-        entity = repository.save(entity);
-        return  new IngredientDTO(entity);
+        return  new IngredientDTO(repository.save(entity));
     }
 
     @Transactional(readOnly = true)
     public List<IngredientDTO> findByIngredientName(String name){
-        List<IngredientProjection> listProjection = repository.searchProducts(name);
+        List<IngredientProjection> listProjection = repository.searchIngredientsByName(name);
 
         return listProjection.stream()
                 .map(projection -> new IngredientDTO(projection.getId(), projection.getName()))
-                .sorted(Comparator.comparing(IngredientDTO::getName))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = false)
     public IngredientDTO updateIngredient(Long id, UpdateIngredientDTO dto) {
-        try {
-            Ingredients entity = repository.getReferenceById(id);
-            mapDTODataToEntity(dto,entity);
-            entity = repository.save(entity);
-            return new IngredientDTO(entity);
+        Ingredients entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ingredient does not exist " + id));
+
+        mapDTODataToEntity(dto,entity);
+
+        return new IngredientDTO(repository.save(entity));
         }
-        catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id não encontrado " + id);
-        }
-    }
+
+
     @Transactional(propagation = Propagation.SUPPORTS)
     public void deleteIngredientById(Long id) {
         if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Recurso não encontrado");
+            throw new ResourceNotFoundException("Ingredient does not exist" + id);
         }
         try {
             repository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
+            throw new DatabaseException("Referential integrity failure");
         }
     }
 

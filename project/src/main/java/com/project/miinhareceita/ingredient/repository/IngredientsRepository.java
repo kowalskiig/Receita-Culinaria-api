@@ -15,6 +15,7 @@ public interface IngredientsRepository extends JpaRepository<Ingredients, Long> 
 	SELECT tb_ingredients.id, tb_ingredients.name
 	FROM tb_ingredients
 	WHERE (:name IS NULL OR LOWER(tb_ingredients.name) LIKE LOWER(CONCAT('%',:name,'%')))
+	ORDER BY tb_ingredients.name
 	""")
-    List<IngredientProjection> searchProducts(String name);
+    List<IngredientProjection> searchIngredientsByName(String name);
 }
