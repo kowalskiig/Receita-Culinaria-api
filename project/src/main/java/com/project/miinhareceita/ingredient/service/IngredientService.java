@@ -38,7 +38,7 @@ public class IngredientService {
 
     @Transactional(readOnly = true)
     public List<IngredientDTO> findByIngredientName(String name){
-        List<IngredientProjection> listProjection = repository.searchProducts(name);
+        List<IngredientProjection> listProjection = repository.searchIngredientsByName(name);
 
         return listProjection.stream()
                 .map(projection -> new IngredientDTO(projection.getId(), projection.getName()))
