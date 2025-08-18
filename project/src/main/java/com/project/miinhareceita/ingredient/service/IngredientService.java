@@ -46,16 +46,15 @@ public class IngredientService {
 
     @Transactional(readOnly = false)
     public IngredientDTO updateIngredient(Long id, UpdateIngredientDTO dto) {
-        try {
-            Ingredients entity = repository.getReferenceById(id);
-            mapDTODataToEntity(dto,entity);
-            entity = repository.save(entity);
-            return new IngredientDTO(entity);
+        Ingredients entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Id not found " + id));
+
+        mapDTODataToEntity(dto,entity);
+        
+        return new IngredientDTO(repository.save(entity));
         }
-        catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id não encontrado " + id);
-        }
-    }
+
+
     @Transactional(propagation = Propagation.SUPPORTS)
     public void deleteIngredientById(Long id) {
         if (!repository.existsById(id)) {
