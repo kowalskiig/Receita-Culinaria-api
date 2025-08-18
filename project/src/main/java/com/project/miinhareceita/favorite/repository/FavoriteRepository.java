@@ -17,17 +17,15 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     @Query("""
             SELECT obj
             FROM Favorite obj
-            INNER JOIN obj.id.user u
             INNER JOIN obj.id.recipe r
             WHERE obj.id.user.id = :userId
             """)
     List<Favorite> findFavoritesByUserId(Long userId);
 
-    @EntityGraph(attributePaths = {"id.recipe", "id.recipe.user"})
+
     @Query("""
     SELECT COUNT(obj) > 0
     FROM Favorite obj
-    INNER JOIN obj.id.user u
     INNER JOIN obj.id.recipe r
     WHERE obj.id.user.id = :userId AND obj.id.recipe.id = :recipeId
     """)
