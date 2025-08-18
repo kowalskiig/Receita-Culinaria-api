@@ -59,7 +59,7 @@ public class FavoriteService {
         User user = authService.authenticated();
 
         if(!verificationExistsRecipeFavoriteInUserId(user.getId(), recipeId)){
-            throw new ConflictException("Recipe does not appear in your list");
+            throw new ResourceNotFoundException("Recipe does not appear in your list");
         }
             repository.deleteByRecipeIdAndUser(recipeId, user.getId());
     }
