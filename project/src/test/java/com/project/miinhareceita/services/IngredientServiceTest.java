@@ -60,7 +60,7 @@ public class IngredientServiceTest {
 
         ingredient = IngredientFactory.createIngredient();
 
-        Mockito.when(repository.searchProducts(ingredientName)).thenReturn(ingredientProjectionList);
+        Mockito.when(repository.searchIngredientsByName(ingredientName)).thenReturn(ingredientProjectionList);
 
         Mockito.when(repository.getReferenceById(existingId)).thenReturn(ingredient);
         Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
@@ -90,7 +90,7 @@ public class IngredientServiceTest {
         Assertions.assertNotNull(result);
         Assertions.assertEquals(result.size(), ingredientProjectionList.size());
         Assertions.assertEquals(result.getFirst().getName(), ingredientProjection.getName() );
-        verify(repository, times(1)).searchProducts(ingredientName);
+        verify(repository, times(1)).searchIngredientsByName(ingredientName);
 
     }
 
