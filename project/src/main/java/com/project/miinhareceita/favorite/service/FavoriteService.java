@@ -41,7 +41,8 @@ public class FavoriteService {
 
     @Transactional
     public FavoriteDTO insertFavoriteRecipe(Long recipeId) {
-        Recipe recipe = verificationExistsRecipeId(recipeId);
+        Recipe recipe = recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe does not exist"));
 
         User user = authService.authenticated();
 
@@ -61,13 +62,6 @@ public class FavoriteService {
             throw new ConflictException("Recipe does not appear in your list");
         }
             repository.deleteByRecipeIdAndUser(recipeId, user.getId());
-    }
-
-
-    private Recipe verificationExistsRecipeId(Long recipeId){
-        return recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Recipe does not exist"));
-
     }
 
 
