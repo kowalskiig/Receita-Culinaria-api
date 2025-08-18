@@ -41,7 +41,6 @@ public class IngredientService {
 
         return listProjection.stream()
                 .map(projection -> new IngredientDTO(projection.getId(), projection.getName()))
-                .sorted(Comparator.comparing(IngredientDTO::getName))
                 .collect(Collectors.toList());
     }
 
