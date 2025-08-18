@@ -47,10 +47,10 @@ public class IngredientService {
     @Transactional(readOnly = false)
     public IngredientDTO updateIngredient(Long id, UpdateIngredientDTO dto) {
         Ingredients entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Id not found " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Ingredient does not exist " + id));
 
         mapDTODataToEntity(dto,entity);
-        
+
         return new IngredientDTO(repository.save(entity));
         }
 
@@ -58,13 +58,13 @@ public class IngredientService {
     @Transactional(propagation = Propagation.SUPPORTS)
     public void deleteIngredientById(Long id) {
         if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("Recurso não encontrado");
+            throw new ResourceNotFoundException("Ingredient does not exist" + id);
         }
         try {
             repository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
+            throw new DatabaseException("Referential integrity failure");
         }
     }
 
