@@ -32,8 +32,7 @@ public class IngredientService {
         Ingredients entity = new Ingredients();
         mapDTODataToEntity(dto, entity);
 
-        entity = repository.save(entity);
-        return  new IngredientDTO(entity);
+        return  new IngredientDTO(repository.save(entity));
     }
 
     @Transactional(readOnly = true)
