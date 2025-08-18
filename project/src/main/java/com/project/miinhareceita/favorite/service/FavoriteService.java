@@ -7,10 +7,8 @@ import com.project.miinhareceita.favorite.repository.FavoriteRepository;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.shared.exceptions.ConflictException;
-import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.user.domain.User;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,57 +35,43 @@ public class FavoriteService {
     public List<FavoriteDTO> getFavoriteRecipesMe() {
         User user = authService.authenticated();
         List<Favorite> result = repository.findFavoritesByUserId(user.getId());
+
         return result.stream().map(FavoriteDTO::new).toList();
     }
 
     @Transactional
     public FavoriteDTO insertFavoriteRecipe(Long recipeId) {
+        Recipe recipe = verificationExistsRecipeId(recipeId);
 
         User user = authService.authenticated();
 
-        verificationExistsRecipeId(recipeId);
-        verificationExistsRecipeFavoriteInUserId(user.getId(), recipeId);
+        if (repository.existsByUserIdAndRecipeId(user.getId(), recipeId)) {
+            throw new ConflictException("Recipe is already favorited");
+        }
 
-        Favorite favorite = new Favorite();
-
-        Recipe recipe = recipeRepository.getReferenceById(recipeId);
-
-        favorite.getId().setRecipe(recipe);
-        favorite.getId().setUser(user);
-
-        favorite = repository.save(favorite);
-
-        return new FavoriteDTO(favorite);
+        return new FavoriteDTO(repository.save(new Favorite(recipe, user)));
     }
 
     @Transactional
     public void deleteFavoriteByRecipeId(Long recipeId) {
         User user = authService.authenticated();
 
-        verificationExistsRecipeId(recipeId);
+        Recipe recipe = verificationExistsRecipeId(recipeId);
 
-        if (!repository.existsByUserIdAndRecipeId(user.getId(), recipeId)) {
-            throw new ResourceNotFoundException("Não existe essa receita nas suas favoritas");
+        if(!verificationExistsRecipeFavoriteInUserId(user.getId(), recipeId)){
+            throw new ConflictException("Recipe does not appear in your list");
         }
-
-        try {
             repository.deleteByRecipeIdAndUser(recipeId, user.getId());
-        }
-        catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Falha de integridade referencial");
-        }
     }
 
-    private void verificationExistsRecipeId(Long recipeId){
-        Recipe recipe = recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Receita não existe"));
+    private Recipe verificationExistsRecipeId(Long recipeId){
+        return recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe does not exist"));
 
     }
 
 
-    private void verificationExistsRecipeFavoriteInUserId(Long userId, Long recipeId){
-        if (repository.existsByUserIdAndRecipeId(userId, recipeId)) {
-            throw new ConflictException("Receita já está favoritada");
-        }
+    private boolean verificationExistsRecipeFavoriteInUserId(Long userId, Long recipeId){
+        return repository.existsByUserIdAndRecipeId(userId, recipeId);
     }
 }

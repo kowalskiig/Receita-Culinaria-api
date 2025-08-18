@@ -22,7 +22,7 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
             """)
     List<Favorite> findFavoritesByUserId(Long userId);
 
-    @EntityGraph(attributePaths = {"id.recipe", "id.recipe.user"})
+
     @Query("""
     SELECT COUNT(obj) > 0
     FROM Favorite obj
