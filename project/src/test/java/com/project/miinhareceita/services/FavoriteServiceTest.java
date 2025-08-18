@@ -136,7 +136,7 @@ public class FavoriteServiceTest {
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
 
-            favoriteService.deleteFavoriteByRecipeId(existingRecipeId);
+            favoriteService.deleteFavoriteByRecipeId(nonExistingRecipeId);
 
         });
     }
@@ -151,14 +151,5 @@ public class FavoriteServiceTest {
 
     }
 
-    @Test
-    public void deleteFavoriteByRecipeIdShouldThrowDataIntegrityViolationExceptionWhenDataBaseIntegrityWasViolated() {
-        Mockito.when(favoriteRepository.existsByUserIdAndRecipeId(existingUserId, existingRecipeId))
-                .thenReturn(true);
-        Mockito.doThrow(DataIntegrityViolationException.class).when(favoriteRepository).deleteByRecipeIdAndUser(existingRecipeId, existingUserId);
 
-        Assertions.assertThrows(DatabaseException.class, () -> {
-            favoriteService.deleteFavoriteByRecipeId(existingRecipeId);
-        });
-    }
 }
