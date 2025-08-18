@@ -54,15 +54,15 @@ public class FavoriteService {
 
     @Transactional
     public void deleteFavoriteByRecipeId(Long recipeId) {
-        User user = authService.authenticated();
 
-        Recipe recipe = verificationExistsRecipeId(recipeId);
+        User user = authService.authenticated();
 
         if(!verificationExistsRecipeFavoriteInUserId(user.getId(), recipeId)){
             throw new ConflictException("Recipe does not appear in your list");
         }
             repository.deleteByRecipeIdAndUser(recipeId, user.getId());
     }
+
 
     private Recipe verificationExistsRecipeId(Long recipeId){
         return recipeRepository.findById(recipeId)

@@ -134,7 +134,7 @@ public class FavoriteServiceTest {
     @Test
     public void deleteFavoriteByRecipeIdShouldReturnResourceDoesNotFoundExceptionWhenRecipeIdDoesNotInListRecipeFavorite(){
 
-        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+        Assertions.assertThrows(ConflictException.class, () -> {
 
             favoriteService.deleteFavoriteByRecipeId(nonExistingRecipeId);
 
