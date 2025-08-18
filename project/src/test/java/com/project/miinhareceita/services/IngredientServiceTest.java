@@ -24,6 +24,7 @@ import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.mockito.ArgumentMatchers.any;
@@ -62,8 +63,8 @@ public class IngredientServiceTest {
 
         Mockito.when(repository.searchIngredientsByName(ingredientName)).thenReturn(ingredientProjectionList);
 
-        Mockito.when(repository.getReferenceById(existingId)).thenReturn(ingredient);
-        Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+        Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(ingredient));
+        Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
         Mockito.when(repository.save(any())).thenReturn(ingredient);
 
@@ -108,7 +109,7 @@ public class IngredientServiceTest {
         Assertions.assertEquals(result.getId(), ingredients.getId());
         Assertions.assertEquals(result.getName(), ingredients.getName());
 
-        verify(repository, times(1)).getReferenceById(eq(existingId));
+        verify(repository, times(1)).findById(eq(existingId));
         verify(repository, times(1)).save(
                 Mockito.argThat(entity -> entity.getName().equals(dto.getName()) && entity.getId().equals(existingId))
         );
