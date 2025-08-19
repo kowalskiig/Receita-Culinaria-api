@@ -66,12 +66,9 @@ public class RecipeService {
         Recipe recipe = new Recipe();
 
         mapDtoToEntity(recipe, dto);
-
         addRecipeIngredientsToRecipe(recipe, dto.getItems());
-
         recipe.setPublicationDate(Instant.now());
         recipe.setUser(authService.authenticated());
-
 
         return new RecipeDTO(recipeRepository.save(recipe));
     }
@@ -90,9 +87,7 @@ public class RecipeService {
         userRecipeVerification(recipe);
 
         mapDtoToEntity(recipe, dto);
-
         addRecipeIngredientsToRecipe(recipe, dto.getItems());
-
         recipe.setPublicationDate(Instant.now());
 
         return new RecipeDTO(recipeRepository.save(recipe));
@@ -153,7 +148,7 @@ public class RecipeService {
         if (!items.isEmpty()) {
             for (RecipeIngredientsDTO recipeIngredients : items) {
                 Ingredients ingredient = ingredientsRepository.findById(recipeIngredients.getIngredientId())
-                        .orElseThrow(() -> new ResourceNotFoundException("Ingrediente não encontrado"));
+                        .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found"));
 
                 RecipeIngredients ri = new RecipeIngredients(
                         recipe,
