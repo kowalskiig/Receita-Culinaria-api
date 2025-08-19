@@ -50,12 +50,7 @@ public class RecipeFactory {
     public static InsertRecipeDTO createInsertRecipeDto(){
 
  return new InsertRecipeDTO(
-                "Bolo de Chocolate Simples",
-                "Um bolo rápido e delicioso para qualquer ocasião.",
-                20,
-                30,
-                "6",
-                "https://example.com/bolo-chocolate.jpg"
+                createRecipe()
         );
     }
 

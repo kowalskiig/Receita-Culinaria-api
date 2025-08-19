@@ -13,7 +13,6 @@ import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.recipe.repository.RecipeIngredientsRepository;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.recipe.service.RecipeService;
-import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.IngredientFactory;
 import com.project.miinhareceita.tests.RecipeFactory;
@@ -26,8 +25,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.data.domain.*;
-import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 public class RecipeServiceTest {
@@ -61,7 +63,7 @@ public class RecipeServiceTest {
     private Pageable pageable;
 
 
-    private Long existingIngredientId, nonExistingIngredientId;
+    private Long existingIngredientId, nonExistingIngredientId, existingRecipeId, nonExistingRecipeId;
 
     private List<RecipeProjections> recipeProjectionsList;
     private Page<RecipeProjections> recipeProjectionsPage;
@@ -79,7 +81,10 @@ public class RecipeServiceTest {
 
 
         existingIngredientId =1L;
-        nonExistingIngredientId =2L;
+        nonExistingIngredientId = 2L;
+
+        existingRecipeId =1L;
+        nonExistingRecipeId =2L;
 
         ingredients = IngredientFactory.createIngredient(existingIngredientId, "tomate");
 
@@ -104,6 +109,10 @@ public class RecipeServiceTest {
         Mockito.when(ingredientsRepository.findById(nonExistingIngredientId)).thenThrow(ResourceNotFoundException.class);
 
         Mockito.when(recipeIngredientsRepository.save(any())).thenReturn(recipeIngredients);
+
+        Mockito.when(recipeRepository.findById(existingRecipeId)).thenReturn(Optional.of(recipe));
+        Mockito.when(recipeRepository.findById(nonExistingRecipeId)).thenThrow(ResourceNotFoundException.class);
+
 
 
 
@@ -137,6 +146,7 @@ public class RecipeServiceTest {
         Assertions.assertNotNull(result);
 
     }
+
     @Test
     public void insertRecipeShourlReturnResourceNotFoundExceptionWhenIngredientIdDoesNotExists(){
         RecipeIngredientsDTO recipeIngredientsDTO = new RecipeIngredientsDTO(1L, nonExistingIngredientId, 1, 2.0);
@@ -147,4 +157,15 @@ public class RecipeServiceTest {
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {recipeService.insertRecipe(dto);
         });
     }
+    @Test
+    public void findRecipeByIdShoudlReturnRecipeDTOWhenSucess(){
+        RecipeDTO result = recipeService.findRecipeById(existingRecipeId);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertNotNull(result.getId());
+        Mockito.verify(recipeRepository, times(1)).findById(existingRecipeId);
+    }
+
+
+
 }
