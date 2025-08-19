@@ -69,16 +69,9 @@ public class RecipeService {
         mapInsertDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
-
         recipe.setUser(authService.authenticated());
 
-        recipe = recipeRepository.save(recipe);
-
-        addRecipeIngredientsToRecipe(recipe, dto.getItems());
-
-        recipe = recipeRepository.save(recipe);
-
-        return new RecipeDTO(recipe);
+        return new RecipeDTO(recipeRepository.save(recipe));
     }
 
     @Transactional
@@ -102,13 +95,7 @@ public class RecipeService {
 
         recipe.setPublicationDate(Instant.now());
 
-        if (!dto.getItems().isEmpty()) {
-            recipeIngredientsRepository.deleteByRecipeId(recipe.getId());
-            recipe.getIngredients().clear();
 
-            addRecipeIngredientsToRecipe(recipe, dto.getItems());
-
-        }
 
         recipe = recipeRepository.save(recipe);
 
@@ -131,8 +118,19 @@ public class RecipeService {
         recipe.setTimeMinutes(dto.getTimeMinutes());
         recipe.setRendiment(dto.getRendiment());
         recipe.setUrlImg(dto.getUrlImg());
-    }
+        for (RecipeIngredientsDTO recipeIngredients : dto.getItems()) {
+            Ingredients ingredient = ingredientsRepository.findById(recipeIngredients.getIngredientId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Ingrediente não encontrado"));
 
+            RecipeIngredients ri = new RecipeIngredients(
+                    recipe,
+                    ingredient,
+                    recipeIngredients.getQuantity(),
+                    recipeIngredients.getPrice()
+            );
+            recipe.getIngredients().add(ri);
+    }
+        }
 
     private void mapUpdateDtoToEntity(Recipe recipe, UpdateRecipeDTO dto) {
         if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
@@ -168,22 +166,6 @@ public class RecipeService {
         return list;
     }
 
-    private void addRecipeIngredientsToRecipe(Recipe recipe, List<RecipeIngredientsDTO> items) {
-        for (RecipeIngredientsDTO recipeIngredients : items) {
-            Ingredients ingredient = ingredientsRepository.findById(recipeIngredients.getIngredientId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Ingrediente não encontrado"));
 
-            RecipeIngredients ri = new RecipeIngredients(
-                    recipe,
-                    ingredient,
-                    recipeIngredients.getQuantity(),
-                    recipeIngredients.getPrice()
-            );
-
-            recipe.getIngredients().add(ri);
-
-            recipeIngredientsRepository.save(ri);
-        }
-    }
 }
 
