@@ -106,12 +106,12 @@ public class RecipeServiceTest {
         Mockito.when(authService.authenticated()).thenReturn(user);
 
         Mockito.when(ingredientsRepository.findById(existingIngredientId)).thenReturn(Optional.of(ingredients));
-        Mockito.when(ingredientsRepository.findById(nonExistingIngredientId)).thenThrow(ResourceNotFoundException.class);
+        Mockito.when(ingredientsRepository.findById(nonExistingIngredientId)).thenReturn(Optional.empty());
 
         Mockito.when(recipeIngredientsRepository.save(any())).thenReturn(recipeIngredients);
 
         Mockito.when(recipeRepository.findById(existingRecipeId)).thenReturn(Optional.of(recipe));
-        Mockito.when(recipeRepository.findById(nonExistingRecipeId)).thenThrow(ResourceNotFoundException.class);
+        Mockito.when(recipeRepository.findById(nonExistingRecipeId)).thenReturn(Optional.empty());
 
 
 
@@ -166,6 +166,11 @@ public class RecipeServiceTest {
         Mockito.verify(recipeRepository, times(1)).findById(existingRecipeId);
     }
 
-
+    @Test
+    public void findRecipeByIdShoudlReturnResourceNotFoundExceptionWhenIdDoesNotExist(){
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            recipeService.findRecipeById(nonExistingRecipeId);
+        });
+    }
 
 }
