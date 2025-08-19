@@ -5,6 +5,7 @@ import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
 import com.project.miinhareceita.recipe.dto.RecipeIngredientsDTO;
+import com.project.miinhareceita.recipe.dto.UpdateRecipeDTO;
 import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.user.domain.User;
 
@@ -52,6 +53,18 @@ public class RecipeFactory {
  return new InsertRecipeDTO(
                 createRecipe()
         );
+    }
+
+    public static UpdateRecipeDTO createUpdateRecipeDto(){
+        UpdateRecipeDTO dto = new UpdateRecipeDTO();
+        dto.setTitle("Titulo");
+        dto.setInstructions("Instructions");
+        dto.setRendiment(30);
+        dto.setTimeMinutes(10);
+        dto.setUrlImg("g");
+        dto.setShortDescription("as");
+        return dto;
+
     }
 
 

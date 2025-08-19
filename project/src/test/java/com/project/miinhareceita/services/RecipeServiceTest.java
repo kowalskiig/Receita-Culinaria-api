@@ -5,14 +5,12 @@ import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
-import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
-import com.project.miinhareceita.recipe.dto.RecipeDTO;
-import com.project.miinhareceita.recipe.dto.RecipeIngredientsDTO;
-import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.recipe.dto.*;
 import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.recipe.repository.RecipeIngredientsRepository;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.recipe.service.RecipeService;
+import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.IngredientFactory;
 import com.project.miinhareceita.tests.RecipeFactory;
@@ -62,6 +60,8 @@ public class RecipeServiceTest {
     private RecipeMinDTO recipeMinDTO;
     private Pageable pageable;
 
+    private UpdateRecipeDTO updateRecipeDTO;
+
 
     private Long existingIngredientId, nonExistingIngredientId, existingRecipeId, nonExistingRecipeId;
 
@@ -76,6 +76,8 @@ public class RecipeServiceTest {
 
         recipeMinDTO = new RecipeMinDTO(recipe);
         recipeIngredients = new RecipeIngredients(recipe, ingredients, 1 ,2.0);
+
+
         pageable = PageRequest.of(0, 10);
 
 
@@ -94,6 +96,8 @@ public class RecipeServiceTest {
 
         recipeMinDTOList = new ArrayList<>();
         recipeMinDTOList.add(recipeMinDTO);
+
+        updateRecipeDTO = RecipeFactory.createUpdateRecipeDto();
 
         recipeProjectionsPage = new PageImpl<>(recipeProjectionsList);
 
@@ -148,7 +152,7 @@ public class RecipeServiceTest {
     }
 
     @Test
-    public void insertRecipeShourlReturnResourceNotFoundExceptionWhenIngredientIdDoesNotExists(){
+    public void insertRecipeShouldReturnResourceNotFoundExceptionWhenIngredientIdDoesNotExists(){
         RecipeIngredientsDTO recipeIngredientsDTO = new RecipeIngredientsDTO(1L, nonExistingIngredientId, 1, 2.0);
 
         InsertRecipeDTO dto = RecipeFactory.createInsertRecipeDto();
@@ -158,7 +162,7 @@ public class RecipeServiceTest {
         });
     }
     @Test
-    public void findRecipeByIdShoudlReturnRecipeDTOWhenSucess(){
+    public void findRecipeByIdShouldReturnRecipeDTOWhenSucess(){
         RecipeDTO result = recipeService.findRecipeById(existingRecipeId);
 
         Assertions.assertNotNull(result);
@@ -167,10 +171,55 @@ public class RecipeServiceTest {
     }
 
     @Test
-    public void findRecipeByIdShoudlReturnResourceNotFoundExceptionWhenIdDoesNotExist(){
+    public void findRecipeByIdShouldReturnResourceNotFoundExceptionWhenIdDoesNotExist(){
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             recipeService.findRecipeById(nonExistingRecipeId);
         });
+        Mockito.verify(recipeRepository, times(1)).findById(nonExistingRecipeId);
     }
 
+    @Test
+    public void updateRecipeShouldReturnRecipeDTOWhenAllSucess(){
+
+        RecipeDTO result = recipeService.updateRecipe(existingRecipeId ,updateRecipeDTO);
+
+        Assertions.assertNotNull(result);
+        Mockito.verify(authService, times(1)).authenticated();
+        Mockito.verify(recipeRepository, times(1)).findById(existingRecipeId);
+        Mockito.verify(recipeRepository, times(1)).save(any());
+
+        };
+
+    @Test
+    public void updateRecipeShouldReturnForbiddenExceptionWhenUserIdDiferentOfRecipeId(){
+        Long existingRecipeWithUserId = 3L;
+
+        User recipeUser = UserFactory.createUser();
+        recipeUser.setId(2L);
+
+
+        recipe.setId(3L);
+        recipe.setUser(recipeUser);
+
+
+        user.setId(1L);
+
+
+        Mockito.when(recipeRepository.findById(existingRecipeWithUserId)).thenReturn(Optional.of(recipe));
+
+
+        Mockito.when(authService.authenticated()).thenReturn(user);
+
+        Assertions.assertThrows(ForbiddenException.class, () -> {
+            recipeService.updateRecipe(existingRecipeWithUserId, updateRecipeDTO);
+        });
+    }
+
+
+
+
+
+
 }
+
+
