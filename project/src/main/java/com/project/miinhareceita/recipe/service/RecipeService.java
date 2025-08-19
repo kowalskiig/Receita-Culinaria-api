@@ -66,7 +66,7 @@ public class RecipeService {
     public RecipeDTO insertRecipe(InsertRecipeDTO dto) {
 
         Recipe recipe = new Recipe();
-        mapInsertDtoToEntity(recipe, dto);
+        mapDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
         recipe.setUser(authService.authenticated());
@@ -87,19 +87,13 @@ public class RecipeService {
 
         Recipe recipe = recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Receita não encontrada"));
-
         userRecipeVerification(recipe);
 
-
-        mapUpdateDtoToEntity(recipe, dto);
+        mapDtoToEntity(recipe, dto);
 
         recipe.setPublicationDate(Instant.now());
 
-
-
-        recipe = recipeRepository.save(recipe);
-
-        return new RecipeDTO(recipe);
+        return new RecipeDTO(recipeRepository.save(recipe));
     }
 
 
@@ -111,28 +105,7 @@ public class RecipeService {
         }
     }
 
-    private void mapInsertDtoToEntity(Recipe recipe, InsertRecipeDTO dto) {
-        recipe.setTitle(dto.getTitle());
-        recipe.setShortDescription(dto.getShortDescription());
-        recipe.setInstructions(dto.getInstructions());
-        recipe.setTimeMinutes(dto.getTimeMinutes());
-        recipe.setRendiment(dto.getRendiment());
-        recipe.setUrlImg(dto.getUrlImg());
-        for (RecipeIngredientsDTO recipeIngredients : dto.getItems()) {
-            Ingredients ingredient = ingredientsRepository.findById(recipeIngredients.getIngredientId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Ingrediente não encontrado"));
-
-            RecipeIngredients ri = new RecipeIngredients(
-                    recipe,
-                    ingredient,
-                    recipeIngredients.getQuantity(),
-                    recipeIngredients.getPrice()
-            );
-            recipe.getIngredients().add(ri);
-    }
-        }
-
-    private void mapUpdateDtoToEntity(Recipe recipe, UpdateRecipeDTO dto) {
+    private void mapDtoToEntity(Recipe recipe, ValidRecipeDTO dto) {
         if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
             recipe.setTitle(dto.getTitle());
         }
@@ -156,7 +129,23 @@ public class RecipeService {
         if (dto.getUrlImg() != null && !dto.getUrlImg().isBlank()) {
             recipe.setUrlImg(dto.getUrlImg());
         }
-    }
+        if(!dto.getItems().isEmpty()){
+            for (RecipeIngredientsDTO recipeIngredients : dto.getItems()) {
+                Ingredients ingredient = ingredientsRepository.findById(recipeIngredients.getIngredientId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Ingrediente não encontrado"));
+
+                RecipeIngredients ri = new RecipeIngredients(
+                        recipe,
+                        ingredient,
+                        recipeIngredients.getQuantity(),
+                        recipeIngredients.getPrice()
+                );
+                recipe.getIngredients().add(ri);
+        }
+
+    }}
+
+
 
     private List<Long> verificationReceiveIdAndSendToList(String idReceive) {
         List<Long> list = new ArrayList<>();

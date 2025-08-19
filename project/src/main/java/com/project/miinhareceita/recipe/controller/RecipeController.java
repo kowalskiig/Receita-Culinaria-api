@@ -93,7 +93,7 @@ public class RecipeController {
     )
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RecipeDTO> updateRecipeById(@PathVariable Long id, @Valid @RequestBody UpdateRecipeDTO dto){
         RecipeDTO result = recipeService.updateRecipe(id, dto);
         return ResponseEntity.ok(result);
