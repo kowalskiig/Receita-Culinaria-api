@@ -40,3 +40,26 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+---
+
+# production
+spring:
+  config:
+    activate:
+      on-profile: production
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
