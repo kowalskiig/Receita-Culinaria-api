@@ -1,10 +1,12 @@
 package com.project.miinhareceita.recipe.dto;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 @NoArgsConstructor
 public class UpdateRecipeDTO implements ValidRecipeDTO{
 

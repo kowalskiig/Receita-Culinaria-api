@@ -1,16 +1,20 @@
 package com.project.miinhareceita.recipe.dto;
 
+import com.project.miinhareceita.ingredient.domain.Ingredients;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class InsertRecipeDTO implements ValidRecipeDTO{
 
@@ -40,13 +44,11 @@ public class InsertRecipeDTO implements ValidRecipeDTO{
     @NotEmpty(message = "Deve ter pelo menos 1 ingredient")
     private List<RecipeIngredientsDTO> items = new ArrayList<>();
 
-    public InsertRecipeDTO(String title, String urlImg, Integer rendiment, Integer timeMinutes, String instructions, String shortDescription) {
-        this.title = title;
-        this.urlImg = urlImg;
-        this.rendiment = rendiment;
-        this.timeMinutes = timeMinutes;
-        this.instructions = instructions;
-        this.shortDescription = shortDescription;
+    public InsertRecipeDTO(Recipe entity){
+        BeanUtils.copyProperties(entity, this);
+        for(RecipeIngredients ingredient: entity.getIngredients()){
+            items.add(new RecipeIngredientsDTO(ingredient));
+        }
     }
 
     @Override
