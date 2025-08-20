@@ -70,7 +70,7 @@ public class ReviewService {
             Review review = validationExistsReviewsId(id);
             validationReviewUserIdEqualsUserId(review);
 
-           
+
                 reviewRepository.deleteById(id);
 
     }

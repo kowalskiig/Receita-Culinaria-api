@@ -14,9 +14,10 @@ public class UpdateReviewDTO implements ReviewValidDTO{
 
     private String comment;
 
-    public UpdateReviewDTO(Review review) {
-        nota = review.getNota();
-        comment = review.getComment();
+    public UpdateReviewDTO(Integer nota, String comment) {
+        this.nota = nota;
+        this.comment = comment;
+
     }
 
     @Override
