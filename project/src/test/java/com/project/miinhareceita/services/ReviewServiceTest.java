@@ -9,6 +9,7 @@ import com.project.miinhareceita.review.dto.InsertReviewDTO;
 import com.project.miinhareceita.review.dto.ReviewDTO;
 import com.project.miinhareceita.review.repository.ReviewRepository;
 import com.project.miinhareceita.review.service.ReviewService;
+import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.RecipeFactory;
 import com.project.miinhareceita.tests.ReviewFactory;
 import com.project.miinhareceita.tests.UserFactory;
@@ -51,12 +52,14 @@ public class ReviewServiceTest {
 
     private Review review;
 
-    private Long existingRecipeId;
+    private Long existingRecipeId, nonExistingRecipeId;
 
     private Pageable pageable;
 
     private Recipe recipe;
     private User user;
+
+    private InsertReviewDTO insertReviewDTO;
 
     @BeforeEach
     void setUp(){
@@ -70,11 +73,15 @@ public class ReviewServiceTest {
         listReview.add(review);
         reviewPage = new PageImpl<>(listReview);
         existingRecipeId =1L;
+        nonExistingRecipeId =2L;
         pageable = PageRequest.of(0, 10);
+
+        insertReviewDTO = new InsertReviewDTO(3, "Boa");
 
         Mockito.when(reviewRepository.findReviewsByRecipeId(any(), any())).thenReturn(reviewPage);
 
         Mockito.when(recipeRepository.findById(existingRecipeId)).thenReturn(Optional.of(recipe));
+        Mockito.when(recipeRepository.findById(nonExistingRecipeId)).thenReturn(Optional.empty());
         Mockito.when(authService.authenticated()).thenReturn(user);
 
         Mockito.when(reviewRepository.save(any())).thenReturn(review);
@@ -89,9 +96,16 @@ public class ReviewServiceTest {
 
     @Test
     void insertReviewShouldReturnReviewDTOWhenSucess(){
-        InsertReviewDTO dto = new InsertReviewDTO(3, "Boa");
-        ReviewDTO result = reviewService.insertReview(existingRecipeId, dto);
+        ReviewDTO result = reviewService.insertReview(existingRecipeId, insertReviewDTO);
 
         Assertions.assertNotNull(result);
     }
+
+    @Test
+    void insertReviewShouldReturnResourceNotFoundWhenRecipeDoesNotExist(){
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            reviewService.insertReview(nonExistingRecipeId, insertReviewDTO);
+        });
+    }
+
 }
