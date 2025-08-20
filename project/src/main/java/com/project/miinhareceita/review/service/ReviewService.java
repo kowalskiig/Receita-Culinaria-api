@@ -109,14 +109,14 @@ public class ReviewService {
 
     private Review validationExistsReviewsId(Long reviewId){
         return reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
 
 
 
     private void validationReviewUserIdEqualsUserId(Review review){
         if(!authService.authenticated().getId().equals(review.getUser().getId())){
-            throw new ForbiddenException("Não tem permissão para isso");
+            throw new ForbiddenException("You are not allowed to do this");
         }
     }
 
