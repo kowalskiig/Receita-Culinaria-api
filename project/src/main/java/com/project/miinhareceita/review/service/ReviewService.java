@@ -80,7 +80,7 @@ public class ReviewService {
                 reviewRepository.deleteById(id);
             }
             catch (DataIntegrityViolationException e) {
-                throw new DatabaseException("Falha de integridade referencial");
+                throw new DatabaseException("Referential integrity failure");
             }
     }
 
@@ -90,7 +90,7 @@ public class ReviewService {
             validationReviewUserIdEqualsUserId(review);
 
             copyDtoToEntity(review,dto);
-            
+
             return new ReviewDTO(reviewRepository.save(review));
 
     }
