@@ -1,6 +1,8 @@
 package com.project.miinhareceita.tests;
 
 import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
+import com.project.miinhareceita.recipe.dto.ValidRecipeDTO;
 import com.project.miinhareceita.review.domain.Review;
 import com.project.miinhareceita.user.domain.User;
 
@@ -16,4 +18,7 @@ public class ReviewFactory {
     public static Review createReviewWithOutData(){
         return new Review();
     }
-}
+
+
+
+    }

@@ -1,10 +1,18 @@
 package com.project.miinhareceita.services;
 
+import com.project.miinhareceita.auth.service.AuthService;
+import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
+import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.review.dto.InsertReviewDTO;
 import com.project.miinhareceita.review.dto.ReviewDTO;
 import com.project.miinhareceita.review.repository.ReviewRepository;
 import com.project.miinhareceita.review.service.ReviewService;
+import com.project.miinhareceita.tests.RecipeFactory;
 import com.project.miinhareceita.tests.ReviewFactory;
+import com.project.miinhareceita.tests.UserFactory;
+import com.project.miinhareceita.user.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -31,6 +40,12 @@ public class ReviewServiceTest {
     @Mock
     private ReviewRepository reviewRepository;
 
+    @Mock
+    private RecipeRepository recipeRepository;
+
+    @Mock
+    private AuthService authService;
+
     private Page<Review> reviewPage;
     private List<Review> listReview;
 
@@ -40,10 +55,14 @@ public class ReviewServiceTest {
 
     private Pageable pageable;
 
+    private Recipe recipe;
+    private User user;
+
     @BeforeEach
     void setUp(){
 
-
+        recipe = RecipeFactory.createRecipe();
+        user = UserFactory.createUser();
 
         listReview = new ArrayList<>();
 
@@ -55,6 +74,10 @@ public class ReviewServiceTest {
 
         Mockito.when(reviewRepository.findReviewsByRecipeId(any(), any())).thenReturn(reviewPage);
 
+        Mockito.when(recipeRepository.findById(existingRecipeId)).thenReturn(Optional.of(recipe));
+        Mockito.when(authService.authenticated()).thenReturn(user);
+
+        Mockito.when(reviewRepository.save(any())).thenReturn(review);
     }
 
     @Test
@@ -64,5 +87,11 @@ public class ReviewServiceTest {
         Assertions.assertNotNull(result);
     }
 
-    @Te
+    @Test
+    void insertReviewShouldReturnReviewDTOWhenSucess(){
+        InsertReviewDTO dto = new InsertReviewDTO(3, "Boa");
+        ReviewDTO result = reviewService.insertReview(existingRecipeId, dto);
+
+        Assertions.assertNotNull(result);
+    }
 }
