@@ -58,13 +58,14 @@ public class ReviewService {
 
     @Transactional(readOnly = false)
     public ReviewDTO insertReview(Long recipeId, InsertReviewDTO dto){
-            recipeExists(recipeId);
 
             Review review = new Review();
+
+            review.setRecipes(recipeExists(recipeId));
             review.setDataReview(Instant.now());
             review.setUser(authService.authenticated());
 
-            copyDtoToEntity(review, dto);
+        copyDtoToEntity(review, dto);
 
             return new ReviewDTO(reviewRepository.save(review));
         }
@@ -89,9 +90,8 @@ public class ReviewService {
             validationReviewUserIdEqualsUserId(review);
 
             copyDtoToEntity(review,dto);
-
-            review = reviewRepository.save(review);
-            return new ReviewDTO(review);
+            
+            return new ReviewDTO(reviewRepository.save(review));
 
     }
 
@@ -120,8 +120,8 @@ public class ReviewService {
         }
     }
 
-    private void recipeExists(Long recipeId) {
-        recipeRepository.findById(recipeId)
+    private Recipe recipeExists(Long recipeId) {
+        return recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
     }
 
