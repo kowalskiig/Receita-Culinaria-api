@@ -50,30 +50,18 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<ReviewDTO> findReviewByRecipeId(Long id, Pageable pageable) {
+        Page<ReviewProjections> reviews = reviewRepository.findReviewsByRecipeId(id, pageable);
 
-        List<ReviewProjections> reviews = reviewRepository.findReviewByRecipeId(id);
-
-        List<ReviewDTO> result = new ArrayList<>();
-
-        for(ReviewProjections projections : reviews){
-            Review reviewE= new Review();
-
-            reviewE.setId(projections.getId());
-            reviewE.setNota(projections.getNota());
-            reviewE.setDataReview(projections.getDataReview().toInstant());
-            reviewE.setComment(projections.getComment());
-
-            User user = userRepository.getReferenceById(projections.getUser_Id());
-            Recipe recipe = recipeRepository.getReferenceById(projections.getRecipe_Id());
-
-            reviewE.setUser(user);
-            reviewE.setRecipes(recipe);
-
-            result.add(new ReviewDTO(reviewE));
-        }
-
-
-        return new PageImpl<>(result, pageable, pageable.getPageSize());
+        return reviews.map(p -> {
+            Review review = new Review();
+            review.setId(p.getId());
+            review.setNota(p.getNota());
+            review.setDataReview(p.getDataReview().toInstant());
+            review.setComment(p.getComment());
+            review.setUser(userRepository.getReferenceById(p.getUser_Id()));
+            review.setRecipes(recipeRepository.getReferenceById(p.getRecipe_Id()));
+            return new ReviewDTO(review);
+        });
     }
 
     @Transactional(readOnly = false)
@@ -87,8 +75,7 @@ public class ReviewService {
 
             copyDtoToEntity(review, dto);
 
-            review = reviewRepository.save(review);
-            return new ReviewDTO(review);
+            return new ReviewDTO(reviewRepository.save(review));
         }
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + recipeId);
