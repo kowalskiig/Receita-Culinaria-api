@@ -15,8 +15,8 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Query("SELECT new com.project.miinhareceita.review.projection.ReviewProjections(obj.id, obj.nota, obj.dataReview, obj.comment, obj.user.id, obj.recipes.id) " +
-            "FROM Review obj WHERE obj.recipes.id = :recipeId")
-    Page<ReviewProjections> findReviewsByRecipeId(Long recipeId, Pageable pageable);
+    @Query("SELECT r FROM Review r JOIN FETCH r.user u JOIN FETCH r.recipes rec WHERE rec.id = :recipeId")
+    Page<Review> findReviewsByRecipeId(Long recipeId, Pageable pageable);
+
 }
 

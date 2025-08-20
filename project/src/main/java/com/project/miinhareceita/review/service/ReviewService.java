@@ -50,26 +50,17 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<ReviewDTO> findReviewByRecipeId(Long id, Pageable pageable) {
-        Page<ReviewProjections> reviews = reviewRepository.findReviewsByRecipeId(id, pageable);
+        Page<Review> reviews = reviewRepository.findReviewsByRecipeId(id, pageable);
 
-        return reviews.map(p -> {
-            Review review = new Review();
-            review.setId(p.getId());
-            review.setNota(p.getNota());
-            review.setDataReview(p.getDataReview().toInstant());
-            review.setComment(p.getComment());
-            review.setUser(userRepository.getReferenceById(p.getUser_Id()));
-            review.setRecipes(recipeRepository.getReferenceById(p.getRecipe_Id()));
-            return new ReviewDTO(review);
-        });
-    }
+        return reviews.map(ReviewDTO::new);
+        }
+
 
     @Transactional(readOnly = false)
     public ReviewDTO insertReview(Long recipeId, InsertReviewDTO dto){
-        try{
-            Review review = new Review();
-            review.setRecipes(recipeRepository.getReferenceById(recipeId));
+            recipeExists(recipeId);
 
+            Review review = new Review();
             review.setDataReview(Instant.now());
             review.setUser(authService.authenticated());
 
@@ -77,13 +68,7 @@ public class ReviewService {
 
             return new ReviewDTO(reviewRepository.save(review));
         }
-        catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id not found " + recipeId);
-        }
 
-
-
-    }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteReview(Long id){
@@ -102,8 +87,6 @@ public class ReviewService {
     public ReviewDTO updateReview(Long reviewId, UpdateReviewDTO dto){
             Review review = validationExistsReviewsId(reviewId);
             validationReviewUserIdEqualsUserId(review);
-
-            review = reviewRepository.getReferenceById(reviewId);
 
             copyDtoToEntity(review,dto);
 
@@ -135,6 +118,11 @@ public class ReviewService {
         if(!authService.authenticated().getId().equals(review.getUser().getId())){
             throw new ForbiddenException("Não tem permissão para isso");
         }
+    }
+
+    private void recipeExists(Long recipeId) {
+        recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
     }
 
 }
