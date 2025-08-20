@@ -43,11 +43,11 @@ spring:
 
 ---
 
-# production
+# dev
 spring:
   config:
     activate:
-      on-profile: production
+      on-profile: dev
 
   datasource:
     url: ${DB_URL}

@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: dev-postgresql
+    restart: always
+    environment:
+      POSTGRES_DB: minhaReceita
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234567
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./.data/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - minhaReceita-net
+
+  myaplication:
+    image: nawszera/minhareceita
+    build: ./project
+    restart: always
+    working_dir: /project
+    environment:
+      TZ: America/Sao_Paulo
+      APP_PROFILE: dev
+      DB_URL: jdbc:postgresql://db:5432/minhaReceita
+      DB_USERNAME: postgres
+      DB_PASSWORD: 1234567
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - minhaReceita-net
+
+
+networks:
+  minhaReceita-net:
+    driver: bridge
