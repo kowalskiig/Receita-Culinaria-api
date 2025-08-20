@@ -51,6 +51,8 @@ public class InsertRecipeDTO implements ValidRecipeDTO{
         }
     }
 
+
+
     @Override
     public String getTitle() {
         return title;

@@ -3,10 +3,13 @@ package com.project.miinhareceita.review.dto;
 import com.project.miinhareceita.review.domain.Review;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
+@Setter
 @NoArgsConstructor
 public class InsertReviewDTO implements ReviewValidDTO {
 
@@ -15,12 +18,12 @@ public class InsertReviewDTO implements ReviewValidDTO {
     @NotNull(message = "A nota não deve ser nula")
     private Integer nota;
 
-
+    @NotBlank(message = "A nota não deve ser nula")
     private String comment;
 
-    public InsertReviewDTO(Review review) {
-        nota = review.getNota();
-        comment = review.getComment();
+    public InsertReviewDTO(Integer nota, String comment) {
+        this.nota = nota;
+        this.comment = comment;
     }
 
     @Override
