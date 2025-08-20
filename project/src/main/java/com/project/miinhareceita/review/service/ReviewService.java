@@ -70,12 +70,9 @@ public class ReviewService {
             Review review = validationExistsReviewsId(id);
             validationReviewUserIdEqualsUserId(review);
 
-            try {
+           
                 reviewRepository.deleteById(id);
-            }
-            catch (DataIntegrityViolationException e) {
-                throw new DatabaseException("Referential integrity failure");
-            }
+
     }
 
     @Transactional
