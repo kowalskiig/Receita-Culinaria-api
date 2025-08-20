@@ -4,11 +4,13 @@ package com.project.miinhareceita.review.domain;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.user.domain.User;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
 
 @Entity
+@NoArgsConstructor
 @Table(name ="tb_review")
 public class Review {
     @Id
@@ -30,10 +32,6 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Review(){
-
-    }
-
     public Review(Long id, User user, Recipe recipes, Instant dataReview, String comment, Integer nota) {
         this.id = id;
         this.user = user;
@@ -42,6 +40,8 @@ public class Review {
         this.comment = comment;
         this.nota = nota;
     }
+
+
 
     public Long getId() {
         return id;

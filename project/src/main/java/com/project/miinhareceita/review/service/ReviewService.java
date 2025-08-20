@@ -8,25 +8,19 @@ import com.project.miinhareceita.review.dto.InsertReviewDTO;
 import com.project.miinhareceita.review.dto.ReviewDTO;
 import com.project.miinhareceita.review.dto.ReviewValidDTO;
 import com.project.miinhareceita.review.dto.UpdateReviewDTO;
-import com.project.miinhareceita.review.projection.ReviewProjections;
 import com.project.miinhareceita.review.repository.ReviewRepository;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
-import com.project.miinhareceita.user.domain.User;
 import com.project.miinhareceita.user.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ReviewService {
