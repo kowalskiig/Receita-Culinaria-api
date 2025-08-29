@@ -1,156 +1,148 @@
-# Minha Receita
+#  Minha Receita
 
-![Status do Build do CI](https://github.com/gustavokowallski/MinhaReceita/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/gustavokowallski/MinhaReceita/actions/workflows/ci.yml/badge.svg)
+![Java](https://img.shields.io/badge/Java-21-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1-brightgreen)
+![Docker](https://img.shields.io/badge/docker-enabled-blue)
+![PostgreSQL](https://img.shields.io/badge/postgres-db-blue)
 
-Minha Receita é um sistema completo de gestão de receitas culinárias, construído com foco em boas práticas, regras de negócio reais e código limpo. O projeto foi idealizado para simular um ambiente de desenvolvimento backend robusto, com autenticação, permissões, domínio complexo e escalabilidade.
+**Minha Receita** é uma API RESTful para gestão de receitas culinárias com autenticação, controle de permissões, sistema de favoritos e reviews, construída com foco em código limpo, regras de negócio reais e boas práticas de backend.  
+Idealizado como um desafio técnico completo, o projeto simula um ambiente real de desenvolvimento robusto.
 
- ##  Problema Resolvido
+---
 
-Esse projeto é uma API RESTful desenvolvida com Spring Boot, projetada para gerenciar e organizar receitas culinárias de forma eficiente, permitindo que usuários cadastrados criem, consultem, atualizem e compartilhem suas receitas favoritas.
+## 📌 Problema Resolvido
 
-- Cadastro e edição de receitas com múltiplos ingredientes e categorias
-- Sistema de reviews com nota e comentário
-- Autenticação com OAuth2
-- Permissões baseadas em perfil (admin, usuário comum)
-- Gerenciamento de favoritos
-- Busca por nome, ingredientes e categorias
+O sistema permite que usuários cadastrados criem, editem, consultem e compartilhem receitas com múltiplos ingredientes e categorias, além de:
 
+- Criar reviews com nota e comentário
+- Favoritar/desfavoritar receitas
+- Buscar receitas por nome, ingredientes e categorias
+- Atribuir permissões específicas por perfil (usuário comum vs admin)
+
+---
 
 ## 🧩 Funcionalidades Principais
 
-  ### 🔐 Autenticação
+### 🔐 Autenticação e Permissões
 
-- OAuth2 com suporte a `{{host}}/oauth2/token`
-- Somente usuários autenticados podem inserir, editar ou deletar receitas e reviews
-- Admins possuem permissões estendidas para manipular ingredientes
+- Login via OAuth2 (`/oauth2/token`)
+- Usuários autenticados podem criar/editar/deletar receitas e reviews
+- Admins têm permissões estendidas (como CRUD de ingredientes)
 
-  ### 📋 Gestão de Receitas
+### 📋 Gestão de Receitas
 
-- Cada receita pertence a um usuário autenticado
-- Receitas contêm múltiplos ingredientes e categorias
-- Regras de atualização: somente campos válidos (ex: não altera se estiver em branco)
-- Validação de vínculo entre usuário e receita na atualização
+- Cada receita pertence a um usuário
+- Suporte a múltiplos ingredientes e categorias por receita
+- Atualizações validadas (ex: campos obrigatórios, vínculo de dono)
 
-  ### ⭐ Favoritos
+### ⭐ Favoritos
 
-- Usuários podem favoritar e desfavoritar receitas
-- Previne duplicação: não é possível favoritar a mesma receita mais de uma vez
+- Usuários podem favoritar/desfavoritar receitas
+- Impede duplicações automáticas de favoritos
 
-  ### 🧪 Reviews
+### 🧪 Reviews
 
-- Sistema de avaliação (nota + comentário)
-- Só o autor do review pode deletar ou editar
-- Busca paginada de reviews por receita
+- Avaliação por nota + comentário
+- Apenas o autor pode editar/deletar o próprio review
+- Suporte a paginação de reviews por receita
 
-  ### 🥫 Ingredientes
+### 🥫 Ingredientes
 
-- Buscáveis por nome (com ordenação alfabética)
-- CRUD completo (restrito a admins)
-- Protegido contra exclusão se estiver em uso em uma receita
-- Com acesso apenas para usuários com Role de ADMIN.
+- CRUD completo (acesso restrito a admins)
+- Proteção contra exclusão de ingrediente em uso
+- Busca por nome com ordenação alfabética
 
 ---
 
+## 🏆 Conquistas e Aprendizados
 
+Este projeto foi elaborado como simulação de um desafio técnico júnior. Os principais aprendizados e entregas incluem:
 
-
- ### Conquistas e Aprendizados
-
-Este projeto foi uma simulação de um desafio técnico para uma vaga júnior. Com ele, eu apliquei conceitos de domínio real e regras de negócio claras, usando código limpo, validações e tratamentos de exceções completos.
-
-* **Automatizei um pipeline de CI/CD** utilizando GitHub Actions para fazer o build e o push da imagem da aplicação para o DockerHub de forma automatizada.
-
-* **Refatorei o projeto por completo**, aprimorando a legibilidade do código, otimizando a performance das consultas ao banco de dados e removendo código desnecessário.
-
-* **Tratei exceções** de forma padronizada utilizando o ExceptionHandler, tratando 100% dos cenários de erro e trabalhei com validações de dados utilizando a biblioteca Validations, garantindo que dados de entrada sejam validados antes de ser enviado a requisição.
-
-* **Melhorei minha habilidade em testes unitários** garantindo 100% de código coberto, cobrindo testes de sucesso e testes de erros.
-
-* **Utilizei Docker e Docker Compose** para criar ambientes de desenvolvimento e produção reproduzíveis, simplificando o processo de setup e garantindo a consistência da aplicação..
-
-## Pontos a melhorar
-
-- Qualidade dos commits, ao longo do projeto foi melhorando, porém um pouco incosistente.
-- Aumentar a robustez dos testes com cenários mais avançados.
-
-
-| Tecnologias / Práticas | Justificativa | 
-| :--- | :--- | 
-| **Java 21 + Spring Boot** | Padrão de mercado para APIs seguras, escaláveis e testáveis. | 
-| **Spring Security + OAuth2/JWT** | Segurança baseada em tokens e controle de acesso por roles. | 
-| **BCrypt** | Criptografia de senhas para garantir a segurança da API. | 
-| **PostgreSQL + Spring Data JPA** | Banco de dados relacional robusto para persistência de dados. | 
-| **Docker + Docker Compose** | Contêineres que garantem um ambiente de desenvolvimento isolado e replicável. | 
-| **GitHub Actions** | Automação de CI/CD para build, testes e entrega contínua. | 
-| **OpenAPI / Swagger UI** | Garante uma API auto-documentada e interativa para outros desenvolvedores. |  
-| **JUnit 5 + Mockito** | Ferramentas de testes automatizados para validar a estabilidade e funcionalidade da aplicação. | 
-| **Injeção de dependência via construtor** | Facilita testes e segue o princípio de imutabilidade e boas práticas do Spring. | 
-| **DTOs personalizados** | Evita vazamento de dados e mantém o código desacoplado. | 
-| **Validações com Bean Validation** | Garante integridade nos dados recebidos da API. | 
-| **Organização por domínio** | Código limpo, modular e fácil de manter ou escalar. | 
-| **Git e Troca de Branches** | Facilita o controle de versão, colaboração em equipe e revisão de código. | 
+- ✅ **Automatização de CI/CD** com GitHub Actions (build + push da imagem para o DockerHub)
+- ✅ **Refatoração completa** para legibilidade e performance (consultas otimizadas)
+- ✅ **Tratamento global de exceções** com `@ExceptionHandler`, cobrindo 100% dos cenários
+- ✅ **Testes unitários** com JUnit e Mockito cobrindo fluxos de sucesso e erro (100% de cobertura)
+- ✅ **Containerização com Docker e Docker Compose** para ambientes reprodutíveis
 
 ---
+
+## 📦 Tecnologias Utilizadas
+
+| Tecnologias / Práticas | Justificativa |
+| :--- | :--- |
+| **Java 21 + Spring Boot** | Backend moderno, seguro e escalável |
+| **Spring Security + OAuth2/JWT** | Autenticação e autorização por roles |
+| **BCrypt** | Criptografia segura de senhas |
+| **PostgreSQL + Spring Data JPA** | Persistência relacional robusta |
+| **Docker + Docker Compose** | Ambientes isolados e reprodutíveis |
+| **GitHub Actions** | CI/CD com build, testes e entrega contínua |
+| **Swagger/OpenAPI** | API auto-documentada e interativa |
+| **JUnit 5 + Mockito** | Testes automatizados de lógica e validações |
+| **DTOs personalizados** | Proteção de dados e desacoplamento |
+| **Bean Validation** | Validação automática dos dados de entrada |
+| **Injeção via construtor** | Testabilidade e boas práticas do Spring |
+| **Organização por domínio** | Código modular, limpo e escalável |
+
+---
+
 ## 🚀 Próximos Passos
 
-📸 Adicionar upload de imagens nas receitas.
-
-🏆 Criar ranking de usuários baseado em engajamento (receitas e reviews).
-
-🔔 Implementar notificações para novos reviews e favoritos.
+- 📸 Upload de imagens nas receitas  
+- 🏆 Ranking de usuários por engajamento  
+- 🔔 Notificações para reviews e favoritos
 
 ---
-### Rodando o Projeto
 
-O ambiente completo do projeto pode ser iniciado com um único comando, graças ao **Docker Compose**.
+## ⚙️ Como Rodar o Projeto (via Docker Compose)
 
-**Pré-requisitos:**
+### Pré-requisitos
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- Git
 
-* Docker Desktop (Garanta que esteja instalado)
-* Git
+### Passos
 
-**Passos:**
-
-1. **Clone o repositório e navegue até a pasta:**
- 
 ```bash
- git clone https://github.com/gustavokowallski/MinhaReceita.git
+# Clone o repositório
+git clone https://github.com/gustavokowallski/MinhaReceita.git
 cd MinhaReceita
+
+# Suba os containers
+docker compose up
+
 ```
-2. **Roda o comando dentro da página MinhaReceita:**
+## 🌐 Acesso à Aplicação
 
-```bash
-docker compose up 
-```
-A API estará disponível em `http://localhost:8080`.
+A aplicação estará disponível em:
 
-3. **Consuma a API:**
+➡️ [http://localhost:8080](http://localhost:8080)  
+➡️ [Swagger UI](http://localhost:8080/swagger-ui/index.html)
 
-### Consumindo pelo Postman (Recomendado)
-* **Coleção Postman:** Clique no botão abaixo para importar e testar os endpoints da API diretamente no Postman:
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/collection/45108000-4940dac4-9643-4a53-b591-5ad13ab61698?action=share&creator=45108000&active-environment=45108000-ee357952-f911-405a-9337-066beac8e080)
-
-* **Coleção Postman:** Clique no botão abaixo para importar os váriaveis de ambiente:
-    [![Enviroment](https://run.pstmn.io/button.svg)](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/environment/45108000-ee357952-f911-405a-9337-066beac8e080?action=share&creator=45108000&active-environment=45108000-ee357952-f911-405a-9337-066beac8e080)
-```bash
-Caso prefira pegue o token de authenticação e abra o Swagger para testar a API no postman
-```
-
-### Documentação da API
-* Acesse o Swagger UI em: `http://localhost:8080/swagger-ui/index.html`
 ---
 
-* **Credenciais de Teste:**
+## 📬 Testando a API
 
-**Admin:**
+### ✅ Via Postman (Recomendado)
 
+- **Coleção de endpoints + variáveis de ambiente:**  
+  [![Run in Postman](https://run.pstmn.io/button.svg)](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/collection/45108000-4940dac4-9643-4a53-b591-5ad13ab61698?action=share&creator=45108000&active-environment=45108000-ee357952-f911-405a-9337-066beac8e080)
+
+### 📖 Via Swagger
+
+- Acesse: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)  
+- Utilize o token OAuth2 no botão **Authorize** para testar rotas protegidas
+
+---
+
+## 🔐 Credenciais de Teste
+
+### 👑 Admin
 ```bash
-email: admin@gmail.com
-password: 123456
+email: admin@gmail.com  
+senha: 123456
 ```
-**Usuário:**
-
+### 👤 User
 ```bash
-email: user@gmail.com
-password: 123456
+email: user@gmail.com    
+senha: 123456
 ```
