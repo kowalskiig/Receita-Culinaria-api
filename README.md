@@ -1,4 +1,4 @@
-#  Minha Receita
+#  Shared Recipes
 
 ![CI](https://github.com/gustavokowallski/MinhaReceita/actions/workflows/ci.yml/badge.svg)
 ![Java](https://img.shields.io/badge/Java-21-blue)
@@ -6,7 +6,7 @@
 ![Docker](https://img.shields.io/badge/docker-enabled-blue)
 ![PostgreSQL](https://img.shields.io/badge/postgres-db-blue)
 
-**Minha Receita** é uma API RESTful para gestão de receitas culinárias com autenticação, controle de permissões, sistema de favoritos e reviews, construída com foco em código limpo, regras de negócio reais e boas práticas de backend.  
+**SharedRecipes** é uma API RESTful para gestão de receitas culinárias com autenticação, controle de permissões, sistema de favoritos e reviews, construída com foco em código limpo, regras de negócio reais e boas práticas de backend.  
 Idealizado como um desafio técnico completo, o projeto simula um ambiente real de desenvolvimento robusto.
 
 > 📢 Este projeto simula um desafio técnico real e mostra como aplico boas práticas de arquitetura, testes e segurança no backend Java com Spring Boot.
@@ -149,3 +149,11 @@ senha: 123456
 email: user@gmail.com    
 senha: 123456
 ```
+---
+
+### **Autor**
+
+**Gustavo Eiji Kowalski Hatada**
+[![LinkedIn Badge](https://img.shields.io/badge/-Gustavo%20Kowalski-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gustavokowalski/)
+
+---
