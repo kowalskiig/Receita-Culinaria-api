@@ -9,6 +9,9 @@
 **Minha Receita** é uma API RESTful para gestão de receitas culinárias com autenticação, controle de permissões, sistema de favoritos e reviews, construída com foco em código limpo, regras de negócio reais e boas práticas de backend.  
 Idealizado como um desafio técnico completo, o projeto simula um ambiente real de desenvolvimento robusto.
 
+> 📢 Este projeto simula um desafio técnico real e mostra como aplico boas práticas de arquitetura, testes e segurança no backend Java com Spring Boot.
+
+
 ---
 
 ## 📌 Problema Resolvido
