@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/gustavokowallski/MinhaReceita/actions/workflows/ci.yml/badge.svg)
 ![Java](https://img.shields.io/badge/Java-21-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1-brightgreen)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen)
 ![Docker](https://img.shields.io/badge/docker-enabled-blue)
 ![PostgreSQL](https://img.shields.io/badge/postgres-db-blue)
 
