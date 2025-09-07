@@ -30,7 +30,7 @@ jobs:
         run: mvn clean package
 
       - name: Docker Compose Buildr
-        working-directory: ./project
+        working-directory: ./
         run: docker compose -f docker-compose.build.yml build
 
       - name: Push to Docker Hub Container Registry
