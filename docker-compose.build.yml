@@ -2,7 +2,5 @@ services:
   myaplication:
     image: nawszera/minhareceita
     build: ./project
-    restart: always
-    working_dir: /project
-    ports:
-      - "8080:8080"
+
+
