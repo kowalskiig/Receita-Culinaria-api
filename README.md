@@ -9,117 +9,230 @@
 **SharedRecipes** é uma API RESTful para gestão de receitas culinárias com autenticação, controle de permissões, sistema de favoritos e reviews, construída com foco em código limpo, regras de negócio reais e boas práticas de backend.  
 Idealizado como um desafio técnico completo, o projeto simula um ambiente real de desenvolvimento robusto.
 
-> 📢 Este projeto simula um desafio técnico real e mostra como aplico boas práticas de arquitetura, testes e segurança no backend Java com Spring Boot.
-
-
 ---
+
 
 ## 📌 Problema Resolvido
 
-O sistema permite que usuários cadastrados criem, editem, consultem e compartilhem receitas com múltiplos ingredientes e categorias, além de:
+O SharedRecipes nasceu da necessidade de ter um lugar organizado para salvar e compartilhar receitas com outras pessoas. Em vez de depender de anotações soltas ou mensagens no WhatsApp, a ideia foi criar um espaço onde qualquer usuário possa registrar suas receitas com todos os detalhes, receber avaliações e favoritar pratos de outros.
 
-- Criar reviews com nota e comentário
-- Favoritar/desfavoritar receitas
-- Buscar receitas por nome, ingredientes e categorias
-- Atribuir permissões específicas por perfil (usuário comum vs admin)
+Além disso, o sistema garante que cada ação — como editar ou deletar conteúdo — seja feita apenas pelo dono, mantendo tudo seguro e organizado. É uma aplicação que transforma o hábito de cozinhar em uma experiência digital simples, útil e colaborativa.
 
 ---
 
-## 🧩 Funcionalidades Principais
+## 🧠 Visão Geral da Solução
 
-### 🔐 Autenticação e Permissões
+O sistema SharedRecipes entrega:
 
-- Login via OAuth2 (`/oauth2/token`)
-- Usuários autenticados podem criar/editar/deletar receitas e reviews
-- Admins têm permissões estendidas (como CRUD de ingredientes)
-
-### 📋 Gestão de Receitas
-
-- Cada receita pertence a um usuário
-- Suporte a múltiplos ingredientes e categorias por receita
-- Atualizações validadas (ex: campos obrigatórios, vínculo de dono)
-
-### ⭐ Favoritos
-
-- Usuários podem favoritar/desfavoritar receitas
-- Impede duplicações automáticas de favoritos
-
-### 🧪 Reviews
-
-- Avaliação por nota + comentário
-- Apenas o autor pode editar/deletar o próprio review
-- Suporte a paginação de reviews por receita
-
-### 🥫 Ingredientes
-
-- CRUD completo (acesso restrito a admins)
-- Proteção contra exclusão de ingrediente em uso
-- Busca por nome com ordenação alfabética
+- Cadastro de receitas com ingredientes, categorias e imagem  
+- Sistema de favoritos e reviews entre usuários autenticados  
+- Autenticação robusta com JWT + OAuth2  
+- Controle de acesso por perfil (usuário comum x admin)  
+- Validação rigorosa para criação, edição e exclusão de dados  
+- Rotas protegidas: só o autor pode modificar seu conteúdo  
+- Backend seguro, testado, versionado e pronto para produção via Docker
 
 ---
 
-## 🏆 Conquistas e Aprendizados
+##  Diagrama de Classes
+```mermaid
+classDiagram
+    class User {
+        +Long id
+        +String firstName
+        +String lastName
+        +String email
+        +String password
+    }
 
-Este projeto foi elaborado como simulação de um desafio técnico júnior. Os principais aprendizados e entregas incluem:
+    class Recipe {
+        +Long id
+        +String title
+        +String shortDescription
+        +String instructions
+        +Integer timeMinutes
+        +Integer rendiment
+        +Instant publicationDate
+        +String urlImg
+    }
 
-- ✅ **Automatização de CI/CD** com GitHub Actions (build + push da imagem para o DockerHub)
-- ✅ **Refatoração completa** para legibilidade e performance (consultas otimizadas)
-- ✅ **Tratamento global de exceções** com `@ExceptionHandler`, cobrindo 100% dos cenários
-- ✅ **Testes unitários** com JUnit e Mockito cobrindo fluxos de sucesso e erro (100% de cobertura)
-- ✅ **Containerização com Docker e Docker Compose** para ambientes reprodutíveis
+     class Ingredient {
+        +Long id
+        +String name
+    }
+
+    class RecipeIngredient {
+        +RecipeIngredientsPk id
+        +Integer quantity
+        +Double price
+    }
+
+    class Category {
+        +Long id
+        +String name
+    }
+
+    class Review {
+        +Long id
+        +Integer nota
+        +String comment
+        +Instant dataReview
+    }
+
+    class Favorite {
+        + FavoritePk id
+
+    }
+
+    class Role {
+        +Long id
+        +String authority
+    }
+
+    User "1" --> "*" Recipe 
+    User "1" --> "*" Review 
+    User "1" --> "*" Favorite
+    User "*" --> "*" Role
+
+    Recipe "1" --> "*" Review
+    Recipe "1" --> "*" Favorite
+    Recipe "*" --> "*" Category
+
+    Recipe "1" --> "*" RecipeIngredient
+    Ingredient "1" --> "*" RecipeIngredient
+    RecipeIngredient "*" --> "1" Recipe
+    RecipeIngredient "*" --> "1" Ingredient
+
+    Review "*" --> "1" Recipe
+    Favorite "*" --> "1" Recipe
+
+
+```
+
+
+
+---
+
+
+
+## 🏆 Conquistas e Aprendizados Técnicos
+
+Este projeto simula um backend real de produção. Os principais diferenciais:
+
+✅ CI/CD com GitHub Actions + DockerHub  
+✅ Arquitetura em camadas com foco em Clean Code  
+✅ Tratamento global de exceções  
+✅ 100% de cobertura de testes com JUnit e Mockito  
+✅ Segurança robusta com OAuth2 + JWT  
+✅ Persistência com PostgreSQL via JPA  
+✅ Documentação interativa com Swagger
 
 ---
 
 ## 📦 Tecnologias Utilizadas
 
-| Tecnologias / Práticas | Justificativa |
-| :--- | :--- |
-| **Java 21 + Spring Boot** | Backend moderno, seguro e escalável |
-| **Spring Security + OAuth2/JWT** | Autenticação e autorização por roles |
-| **BCrypt** | Criptografia segura de senhas |
-| **PostgreSQL + Spring Data JPA** | Persistência relacional robusta |
-| **Docker + Docker Compose** | Ambientes isolados e reprodutíveis |
-| **GitHub Actions** | CI/CD com build, testes e entrega contínua |
-| **Swagger/OpenAPI** | API auto-documentada e interativa |
-| **JUnit 5 + Mockito** | Testes automatizados de lógica e validações |
-| **DTOs personalizados** | Proteção de dados e desacoplamento |
-| **Bean Validation** | Validação automática dos dados de entrada |
-| **Injeção via construtor** | Testabilidade e boas práticas do Spring |
-| **Organização por domínio** | Código modular, limpo e escalável |
+| Tecnologia / Prática | Justificativa |
+|----------------------|----------------|
+| **Java 21 + Spring Boot** | Backend robusto e moderno |
+| **Spring Security + OAuth2 + JWT** | Autenticação stateless com roles |
+| **BCrypt** | Criptografia de senhas confiável |
+| **PostgreSQL + Spring Data JPA** | Persistência relacional eficiente |
+| **Docker + Docker Compose** | Ambiente isolado e reprodutível |
+| **GitHub Actions** | CI/CD integrado no fluxo de trabalho |
+| **Swagger/OpenAPI** | API interativa e auto-documentada |
+| **JUnit 5 + Mockito** | Testes de unidade completos |
+
 
 ---
 
-## 🚀 Próximos Passos
+## 🧭 Endpoints da API
+
+### 🍽️ Receitas (Recipes)
+- `GET /recipes` — Listar receitas (filtros: categoria, ingrediente, título)  
+- `GET /recipes/{id}` — Buscar receita por ID  
+- `POST /recipes` — Criar nova receita  
+- `PATCH /recipes/{id}` — Atualizar receita *(somente autor)*  
+- `DELETE /recipes/{id}` — Deletar receita *(somente autor)*  
+
+---
+
+### 🧂 Ingredientes (Ingredients)
+- `GET /ingredients` — Listar ingredientes (com filtro por nome)  
+- `POST /ingredients` — Criar novo ingrediente *(admin)*  
+- `PUT /ingredients/{id}` — Atualizar ingrediente *(admin)*  
+- `DELETE /ingredients/{id}` — Remover ingrediente *(admin)*  
+
+---
+
+### 🗂️ Categorias (Categories)
+- `GET /categories` — Listar todas as categorias  
+- `POST /categories` — Criar nova categoria *(admin)*  
+- `DELETE /categories/{id}` — Remover categoria *(admin)*  
+
+---
+
+### ⭐ Favoritos (Favorites)
+- `POST /favorites/{recipeId}` — Favoritar uma receita  
+- `DELETE /favorites/{recipeId}` — Remover dos favoritos  
+- `GET /favorites/me` — Listar favoritos do usuário logado  
+
+---
+
+### 🧪 Avaliações (Reviews)
+- `POST /reviews/{recipeId}` — Criar avaliação para uma receita  
+- `GET /reviews/{recipeId}` — Listar avaliações da receita  
+- `PUT /reviews/{id}` — Editar avaliação *(somente autor)*  
+- `DELETE /reviews/{id}` — Deletar avaliação *(somente autor)*  
+
+---
+
+### 👤 Usuário (User)
+- `POST /users` — Criar novo usuário  
+- `GET /users/me` — Buscar dados do usuário logado  
+- `GET /users/{id}` — Buscar outro usuário *(admin ou para perfil público)*  
+
+---
+
+### 🔐 Autenticação (Auth)
+- `POST /oauth2/token` — Obter token JWT com client credentials  
+- **Swagger Authorize** — Testar endpoints protegidos via OAuth2  
+
+---
+
+
+## 🚀 Próximas Funcionalidades
 
 - 📸 Upload de imagens nas receitas  
-- 🏆 Ranking de usuários por engajamento  
-- 🔔 Notificações para reviews e favoritos
+- 🏆 Ranking de usuários mais engajados  
+- 🔔 Notificações para novos reviews e favoritos
 
 ---
 
-## ⚙️ Como Rodar o Projeto (via Docker Compose)
 
-### Pré-requisitos
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Git
+## ⚙️ Como Rodar o Projeto (Docker)
+
+### 🛠️ Pré-requisitos
+
+[![Docker](https://img.shields.io/badge/Docker-%23007ACC.svg?logo=docker&logoColor=white)](https://www.docker.com/products/docker-desktop)
+[![Git](https://img.shields.io/badge/Git-%23F05033.svg?logo=git&logoColor=white)](https://git-scm.com/)
 
 ### Passos
 
 ```bash
 # Clone o repositório
-git clone https://github.com/gustavokowallski/MinhaReceita.git
+git clone https://github.com/gustavokowallski/SharedRecipes.git
 cd MinhaReceita
 
 # Suba os containers
 docker compose up
 
 ```
-## 🌐 Acesso à Aplicação
 
-A aplicação estará disponível em:
+### 🌐 Acesso à Aplicação
 
-➡️ [http://localhost:8080](http://localhost:8080)  
-➡️ [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+[![App Rodando](https://img.shields.io/badge/🚀%20Aplicação%20Rodando-localhost%3A8080-blue)](http://localhost:8080)  
+[![Swagger UI](https://img.shields.io/badge/🧾%20Swagger%20UI-documentação-brightgreen)](http://localhost:8080/swagger-ui/index.html)
+
 
 ---
 
@@ -132,7 +245,8 @@ A aplicação estará disponível em:
 
 ### 📖 Via Swagger
 
-- Acesse: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)  
+[![Abrir Swagger UI](https://img.shields.io/badge/🧾%20Abrir-Swagger%20UI-brightgreen)](http://localhost:8080/swagger-ui/index.html)
+
 - Utilize o token OAuth2 no botão **Authorize** para testar rotas protegidas
 
 ---
@@ -150,6 +264,10 @@ email: user@gmail.com
 senha: 123456
 ```
 ---
+
+#  Imagem Docker Pública
+
+[![DockerHub - Minhareceita](https://img.shields.io/badge/DockerHub-minhareceita-blue?logo=docker)](https://hub.docker.com/repository/docker/nawszera/minhareceita)
 
 ### **Autor**
 

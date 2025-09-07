@@ -16,6 +16,7 @@ services:
 
   myaplication:
     image: nawszera/minhareceita
+    build: ./project
     restart: always
     working_dir: /project
     environment:
