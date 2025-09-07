@@ -1,5 +1,6 @@
 services:
   myaplication:
+    image: nawszera/minhareceita
     build: ./project
 
 
