@@ -223,7 +223,7 @@ Este projeto simula um backend real de produção. Os principais diferenciais:
 ```bash
 # Clone o repositório
 git clone https://github.com/gustavokowallski/SharedRecipes.git
-cd MinhaReceita
+cd SharedRecipes
 
 # Suba os containers
 docker compose up
@@ -266,7 +266,7 @@ email: user@gmail.com
 senha: 123456
 ```
 ---
-
+.
 #  Imagem Docker Pública
 
 [![DockerHub - Minhareceita](https://img.shields.io/badge/DockerHub-minhareceita-blue?logo=docker)](https://hub.docker.com/repository/docker/nawszera/minhareceita)
