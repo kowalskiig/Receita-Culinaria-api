@@ -126,6 +126,8 @@ Este projeto simula um backend real de produção. Os principais diferenciais:
 ✅ Segurança robusta com OAuth2 + JWT  
 ✅ Persistência com PostgreSQL via JPA  
 ✅ Documentação interativa com Swagger
+✅ Melhor uso do Git e branchs para diferentes implementações
+✅ Melhor uso do Git e branchs para diferentes implementações
 
 ---
 
