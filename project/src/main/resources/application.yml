@@ -26,9 +26,9 @@ spring:
       on-profile: test
 
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5433/minhareceitadev
+    username: postgres
+    password: 1234567
 
   h2:
     console:
@@ -41,13 +41,15 @@ spring:
       hibernate:
         format_sql: true
 
+
+
 ---
 
-# dev
+# prod
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: prod
 
   datasource:
     url: ${DB_URL}
