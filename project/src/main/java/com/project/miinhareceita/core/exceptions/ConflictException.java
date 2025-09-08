@@ -1,4 +1,4 @@
-package com.project.miinhareceita.shared.exceptions;
+package com.project.miinhareceita.core.exceptions;
 
 @SuppressWarnings("serial")
 public class ConflictException extends RuntimeException {

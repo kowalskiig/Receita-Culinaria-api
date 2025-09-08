@@ -1,4 +1,4 @@
-package com.project.miinhareceita.shared.exceptions;
+package com.project.miinhareceita.core.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.project.miinhareceita.shared.exceptions;
+package com.project.miinhareceita.core.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

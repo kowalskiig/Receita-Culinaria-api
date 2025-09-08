@@ -1,6 +1,6 @@
 package com.project.miinhareceita.domains.user.validation;
 
-import com.project.miinhareceita.shared.exceptions.FieldMessage;
+import com.project.miinhareceita.core.exceptions.FieldMessage;
 import com.project.miinhareceita.domains.user.domain.User;
 import com.project.miinhareceita.domains.user.dto.UserInsertDTO;
 import com.project.miinhareceita.domains.user.repository.UserRepository;
