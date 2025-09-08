@@ -1,0 +1,20 @@
+package com.project.miinhareceita.domains.ingredient.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+public class InsertIngredientDTO implements ValidIngredientDTO {
+
+    @NotBlank(message = "Nome não deve estar em branco")
+    private String name;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+}

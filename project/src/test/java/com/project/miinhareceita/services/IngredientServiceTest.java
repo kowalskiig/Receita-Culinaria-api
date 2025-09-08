@@ -1,16 +1,15 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.ingredient.domain.Ingredients;
-import com.project.miinhareceita.ingredient.dto.IngredientDTO;
-import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
-import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
-import com.project.miinhareceita.ingredient.projection.IngredientProjection;
-import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
-import com.project.miinhareceita.ingredient.service.IngredientService;
-import com.project.miinhareceita.shared.exceptions.DatabaseException;
-import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
+import com.project.miinhareceita.domains.ingredient.domain.Ingredients;
+import com.project.miinhareceita.domains.ingredient.dto.IngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.UpdateIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.projection.IngredientProjection;
+import com.project.miinhareceita.domains.ingredient.repository.IngredientsRepository;
+import com.project.miinhareceita.domains.ingredient.service.IngredientService;
+import com.project.miinhareceita.core.exceptions.DatabaseException;
+import com.project.miinhareceita.core.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.IngredientFactory;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;

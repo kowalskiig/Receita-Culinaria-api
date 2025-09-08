@@ -123,34 +123,24 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.11</version>
-				<configuration>
-					<excludes>
-						<exclude>com/project/miinhareceita/config/**</exclude>
-						<exclude>com/project/miinhareceita</exclude>
-						<exclude>com/project/miinhareceita/recipe/domain/**</exclude>
-						<exclude>com/project/miinhareceita/shared/exceptions/**</exclude>
-						<exclude>com/project/miinhareceita/recipe/dto/**</exclude>
-						<exclude>com/project/miinhareceita/favorite/domain/**</exclude>
-						<exclude>com/project/miinhareceita/review/dto/**</exclude>
-						<exclude>com/project/miinhareceita/review/domain/**</exclude>
-						<exclude>com/project/miinhareceita/recipe/controller/**</exclude>
-						<exclude>com/project/miinhareceita/review/controller/**</exclude>
-						<exclude>com/project/miinhareceita/user/validation/**</exclude>
-						<exclude>com/project/miinhareceita/ingredient/controller/**</exclude>
-						<exclude>com/project/miinhareceita/user/controller/**</exclude>
-						<exclude>com/project/miinhareceita/user/domain/**</exclude>
-						<exclude>com/project/miinhareceita/ingredient/dto/**</exclude>
-						<exclude>com/project/miinhareceita/favorite/dto/**</exclude>
-						<exclude>com/project/miinhareceita/favorite/controller/**</exclude>
-						<exclude>com/project/miinhareceita/user/dto/**</exclude>
-						<exclude>com/project/miinhareceita/ingredient/domain/**</exclude>
-						<exclude>com/project/miinhareceita/category/domain/**</exclude>
-						<exclude>com/project/miinhareceita/category/dto/**</exclude>
-						<exclude>com/project/miinhareceita/category/controller/**</exclude>
-						<exclude>com/project/miinhareceita/auth/util/**</exclude>
+                <configuration>
+                    <excludes>
+                        <!-- Pacotes do core -->
+                        <exclude>com/project/miinhareceita/core/**</exclude>
 
-					</excludes>
-				</configuration>
+
+                        <!-- Classe principal da aplicação -->
+                        <exclude>com/project/miinhareceita/miinhareceitaApplication.class</exclude>
+
+                        <!-- Exclusão genérica de classes que não são de serviço em qualquer domínio -->
+                        <exclude>com/project/miinhareceita/domains/*/controller/**</exclude>
+                        <exclude>com/project/miinhareceita/domains/*/domain/**</exclude>
+                        <exclude>com/project/miinhareceita/domains/*/dto/**</exclude>
+                        <exclude>com/project/miinhareceita/domains/*/repository/**</exclude>
+                        <exclude>com/project/miinhareceita/domains/*/validation/**</exclude>
+                        <exclude>com/project/miinhareceita/domains/user/auth/util/**</exclude>
+                    </excludes>
+                </configuration>
 				<executions>
 					<execution>
 						<goals>

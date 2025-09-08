@@ -1,17 +1,12 @@
 package com.project.miinhareceita.tests;
 
-import com.project.miinhareceita.ingredient.domain.Ingredients;
-import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.recipe.domain.RecipeIngredients;
-import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
-import com.project.miinhareceita.recipe.dto.RecipeIngredientsDTO;
-import com.project.miinhareceita.recipe.dto.UpdateRecipeDTO;
-import com.project.miinhareceita.recipe.projection.RecipeProjections;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.recipe.dto.InsertRecipeDTO;
+import com.project.miinhareceita.domains.recipe.dto.UpdateRecipeDTO;
+import com.project.miinhareceita.domains.recipe.projection.RecipeProjections;
+import com.project.miinhareceita.domains.user.domain.User;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RecipeFactory {
     public static Recipe createRecipe() {

@@ -1,19 +1,18 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.auth.service.AuthService;
-import com.project.miinhareceita.favorite.domain.Favorite;
-import com.project.miinhareceita.favorite.dto.FavoriteDTO;
-import com.project.miinhareceita.favorite.repository.FavoriteRepository;
-import com.project.miinhareceita.favorite.service.FavoriteService;
-import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.recipe.repository.RecipeRepository;
-import com.project.miinhareceita.shared.exceptions.ConflictException;
-import com.project.miinhareceita.shared.exceptions.DatabaseException;
-import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
+import com.project.miinhareceita.domains.user.auth.service.AuthService;
+import com.project.miinhareceita.domains.favorite.domain.Favorite;
+import com.project.miinhareceita.domains.favorite.dto.FavoriteDTO;
+import com.project.miinhareceita.domains.favorite.repository.FavoriteRepository;
+import com.project.miinhareceita.domains.favorite.service.FavoriteService;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.recipe.repository.RecipeRepository;
+import com.project.miinhareceita.core.exceptions.ConflictException;
+import com.project.miinhareceita.core.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.FavoriteFactory;
 import com.project.miinhareceita.tests.RecipeFactory;
 import com.project.miinhareceita.tests.UserFactory;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;

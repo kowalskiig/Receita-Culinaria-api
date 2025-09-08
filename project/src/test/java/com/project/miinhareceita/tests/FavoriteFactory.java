@@ -1,8 +1,8 @@
 package com.project.miinhareceita.tests;
 
-import com.project.miinhareceita.favorite.domain.Favorite;
-import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.favorite.domain.Favorite;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.user.domain.User;
 
 public class FavoriteFactory {
     public static Favorite createFavorite(){

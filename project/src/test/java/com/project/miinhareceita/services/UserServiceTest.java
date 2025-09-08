@@ -2,24 +2,24 @@ package com.project.miinhareceita.services;
 
 
 
-import com.project.miinhareceita.auth.service.AuthService;
+import com.project.miinhareceita.domains.user.auth.service.AuthService;
 import com.project.miinhareceita.tests.RoleFactory;
 import com.project.miinhareceita.tests.UserFactory;
-import com.project.miinhareceita.user.domain.Role;
+import com.project.miinhareceita.domains.user.domain.Role;
 
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 
-import com.project.miinhareceita.user.dto.UserDTO;
+import com.project.miinhareceita.domains.user.dto.UserDTO;
 
-import com.project.miinhareceita.user.dto.UserInsertDTO;
+import com.project.miinhareceita.domains.user.dto.UserInsertDTO;
 
-import com.project.miinhareceita.user.projection.UserDetailsProjection;
+import com.project.miinhareceita.domains.user.projection.UserDetailsProjection;
 
-import com.project.miinhareceita.user.repository.RoleRepository;
+import com.project.miinhareceita.domains.user.repository.RoleRepository;
 
-import com.project.miinhareceita.user.repository.UserRepository;
+import com.project.miinhareceita.domains.user.repository.UserRepository;
 
-import com.project.miinhareceita.user.service.UserService;
+import com.project.miinhareceita.domains.user.service.UserService;
 
 import org.junit.jupiter.api.Assertions;
 

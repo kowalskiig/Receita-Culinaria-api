@@ -1,6 +1,6 @@
 package com.project.miinhareceita.tests;
 
-import com.project.miinhareceita.user.domain.Role;
+import com.project.miinhareceita.domains.user.domain.Role;
 
 public class RoleFactory {
     public static final Long DEFAULT_ROLE_ID = 1L;
