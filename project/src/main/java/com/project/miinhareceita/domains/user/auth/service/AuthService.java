@@ -1,6 +1,6 @@
-package com.project.miinhareceita.auth.service;
+package com.project.miinhareceita.domains.user.auth.service;
 
-import com.project.miinhareceita.auth.util.UtilAuth;
+import com.project.miinhareceita.domains.user.auth.util.UtilAuth;
 import com.project.miinhareceita.domains.user.domain.User;
 import com.project.miinhareceita.domains.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

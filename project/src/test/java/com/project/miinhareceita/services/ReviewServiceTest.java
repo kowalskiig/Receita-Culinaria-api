@@ -1,6 +1,6 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.auth.service.AuthService;
+import com.project.miinhareceita.domains.user.auth.service.AuthService;
 import com.project.miinhareceita.domains.recipe.domain.Recipe;
 import com.project.miinhareceita.domains.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.domains.review.domain.Review;

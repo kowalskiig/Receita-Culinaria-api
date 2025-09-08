@@ -1,6 +1,6 @@
 package com.project.miinhareceita.domains.user.service;
 
-import com.project.miinhareceita.auth.service.AuthService;
+import com.project.miinhareceita.domains.user.auth.service.AuthService;
 import com.project.miinhareceita.domains.user.domain.Role;
 import com.project.miinhareceita.domains.user.domain.User;
 import com.project.miinhareceita.domains.user.dto.UserDTO;

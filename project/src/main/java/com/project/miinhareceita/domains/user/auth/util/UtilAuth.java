@@ -1,4 +1,4 @@
-package com.project.miinhareceita.auth.util;
+package com.project.miinhareceita.domains.user.auth.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

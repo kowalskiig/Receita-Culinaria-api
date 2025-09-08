@@ -1,7 +1,7 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.auth.service.AuthService;
-import com.project.miinhareceita.auth.util.UtilAuth;
+import com.project.miinhareceita.domains.user.auth.service.AuthService;
+import com.project.miinhareceita.domains.user.auth.util.UtilAuth;
 import com.project.miinhareceita.tests.UserFactory;
 import com.project.miinhareceita.domains.user.domain.User;
 import com.project.miinhareceita.domains.user.repository.UserRepository;
