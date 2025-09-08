@@ -1,6 +1,6 @@
 package com.project.miinhareceita.domains.user.domain;
 
-import com.project.miinhareceita.favorite.domain.Favorite;
+import com.project.miinhareceita.domains.favorite.domain.Favorite;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.review.domain.Review;
 import jakarta.persistence.*;

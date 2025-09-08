@@ -1,10 +1,10 @@
 package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.auth.service.AuthService;
-import com.project.miinhareceita.favorite.domain.Favorite;
-import com.project.miinhareceita.favorite.dto.FavoriteDTO;
-import com.project.miinhareceita.favorite.repository.FavoriteRepository;
-import com.project.miinhareceita.favorite.service.FavoriteService;
+import com.project.miinhareceita.domains.favorite.domain.Favorite;
+import com.project.miinhareceita.domains.favorite.dto.FavoriteDTO;
+import com.project.miinhareceita.domains.favorite.repository.FavoriteRepository;
+import com.project.miinhareceita.domains.favorite.service.FavoriteService;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.shared.exceptions.ConflictException;
