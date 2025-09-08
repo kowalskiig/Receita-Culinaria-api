@@ -1,4 +1,4 @@
-package com.project.miinhareceita.ingredient.projection;
+package com.project.miinhareceita.domains.ingredient.projection;
 
 public interface IngredientProjection {
     Long getId();

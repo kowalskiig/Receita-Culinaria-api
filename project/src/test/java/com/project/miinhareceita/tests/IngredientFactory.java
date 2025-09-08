@@ -1,9 +1,9 @@
 package com.project.miinhareceita.tests;
 
-import com.project.miinhareceita.ingredient.domain.Ingredients;
-import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
-import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
-import com.project.miinhareceita.ingredient.projection.IngredientProjection;
+import com.project.miinhareceita.domains.ingredient.domain.Ingredients;
+import com.project.miinhareceita.domains.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.UpdateIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.projection.IngredientProjection;
 
 public class IngredientFactory {
     public static Ingredients createIngredient() {

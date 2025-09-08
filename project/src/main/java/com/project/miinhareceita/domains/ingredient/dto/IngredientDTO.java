@@ -1,6 +1,6 @@
-package com.project.miinhareceita.ingredient.dto;
+package com.project.miinhareceita.domains.ingredient.dto;
 
-import com.project.miinhareceita.ingredient.domain.Ingredients;
+import com.project.miinhareceita.domains.ingredient.domain.Ingredients;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -1,21 +1,19 @@
-package com.project.miinhareceita.ingredient.service;
+package com.project.miinhareceita.domains.ingredient.service;
 
-import com.project.miinhareceita.ingredient.domain.Ingredients;
-import com.project.miinhareceita.ingredient.dto.IngredientDTO;
-import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
-import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
-import com.project.miinhareceita.ingredient.dto.ValidIngredientDTO;
-import com.project.miinhareceita.ingredient.projection.IngredientProjection;
-import com.project.miinhareceita.ingredient.repository.IngredientsRepository;
+import com.project.miinhareceita.domains.ingredient.domain.Ingredients;
+import com.project.miinhareceita.domains.ingredient.dto.IngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.UpdateIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.ValidIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.projection.IngredientProjection;
+import com.project.miinhareceita.domains.ingredient.repository.IngredientsRepository;
 import com.project.miinhareceita.shared.exceptions.DatabaseException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

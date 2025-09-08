@@ -1,13 +1,11 @@
 package com.project.miinhareceita.recipe.dto;
 
-import com.project.miinhareceita.ingredient.domain.Ingredients;
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 

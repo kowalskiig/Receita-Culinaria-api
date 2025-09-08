@@ -1,9 +1,9 @@
-package com.project.miinhareceita.ingredient.controller;
+package com.project.miinhareceita.domains.ingredient.controller;
 
-import com.project.miinhareceita.ingredient.dto.IngredientDTO;
-import com.project.miinhareceita.ingredient.dto.InsertIngredientDTO;
-import com.project.miinhareceita.ingredient.dto.UpdateIngredientDTO;
-import com.project.miinhareceita.ingredient.service.IngredientService;
+import com.project.miinhareceita.domains.ingredient.dto.IngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.InsertIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.dto.UpdateIngredientDTO;
+import com.project.miinhareceita.domains.ingredient.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

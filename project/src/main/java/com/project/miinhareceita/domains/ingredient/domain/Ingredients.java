@@ -1,4 +1,4 @@
-package com.project.miinhareceita.ingredient.domain;
+package com.project.miinhareceita.domains.ingredient.domain;
 
 
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
