@@ -39,9 +39,13 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Page<RecipeProjections> searchRecipesByCategoriesIngredientsAndName(List<Long> categoryIds, List<Long> ingredientsId, String name, Pageable pageable);
 
     @Query("""
-    SELECT new com.project.miinhareceita.recipe.dto.RecipeMinDTO(
-        r.id, r.title, r.timeMinutes, r.publicationDate,r.urlImg, COALESCE(AVG(rv.nota), 0.0)
-    )
+            SELECT
+                     r.id AS id,
+                     r.title AS title,
+                     r.timeMinutes AS timeMinutes,
+                     r.publicationDate AS publicationDate,
+                     r.urlImg AS urlImg,
+                     COALESCE(AVG(rv.nota), 0.0) AS notaMedia
     FROM Recipe r
     LEFT JOIN r.reviews rv
     WHERE r.id IN :recipeIds
