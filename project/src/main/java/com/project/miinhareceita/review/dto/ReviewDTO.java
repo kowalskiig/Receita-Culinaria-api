@@ -2,7 +2,7 @@ package com.project.miinhareceita.review.dto;
 
 import com.project.miinhareceita.recipe.dto.RecipeReviewDTO;
 import com.project.miinhareceita.review.domain.Review;
-import com.project.miinhareceita.user.dto.UserMinDTO;
+import com.project.miinhareceita.domains.user.dto.UserMinDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

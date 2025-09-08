@@ -1,8 +1,8 @@
-package com.project.miinhareceita.user.controller;
+package com.project.miinhareceita.domains.user.controller;
 
-import com.project.miinhareceita.user.dto.UserDTO;
-import com.project.miinhareceita.user.dto.UserInsertDTO;
-import com.project.miinhareceita.user.service.UserService;
+import com.project.miinhareceita.domains.user.dto.UserDTO;
+import com.project.miinhareceita.domains.user.dto.UserInsertDTO;
+import com.project.miinhareceita.domains.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

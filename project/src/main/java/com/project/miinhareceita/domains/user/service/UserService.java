@@ -1,13 +1,13 @@
-package com.project.miinhareceita.user.service;
+package com.project.miinhareceita.domains.user.service;
 
 import com.project.miinhareceita.auth.service.AuthService;
-import com.project.miinhareceita.user.domain.Role;
-import com.project.miinhareceita.user.domain.User;
-import com.project.miinhareceita.user.dto.UserDTO;
-import com.project.miinhareceita.user.dto.UserInsertDTO;
-import com.project.miinhareceita.user.projection.UserDetailsProjection;
-import com.project.miinhareceita.user.repository.RoleRepository;
-import com.project.miinhareceita.user.repository.UserRepository;
+import com.project.miinhareceita.domains.user.domain.Role;
+import com.project.miinhareceita.domains.user.domain.User;
+import com.project.miinhareceita.domains.user.dto.UserDTO;
+import com.project.miinhareceita.domains.user.dto.UserInsertDTO;
+import com.project.miinhareceita.domains.user.projection.UserDetailsProjection;
+import com.project.miinhareceita.domains.user.repository.RoleRepository;
+import com.project.miinhareceita.domains.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

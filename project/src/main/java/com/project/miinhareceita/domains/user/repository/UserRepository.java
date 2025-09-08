@@ -1,7 +1,7 @@
-package com.project.miinhareceita.user.repository;
+package com.project.miinhareceita.domains.user.repository;
 
-import com.project.miinhareceita.user.domain.User;
-import com.project.miinhareceita.user.projection.UserDetailsProjection;
+import com.project.miinhareceita.domains.user.domain.User;
+import com.project.miinhareceita.domains.user.projection.UserDetailsProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

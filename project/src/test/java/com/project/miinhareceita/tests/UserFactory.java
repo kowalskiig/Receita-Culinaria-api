@@ -1,9 +1,9 @@
 package com.project.miinhareceita.tests;
 
-import com.project.miinhareceita.user.domain.Role;
-import com.project.miinhareceita.user.domain.User;
-import com.project.miinhareceita.user.dto.UserInsertDTO;
-import com.project.miinhareceita.user.projection.UserDetailsProjection;
+import com.project.miinhareceita.domains.user.domain.Role;
+import com.project.miinhareceita.domains.user.domain.User;
+import com.project.miinhareceita.domains.user.dto.UserInsertDTO;
+import com.project.miinhareceita.domains.user.projection.UserDetailsProjection;
 
 public class UserFactory {
     public static final Long DEFAULT_USER_ID = 1L;

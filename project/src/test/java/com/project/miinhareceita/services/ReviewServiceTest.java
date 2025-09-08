@@ -2,7 +2,6 @@ package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.auth.service.AuthService;
 import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.review.domain.Review;
 import com.project.miinhareceita.review.dto.InsertReviewDTO;
@@ -15,7 +14,7 @@ import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.RecipeFactory;
 import com.project.miinhareceita.tests.ReviewFactory;
 import com.project.miinhareceita.tests.UserFactory;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

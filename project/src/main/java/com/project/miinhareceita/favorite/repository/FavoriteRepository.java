@@ -1,6 +1,6 @@
-package com.project.miinhareceita.favorite.repository;
+package com.project.miinhareceita.domains.favorite.repository;
 
-import com.project.miinhareceita.favorite.domain.Favorite;
+import com.project.miinhareceita.domains.favorite.domain.Favorite;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

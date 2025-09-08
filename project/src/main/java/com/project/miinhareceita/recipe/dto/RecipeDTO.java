@@ -3,7 +3,7 @@ package com.project.miinhareceita.recipe.dto;
 
 import com.project.miinhareceita.recipe.domain.Recipe;
 import com.project.miinhareceita.recipe.domain.RecipeIngredients;
-import com.project.miinhareceita.user.dto.UserMinDTO;
+import com.project.miinhareceita.domains.user.dto.UserMinDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

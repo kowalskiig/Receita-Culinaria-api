@@ -10,7 +10,7 @@ import com.project.miinhareceita.recipe.projection.RecipeProjections;
 import com.project.miinhareceita.recipe.repository.RecipeRepository;
 import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

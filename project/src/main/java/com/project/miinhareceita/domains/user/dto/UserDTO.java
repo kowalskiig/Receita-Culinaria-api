@@ -1,6 +1,6 @@
-package com.project.miinhareceita.user.dto;
+package com.project.miinhareceita.domains.user.dto;
 
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.NoArgsConstructor;

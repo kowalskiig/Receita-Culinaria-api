@@ -4,7 +4,7 @@ package com.project.miinhareceita.recipe.domain;
 import com.project.miinhareceita.category.domain.Category;
 import com.project.miinhareceita.favorite.domain.Favorite;
 import com.project.miinhareceita.review.domain.Review;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 import jakarta.persistence.*;
 
 import java.time.Instant;

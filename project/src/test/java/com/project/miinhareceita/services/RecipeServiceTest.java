@@ -15,7 +15,7 @@ import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.IngredientFactory;
 import com.project.miinhareceita.tests.RecipeFactory;
 import com.project.miinhareceita.tests.UserFactory;
-import com.project.miinhareceita.user.domain.User;
+import com.project.miinhareceita.domains.user.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

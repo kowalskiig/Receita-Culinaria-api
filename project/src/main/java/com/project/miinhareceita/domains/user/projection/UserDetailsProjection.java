@@ -1,4 +1,4 @@
-package com.project.miinhareceita.user.projection;
+package com.project.miinhareceita.domains.user.projection;
 
 public interface UserDetailsProjection {
     String getUsername();

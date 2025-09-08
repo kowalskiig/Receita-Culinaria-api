@@ -1,6 +1,6 @@
-package com.project.miinhareceita.user.dto;
+package com.project.miinhareceita.domains.user.dto;
 
-import com.project.miinhareceita.user.validation.UserInsertValid;
+import com.project.miinhareceita.domains.user.validation.UserInsertValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

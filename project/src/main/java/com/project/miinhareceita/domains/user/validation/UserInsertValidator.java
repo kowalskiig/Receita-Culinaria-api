@@ -1,9 +1,9 @@
-package com.project.miinhareceita.user.validation;
+package com.project.miinhareceita.domains.user.validation;
 
 import com.project.miinhareceita.shared.exceptions.FieldMessage;
-import com.project.miinhareceita.user.domain.User;
-import com.project.miinhareceita.user.dto.UserInsertDTO;
-import com.project.miinhareceita.user.repository.UserRepository;
+import com.project.miinhareceita.domains.user.domain.User;
+import com.project.miinhareceita.domains.user.dto.UserInsertDTO;
+import com.project.miinhareceita.domains.user.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;

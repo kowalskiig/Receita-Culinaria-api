@@ -1,4 +1,4 @@
-package com.project.miinhareceita.favorite.dto;
+package com.project.miinhareceita.domains.favorite.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

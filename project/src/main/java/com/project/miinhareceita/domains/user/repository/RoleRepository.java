@@ -1,6 +1,6 @@
-package com.project.miinhareceita.user.repository;
+package com.project.miinhareceita.domains.user.repository;
 
-import com.project.miinhareceita.user.domain.Role;
+import com.project.miinhareceita.domains.user.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

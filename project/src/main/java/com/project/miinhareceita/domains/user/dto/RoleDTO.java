@@ -1,6 +1,6 @@
-package com.project.miinhareceita.user.dto;
+package com.project.miinhareceita.domains.user.dto;
 
-import com.project.miinhareceita.user.domain.Role;
+import com.project.miinhareceita.domains.user.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
