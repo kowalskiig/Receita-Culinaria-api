@@ -1,6 +1,6 @@
-package com.project.miinhareceita.category.repository;
+package com.project.miinhareceita.domains.category.repository;
 
-import com.project.miinhareceita.category.domain.Category;
+import com.project.miinhareceita.domains.category.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

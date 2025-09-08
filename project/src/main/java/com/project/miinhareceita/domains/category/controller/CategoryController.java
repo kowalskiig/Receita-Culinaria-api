@@ -1,7 +1,7 @@
-package com.project.miinhareceita.category.controller;
+package com.project.miinhareceita.domains.category.controller;
 
-import com.project.miinhareceita.category.dto.CategoryMinDTO;
-import com.project.miinhareceita.category.service.CategoryService;
+import com.project.miinhareceita.domains.category.dto.CategoryMinDTO;
+import com.project.miinhareceita.domains.category.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

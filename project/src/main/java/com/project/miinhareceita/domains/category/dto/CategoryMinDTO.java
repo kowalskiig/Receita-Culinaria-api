@@ -1,6 +1,6 @@
-package com.project.miinhareceita.category.dto;
+package com.project.miinhareceita.domains.category.dto;
 
-import com.project.miinhareceita.category.domain.Category;
+import com.project.miinhareceita.domains.category.domain.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

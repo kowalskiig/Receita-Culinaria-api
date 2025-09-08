@@ -1,8 +1,8 @@
-package com.project.miinhareceita.category.service;
+package com.project.miinhareceita.domains.category.service;
 
-import com.project.miinhareceita.category.domain.Category;
-import com.project.miinhareceita.category.dto.CategoryMinDTO;
-import com.project.miinhareceita.category.repository.CategoryRepository;
+import com.project.miinhareceita.domains.category.domain.Category;
+import com.project.miinhareceita.domains.category.dto.CategoryMinDTO;
+import com.project.miinhareceita.domains.category.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

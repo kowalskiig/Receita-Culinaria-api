@@ -1,7 +1,7 @@
 package com.project.miinhareceita.domains.recipe.domain;
 
 
-import com.project.miinhareceita.category.domain.Category;
+import com.project.miinhareceita.domains.category.domain.Category;
 import com.project.miinhareceita.domains.favorite.domain.Favorite;
 import com.project.miinhareceita.domains.review.domain.Review;
 import com.project.miinhareceita.domains.user.domain.User;

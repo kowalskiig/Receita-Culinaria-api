@@ -1,9 +1,9 @@
 package com.project.miinhareceita.services;
 
-import com.project.miinhareceita.category.domain.Category;
-import com.project.miinhareceita.category.dto.CategoryMinDTO;
-import com.project.miinhareceita.category.repository.CategoryRepository;
-import com.project.miinhareceita.category.service.CategoryService;
+import com.project.miinhareceita.domains.category.domain.Category;
+import com.project.miinhareceita.domains.category.dto.CategoryMinDTO;
+import com.project.miinhareceita.domains.category.repository.CategoryRepository;
+import com.project.miinhareceita.domains.category.service.CategoryService;
 import com.project.miinhareceita.tests.CategoryFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
