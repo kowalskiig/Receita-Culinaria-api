@@ -1,4 +1,4 @@
-package com.project.miinhareceita.config.customgrant;
+package com.project.miinhareceita.core.config.customgrant;
 
 import org.springframework.security.core.GrantedAuthority;
 

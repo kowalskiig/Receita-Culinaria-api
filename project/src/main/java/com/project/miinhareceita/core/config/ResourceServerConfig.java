@@ -1,4 +1,4 @@
-package com.project.miinhareceita.config;
+package com.project.miinhareceita.core.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;

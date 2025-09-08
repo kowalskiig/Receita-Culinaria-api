@@ -1,4 +1,4 @@
-package com.project.miinhareceita.config.customgrant;
+package com.project.miinhareceita.core.config.customgrant;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;

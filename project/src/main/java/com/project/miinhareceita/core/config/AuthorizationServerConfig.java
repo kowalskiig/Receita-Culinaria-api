@@ -1,12 +1,12 @@
-package com.project.miinhareceita.config;
+package com.project.miinhareceita.core.config;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.project.miinhareceita.config.customgrant.CustomPasswordAuthenticationConverter;
-import com.project.miinhareceita.config.customgrant.CustomPasswordAuthenticationProvider;
-import com.project.miinhareceita.config.customgrant.CustomUserAuthorities;
+import com.project.miinhareceita.core.config.customgrant.CustomPasswordAuthenticationConverter;
+import com.project.miinhareceita.core.config.customgrant.CustomPasswordAuthenticationProvider;
+import com.project.miinhareceita.core.config.customgrant.CustomUserAuthorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
