@@ -1,7 +1,7 @@
 package com.project.miinhareceita.tests;
 
-import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.review.domain.Review;
 import com.project.miinhareceita.domains.user.domain.User;
 
 import java.time.Instant;

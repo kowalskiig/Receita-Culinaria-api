@@ -1,4 +1,4 @@
-package com.project.miinhareceita.recipe.domain;
+package com.project.miinhareceita.domains.recipe.domain;
 
 import com.project.miinhareceita.domains.ingredient.domain.Ingredients;
 import jakarta.persistence.EmbeddedId;

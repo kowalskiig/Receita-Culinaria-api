@@ -1,6 +1,6 @@
 package com.project.miinhareceita.domains.favorite.domain;
 
-import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
 import com.project.miinhareceita.domains.user.domain.User;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

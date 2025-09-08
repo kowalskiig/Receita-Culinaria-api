@@ -1,7 +1,7 @@
-package com.project.miinhareceita.review.dto;
+package com.project.miinhareceita.domains.review.dto;
 
-import com.project.miinhareceita.recipe.dto.RecipeReviewDTO;
-import com.project.miinhareceita.review.domain.Review;
+import com.project.miinhareceita.domains.recipe.dto.RecipeReviewDTO;
+import com.project.miinhareceita.domains.review.domain.Review;
 import com.project.miinhareceita.domains.user.dto.UserMinDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

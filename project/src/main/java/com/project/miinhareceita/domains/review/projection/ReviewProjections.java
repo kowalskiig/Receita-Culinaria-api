@@ -1,4 +1,4 @@
-package com.project.miinhareceita.review.projection;
+package com.project.miinhareceita.domains.review.projection;
 
 
 import java.time.OffsetDateTime;

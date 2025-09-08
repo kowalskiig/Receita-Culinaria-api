@@ -1,8 +1,8 @@
-package com.project.miinhareceita.recipe.repository;
+package com.project.miinhareceita.domains.recipe.repository;
 
-import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
-import com.project.miinhareceita.recipe.projection.RecipeProjections;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.domains.recipe.projection.RecipeProjections;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

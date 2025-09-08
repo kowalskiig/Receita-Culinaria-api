@@ -1,4 +1,4 @@
-package com.project.miinhareceita.recipe.dto;
+package com.project.miinhareceita.domains.recipe.dto;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;

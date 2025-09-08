@@ -1,7 +1,7 @@
 package com.project.miinhareceita.domains.favorite.dto;
 
 import com.project.miinhareceita.domains.favorite.domain.Favorite;
-import com.project.miinhareceita.recipe.dto.RecipeFavoriteDTO;
+import com.project.miinhareceita.domains.recipe.dto.RecipeFavoriteDTO;
 import lombok.Getter;
 
 @Getter

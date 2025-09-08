@@ -1,7 +1,7 @@
-package com.project.miinhareceita.review.domain;
+package com.project.miinhareceita.domains.review.domain;
 
 
-import com.project.miinhareceita.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
 import com.project.miinhareceita.domains.user.domain.User;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;

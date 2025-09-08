@@ -1,9 +1,9 @@
-package com.project.miinhareceita.review.controller;
+package com.project.miinhareceita.domains.review.controller;
 
-import com.project.miinhareceita.review.dto.InsertReviewDTO;
-import com.project.miinhareceita.review.dto.ReviewDTO;
-import com.project.miinhareceita.review.dto.UpdateReviewDTO;
-import com.project.miinhareceita.review.service.ReviewService;
+import com.project.miinhareceita.domains.review.dto.InsertReviewDTO;
+import com.project.miinhareceita.domains.review.dto.ReviewDTO;
+import com.project.miinhareceita.domains.review.dto.UpdateReviewDTO;
+import com.project.miinhareceita.domains.review.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

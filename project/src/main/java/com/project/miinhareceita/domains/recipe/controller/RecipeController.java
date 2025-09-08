@@ -1,10 +1,10 @@
-package com.project.miinhareceita.recipe.controller;
+package com.project.miinhareceita.domains.recipe.controller;
 
-import com.project.miinhareceita.recipe.dto.InsertRecipeDTO;
-import com.project.miinhareceita.recipe.dto.RecipeDTO;
-import com.project.miinhareceita.recipe.dto.RecipeMinDTO;
-import com.project.miinhareceita.recipe.dto.UpdateRecipeDTO;
-import com.project.miinhareceita.recipe.service.RecipeService;
+import com.project.miinhareceita.domains.recipe.dto.InsertRecipeDTO;
+import com.project.miinhareceita.domains.recipe.dto.RecipeDTO;
+import com.project.miinhareceita.domains.recipe.dto.RecipeMinDTO;
+import com.project.miinhareceita.domains.recipe.dto.UpdateRecipeDTO;
+import com.project.miinhareceita.domains.recipe.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

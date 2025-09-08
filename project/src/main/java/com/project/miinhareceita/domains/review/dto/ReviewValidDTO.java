@@ -1,4 +1,4 @@
-package com.project.miinhareceita.review.dto;
+package com.project.miinhareceita.domains.review.dto;
 
 public interface ReviewValidDTO {
     Integer getNota();

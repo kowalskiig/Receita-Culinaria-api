@@ -1,4 +1,4 @@
-package com.project.miinhareceita.recipe.projection;
+package com.project.miinhareceita.domains.recipe.projection;
 
 import java.time.Instant;
 

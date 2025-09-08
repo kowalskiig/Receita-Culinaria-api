@@ -1,7 +1,7 @@
 package com.project.miinhareceita.domains.ingredient.domain;
 
 
-import com.project.miinhareceita.recipe.domain.RecipeIngredients;
+import com.project.miinhareceita.domains.recipe.domain.RecipeIngredients;
 import jakarta.persistence.*;
 import lombok.*;
 

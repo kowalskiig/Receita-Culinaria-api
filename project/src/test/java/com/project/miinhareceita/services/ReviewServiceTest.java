@@ -1,14 +1,14 @@
 package com.project.miinhareceita.services;
 
 import com.project.miinhareceita.auth.service.AuthService;
-import com.project.miinhareceita.recipe.domain.Recipe;
-import com.project.miinhareceita.recipe.repository.RecipeRepository;
-import com.project.miinhareceita.review.domain.Review;
-import com.project.miinhareceita.review.dto.InsertReviewDTO;
-import com.project.miinhareceita.review.dto.ReviewDTO;
-import com.project.miinhareceita.review.dto.UpdateReviewDTO;
-import com.project.miinhareceita.review.repository.ReviewRepository;
-import com.project.miinhareceita.review.service.ReviewService;
+import com.project.miinhareceita.domains.recipe.domain.Recipe;
+import com.project.miinhareceita.domains.recipe.repository.RecipeRepository;
+import com.project.miinhareceita.domains.review.domain.Review;
+import com.project.miinhareceita.domains.review.dto.InsertReviewDTO;
+import com.project.miinhareceita.domains.review.dto.ReviewDTO;
+import com.project.miinhareceita.domains.review.dto.UpdateReviewDTO;
+import com.project.miinhareceita.domains.review.repository.ReviewRepository;
+import com.project.miinhareceita.domains.review.service.ReviewService;
 import com.project.miinhareceita.shared.exceptions.ForbiddenException;
 import com.project.miinhareceita.shared.exceptions.ResourceNotFoundException;
 import com.project.miinhareceita.tests.RecipeFactory;
