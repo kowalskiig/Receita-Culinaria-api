@@ -1,5 +1,6 @@
-package com.project.miinhareceita.core.exceptions;
+package com.project.miinhareceita.core.exceptions.handler;
 
+import com.project.miinhareceita.core.exceptions.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
