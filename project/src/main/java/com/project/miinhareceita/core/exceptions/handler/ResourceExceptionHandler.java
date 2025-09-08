@@ -1,6 +1,8 @@
 package com.project.miinhareceita.core.exceptions.handler;
 
 import com.project.miinhareceita.core.exceptions.*;
+import com.project.miinhareceita.core.exceptions.dto.StandardError;
+import com.project.miinhareceita.core.exceptions.dto.ValidationError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

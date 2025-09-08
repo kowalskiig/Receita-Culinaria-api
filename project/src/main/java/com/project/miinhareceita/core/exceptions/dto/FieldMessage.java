@@ -1,4 +1,4 @@
-package com.project.miinhareceita.core.exceptions;
+package com.project.miinhareceita.core.exceptions.dto;
 
 import java.io.Serializable;
 
