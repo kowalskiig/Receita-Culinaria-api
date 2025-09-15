@@ -1,18 +1,23 @@
-#  Shared Recipes
+#  API REST de Receitas Culinárias - SharedRecipes
 
-![CI](https://github.com/gustavokowallski/MinhaReceita/actions/workflows/ci.yml/badge.svg)
-![Java](https://img.shields.io/badge/Java-21-blue)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen)
-![Docker](https://img.shields.io/badge/docker-enabled-blue)
-![PostgreSQL](https://img.shields.io/badge/postgres-db-blue)
+Aplicação para gerenciamento de receitas culinárias, com autenticação JWT + OAuth2, sistema de favoritos, avaliações, controle de permissões e cobertura de testes. Idealizado como um projeto real de backend completo e seguro.
 
-**SharedRecipes** é uma API RESTful para gestão de receitas culinárias com autenticação, controle de permissões, sistema de favoritos e reviews, construída com foco em código limpo, regras de negócio reais e boas práticas de backend.  
-Idealizado como um desafio técnico completo, o projeto simula um ambiente real de desenvolvimento robusto.
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=java,spring,postgres,docker,git,postman" />
+  </a>
+</p>
+<p align="center">
+  <!-- Build Status -->
+  <img src="https://img.shields.io/github/actions/workflow/status/gustavokowallski/SharedRecipes/ci.yml?label=CI%2FCD&logo=githubactions&style=for-the-badge" />
+  
+  <!-- Cobertura de Testes -->
+  <img src="https://img.shields.io/badge/Cobertura-100%25-brightgreen?style=for-the-badge&logo=pytest" />
 
----
 
+</p>
 
-## 📌 Problema Resolvido
+## Visão Geral do projeto
 
 O SharedRecipes nasceu da necessidade de ter um lugar organizado para salvar e compartilhar receitas com outras pessoas. Em vez de depender de anotações soltas ou mensagens no WhatsApp, a ideia foi criar um espaço onde qualquer usuário possa registrar suas receitas com todos os detalhes, receber avaliações e favoritar pratos de outros.
 
@@ -20,9 +25,7 @@ Além disso, o sistema garante que cada ação — como editar ou deletar conte�
 
 ---
 
-## 🧠 Visão Geral da Solução
-
-O sistema SharedRecipes entrega:
+##  Visão Geral da Solução
 
 - Cadastro de receitas com ingredientes, categorias e imagem  
 - Sistema de favoritos e reviews entre usuários autenticados  
@@ -34,7 +37,22 @@ O sistema SharedRecipes entrega:
 
 ---
 
-##  Diagrama de Classes
+## 📦 Tecnologias Utilizadas
+
+| Tecnologia / Prática                  | Justificativa                                 |
+|--------------------------------------|-----------------------------------------------|
+| **Java 21 + Spring Boot**            | Backend moderno, robusto e produtivo          |
+| **Spring Security + OAuth2 + JWT**   | Autenticação stateless com controle de roles  |
+| **BCrypt**                           | Criptografia segura de senhas                 |
+| **PostgreSQL + Spring Data JPA**     | Persistência relacional eficiente             |
+| **Docker + Docker Compose**          | Ambientes isolados, portáveis e escaláveis    |
+| **GitHub Actions**                   | Pipeline CI/CD automatizada                   |
+| **Swagger/OpenAPI**                  | Documentação clara e interativa da API        |
+| **JUnit 5 + Mockito**                | Testes confiáveis e de fácil manutenção       |
+
+
+## 📊 Diagrama de Classes
+
 ```mermaid
 classDiagram
     class User {
@@ -105,118 +123,36 @@ classDiagram
 
     Review "*" --> "1" Recipe
     Favorite "*" --> "1" Recipe
-
-
 ```
 
 
+---
+
+## 🏆 Conquistas Técnicas
+
+- CI/CD completo com GitHub Actions + DockerHub ✔️
+- Arquitetura em camadas com foco em Clean Code ✔️ 
+- Tratamento global de exceções centralizado ✔️  
+- 100% de cobertura de testes automatizados (JUnit 5 + Mockito) ✔️  
+- Segurança robusta com autenticação OAuth2 + JWT ✔️  
+- Persistência com PostgreSQL via Spring Data JPA ✔️  
+- Documentação interativa gerada com Swagger/OpenAPI ✔️  
+- Uso estratégico de branches e boas práticas de versionamento Git ✔️  
 
 ---
 
+## Execução Local
 
+### Requisitos
 
-## 🏆 Conquistas e Aprendizados Técnicos
-
-Este projeto simula um backend real de produção. Os principais diferenciais:
-
-✅ CI/CD com GitHub Actions + DockerHub  
-✅ Arquitetura em camadas com foco em Clean Code  
-✅ Tratamento global de exceções  
-✅ 100% de cobertura de testes com JUnit e Mockito  
-✅ Segurança robusta com OAuth2 + JWT  
-✅ Persistência com PostgreSQL via JPA  
-✅ Documentação interativa com Swagger
-✅ Melhor uso do Git e branchs para diferentes implementações
-✅ Melhor uso do Git e branchs para diferentes implementações
-
----
-
-## 📦 Tecnologias Utilizadas
-
-| Tecnologia / Prática | Justificativa |
-|----------------------|----------------|
-| **Java 21 + Spring Boot** | Backend robusto e moderno |
-| **Spring Security + OAuth2 + JWT** | Autenticação stateless com roles |
-| **BCrypt** | Criptografia de senhas confiável |
-| **PostgreSQL + Spring Data JPA** | Persistência relacional eficiente |
-| **Docker + Docker Compose** | Ambiente isolado e reprodutível |
-| **GitHub Actions** | CI/CD integrado no fluxo de trabalho |
-| **Swagger/OpenAPI** | API interativa e auto-documentada |
-| **JUnit 5 + Mockito** | Testes de unidade completos |
-
-
----
-
-## 🧭 Endpoints da API
-
-### 🍽️ Receitas (Recipes)
-- `GET /recipes` — Listar receitas (filtros: categoria, ingrediente, título)  
-- `GET /recipes/{id}` — Buscar receita por ID  
-- `POST /recipes` — Criar nova receita  
-- `PATCH /recipes/{id}` — Atualizar receita *(somente autor)*  
-- `DELETE /recipes/{id}` — Deletar receita *(somente autor)*  
-
----
-
-### 🧂 Ingredientes (Ingredients)
-- `GET /ingredients` — Listar ingredientes (com filtro por nome)  
-- `POST /ingredients` — Criar novo ingrediente *(admin)*  
-- `PUT /ingredients/{id}` — Atualizar ingrediente *(admin)*  
-- `DELETE /ingredients/{id}` — Remover ingrediente *(admin)*  
-
----
-
-### 🗂️ Categorias (Categories)
-- `GET /categories` — Listar todas as categorias  
-- `POST /categories` — Criar nova categoria *(admin)*  
-- `DELETE /categories/{id}` — Remover categoria *(admin)*  
-
----
-
-### ⭐ Favoritos (Favorites)
-- `POST /favorites/{recipeId}` — Favoritar uma receita  
-- `DELETE /favorites/{recipeId}` — Remover dos favoritos  
-- `GET /favorites/me` — Listar favoritos do usuário logado  
-
----
-
-### 🧪 Avaliações (Reviews)
-- `POST /reviews/{recipeId}` — Criar avaliação para uma receita  
-- `GET /reviews/{recipeId}` — Listar avaliações da receita  
-- `PUT /reviews/{id}` — Editar avaliação *(somente autor)*  
-- `DELETE /reviews/{id}` — Deletar avaliação *(somente autor)*  
-
----
-
-### 👤 Usuário (User)
-- `POST /users` — Criar novo usuário  
-- `GET /users/me` — Buscar dados do usuário logado  
-- `GET /users/{id}` — Buscar outro usuário *(admin ou para perfil público)*  
-
----
-
-### 🔐 Autenticação (Auth)
-- `POST /oauth2/token` — Obter token JWT com client credentials  
-- **Swagger Authorize** — Testar endpoints protegidos via OAuth2  
-
----
-
-
-## 🚀 Próximas Funcionalidades
-
-- 📸 Upload de imagens nas receitas  
-- 🏆 Ranking de usuários mais engajados  
-- 🔔 Notificações para novos reviews e favoritos
-
----
-
-
-## ⚙️ Como Rodar o Projeto (Docker)
-
-### 🛠️ Pré-requisitos
-
-[![Docker](https://img.shields.io/badge/Docker-%23007ACC.svg?logo=docker&logoColor=white)](https://www.docker.com/products/docker-desktop)
-[![Git](https://img.shields.io/badge/Git-%23F05033.svg?logo=git&logoColor=white)](https://git-scm.com/)
+<p align="left">
+  <a href="https://www.docker.com/">
+    <img src="https://www.vectorlogo.zone/logos/docker/docker-official.svg" alt="Docker" width="60" height="60"/>
+  </a>
+  <a href="https://www.postman.com/">
+    <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="Postman" width="60" height="60"/>
+  </a>
+</p>
 
 ### Passos
 
@@ -230,30 +166,22 @@ docker compose up
 
 ```
 
-### 🌐 Acesso à Aplicação
+### ✅ Testes via Postman
 
-[![App Rodando](https://img.shields.io/badge/🚀%20Aplicação%20Rodando-localhost%3A8080-blue)](http://localhost:8080)  
-[![Swagger UI](https://img.shields.io/badge/🧾%20Swagger%20UI-documentação-brightgreen)](http://localhost:8080/swagger-ui/index.html)
-
-
----
-
-## 📬 Testando a API
-
-### ✅ Via Postman (Recomendado)
-
-- **Coleção de endpoints + variáveis de ambiente:**  
+- **Coleção completa de endpoints + variáveis de ambiente:**  
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/collection/45108000-4940dac4-9643-4a53-b591-5ad13ab61698?action=share&creator=45108000&active-environment=45108000-ee357952-f911-405a-9337-066beac8e080)
 
-### 📖 Via Swagger
 
-[![Abrir Swagger UI](https://img.shields.io/badge/🧾%20Abrir-Swagger%20UI-brightgreen)](http://localhost:8080/swagger-ui/index.html)
+### 🧾 Documentação via Swagger UI
 
-- Utilize o token OAuth2 no botão **Authorize** para testar rotas protegidas
+- Acesse a interface interativa da API:  
+  [![Abrir Swagger UI](https://img.shields.io/badge/Abrir-Swagger%20UI-brightgreen)](http://localhost:8080/swagger-ui/index.html)
+
+- Utilize o botão **Authorize** para inserir o token OAuth2 e testar rotas protegidas.
 
 ---
 
-## 🔐 Credenciais de Teste
+##  Credenciais de Teste
 
 ### 👑 Admin
 ```bash
@@ -266,14 +194,24 @@ email: user@gmail.com
 senha: 123456
 ```
 ---
-.
-#  Imagem Docker Pública
+
+##  Simulação de Vaga
+
+**Descrição da vaga (simulação):**  
+
+> Buscamos desenvolvedor Java com experiência em construção de APIs REST seguras, autenticação com JWT/OAuth2, versionamento com Git e boas práticas de testes automatizados.
+
+**Minha entrega:**  
+Implementei uma API REST completa para gerenciamento de receitas, com autenticação robusta (JWT + OAuth2), controle de permissões por perfil, CI/CD com GitHub Actions e 100% de cobertura de testes automatizados com JUnit 5 e Mockito.  
+A aplicação foi totalmente conteinerizada com Docker, preparada para produção e validada com testes manuais e automatizados via Postman e Swagger.
+
+
+## 🐳 Imagem Docker Pública
 
 [![DockerHub - Minhareceita](https://img.shields.io/badge/DockerHub-minhareceita-blue?logo=docker)](https://hub.docker.com/repository/docker/nawszera/minhareceita)
 
-### **Autor**
+📬 **Conecte-se comigo:**  
+[LinkedIn](https://www.linkedin.com/in/gustavokowalski/) | [Email](mailto:kkowalskigustavo@gmail.com)
 
-**Gustavo Eiji Kowalski Hatada**
-[![LinkedIn Badge](https://img.shields.io/badge/-Gustavo%20Kowalski-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/gustavokowalski/)
 
----
+
