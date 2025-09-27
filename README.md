@@ -1,4 +1,4 @@
-#  API REST de Receitas Culinárias - SharedRecipes
+#  API REST de Receitas Culinárias - MinhaReceita
 
 Aplicação para gerenciamento de receitas culinárias, com autenticação JWT + OAuth2, sistema de favoritos, avaliações, controle de permissões e cobertura de testes. Idealizado como um projeto real de backend completo e seguro.
 
@@ -133,13 +133,19 @@ classDiagram
 - CI/CD completo com GitHub Actions + DockerHub ✔️
 - Arquitetura em camadas com foco em Clean Code ✔️ 
 - Tratamento global de exceções centralizado ✔️  
-- 100% de cobertura de testes automatizados (JUnit 5 + Mockito) ✔️  
 - Segurança robusta com autenticação OAuth2 + JWT ✔️  
 - Persistência com PostgreSQL via Spring Data JPA ✔️  
 - Documentação interativa gerada com Swagger/OpenAPI ✔️  
 - Uso estratégico de branches e boas práticas de versionamento Git ✔️  
 
----
+
+- 100% de cobertura de testes automatizados (JUnit 5 + Mockito) ✔️
+
+### 🔬 Cobertura de Código Comprovada
+
+Abaixo, a prova visual do compromisso com a qualidade e testes unitários, gerada pelo JaCoCo.
+
+![Relatório de Cobertura JaCoCo do SharedRecipes](https://github.com/kowalskiig/Api-compartihar-receitas/issues/20#issue-3459773303)
 
 ## Execução Local
 
@@ -158,8 +164,8 @@ classDiagram
 
 ```bash
 # Clone o repositório
-git clone https://github.com/gustavokowallski/SharedRecipes.git
-cd SharedRecipes
+git clone https://github.com/gustavokowallski/Api-compartihar-receitas.git
+cd Api-compartihar-receitas
 
 # Suba os containers
 docker compose up
