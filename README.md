@@ -164,8 +164,8 @@ Abaixo, a prova visual do compromisso com a qualidade e testes unitários, gerad
 
 ```bash
 # Clone o repositório
-git clone https://github.com/gustavokowallski/Api-compartihar-receitas.git
-cd Api-compartihar-receitas
+git clone https://github.com/gustavokowallski/Receita-Culinaria-api.git
+cd Receita-Culinaria-api
 
 # Suba os containers
 docker compose up
