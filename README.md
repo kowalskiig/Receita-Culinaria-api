@@ -1,55 +1,15 @@
-#  API REST de Receitas Culinárias - MinhaReceita
-
-Aplicação para gerenciamento de receitas culinárias, com autenticação JWT + OAuth2, sistema de favoritos, avaliações, controle de permissões e cobertura de testes. Idealizado como um projeto real de backend completo e seguro.
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,spring,postgres,docker,git,postman" />
-  </a>
-</p>
-<p align="center">
-  <!-- Build Status -->
-  <img src="https://img.shields.io/github/actions/workflow/status/gustavokowallski/SharedRecipes/ci.yml?label=CI%2FCD&logo=githubactions&style=for-the-badge" />
-  
-  <!-- Cobertura de Testes -->
-  <img src="https://img.shields.io/badge/Cobertura-100%25-brightgreen?style=for-the-badge&logo=pytest" />
+#  Site receitas culinárias
 
 
 </p>
 
-## Visão Geral do projeto
+## Objetivo do projeto
 
-O SharedRecipes nasceu da necessidade de ter um lugar organizado para salvar e compartilhar receitas com outras pessoas. Em vez de depender de anotações soltas ou mensagens no WhatsApp, a ideia foi criar um espaço onde qualquer usuário possa registrar suas receitas com todos os detalhes, receber avaliações e favoritar pratos de outros.
-
-Além disso, o sistema garante que cada ação — como editar ou deletar conteúdo — seja feita apenas pelo dono, mantendo tudo seguro e organizado. É uma aplicação que transforma o hábito de cozinhar em uma experiência digital simples, útil e colaborativa.
-
----
-
-##  Visão Geral da Solução
-
-- Cadastro de receitas com ingredientes, categorias e imagem  
-- Sistema de favoritos e reviews entre usuários autenticados  
-- Autenticação robusta com JWT + OAuth2  
-- Controle de acesso por perfil (usuário comum x admin)  
-- Validação rigorosa para criação, edição e exclusão de dados  
-- Rotas protegidas: só o autor pode modificar seu conteúdo  
-- Backend seguro, testado, versionado e pronto para produção via Docker
+- Sistema em que usuários podem postar, interagir, comentar e engajar receitas culinárias.
+- Foco de aplicar conhecimentos e construir um Backend robusto e seguro. Utilizando conceitos que aprendi em treinamentos.
+- Construido do zero a partir de uma ideia e regras de negócio que imaginei como uma demanda real.
 
 ---
-
-## 📦 Tecnologias Utilizadas
-
-| Tecnologia / Prática                  | Justificativa                                 |
-|--------------------------------------|-----------------------------------------------|
-| **Java 21 + Spring Boot**            | Backend moderno, robusto e produtivo          |
-| **Spring Security + OAuth2 + JWT**   | Autenticação stateless com controle de roles  |
-| **BCrypt**                           | Criptografia segura de senhas                 |
-| **PostgreSQL + Spring Data JPA**     | Persistência relacional eficiente             |
-| **Docker + Docker Compose**          | Ambientes isolados, portáveis e escaláveis    |
-| **GitHub Actions**                   | Pipeline CI/CD automatizada                   |
-| **Swagger/OpenAPI**                  | Documentação clara e interativa da API        |
-| **JUnit 5 + Mockito**                | Testes confiáveis e de fácil manutenção       |
-
 
 ## 📊 Diagrama de Classes
 
@@ -125,42 +85,43 @@ classDiagram
     Favorite "*" --> "1" Recipe
 ```
 
+## Tecnologias Utilizadas
+
+- Java 21
+- Spring Boot
+- GitHub Actions pro CI/CD
+- PostgreSQL
+- Docker
+- JUnit
+- Mockito
+- Swagger
 
 ---
 
-## 🏆 Conquistas Técnicas
+## Minhas principais implementações e aprendizados nesse projeto
 
-- CI/CD completo com GitHub Actions + DockerHub ✔️
-- Arquitetura em camadas com foco em Clean Code ✔️ 
-- Tratamento global de exceções centralizado ✔️  
-- Segurança robusta com autenticação OAuth2 + JWT ✔️  
-- Persistência com PostgreSQL via Spring Data JPA ✔️  
-- Documentação interativa gerada com Swagger/OpenAPI ✔️  
-- Uso estratégico de branches e boas práticas de versionamento Git ✔️  
+- API Rest completa com tratamento de exceções robusto e validações respeitando as regras de negócio
+- CI/CD garantindo testes unitários, build do projeto e publish no Docker Hub.
+- Implementação de testes unitários cobrindo as regras de negócio principais, atigindo 90% de codigo coberto por testes.
+- Arquitetura em camadas bem definidas (controller, service, repository)
+- Otimização e performance das consultas ao banco de dados, melhorando problema das N+1.
+- Documentação da aplicação com Swagger/OpenAPI para consumo.  
+- Uso de commits semânticos, e versionamento do projeto com Git, trabalhando em branchs para features. 
 
 
-- 100% de cobertura de testes automatizados (JUnit 5 + Mockito) ✔️
+## Relatório JaCoCo para cobertura de testes
 
-### 🔬 Cobertura de Código Comprovada
-
-Abaixo, a prova visual do compromisso com a qualidade e testes unitários, gerada pelo JaCoCo.
 
 ![Relatório de Cobertura JaCoCo do SharedRecipes](https://github.com/kowalskiig/Api-compartihar-receitas/issues/20#issue-3459773303)
 
-## Execução Local
+---
+
+## Teste a aplicação:
 
 ### Requisitos
+- Docker
+- Postman (opcional)
 
-<p align="left">
-  <a href="https://www.docker.com/">
-    <img src="https://www.vectorlogo.zone/logos/docker/docker-official.svg" alt="Docker" width="60" height="60"/>
-  </a>
-  <a href="https://www.postman.com/">
-    <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="Postman" width="60" height="60"/>
-  </a>
-</p>
-
-### Passos
 
 ```bash
 # Clone o repositório
@@ -172,20 +133,7 @@ docker compose up
 
 ```
 
-### ✅ Testes via Postman
-
-- **Coleção completa de endpoints + variáveis de ambiente:**  
-  [![Run in Postman](https://run.pstmn.io/button.svg)](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/collection/45108000-4940dac4-9643-4a53-b591-5ad13ab61698?action=share&creator=45108000&active-environment=45108000-ee357952-f911-405a-9337-066beac8e080)
-
-
-### 🧾 Documentação via Swagger UI
-
-- Acesse a interface interativa da API:  
-  [![Abrir Swagger UI](https://img.shields.io/badge/Abrir-Swagger%20UI-brightgreen)](http://localhost:8080/swagger-ui/index.html)
-
-- Utilize o botão **Authorize** para inserir o token OAuth2 e testar rotas protegidas.
-
----
+### Consumindo API
 
 ##  Credenciais de Teste
 
@@ -201,23 +149,38 @@ senha: 123456
 ```
 ---
 
-##  Simulação de Vaga
+#### Testes via Postman
 
-**Descrição da vaga (simulação):**  
-
-> Buscamos desenvolvedor Java com experiência em construção de APIs REST seguras, autenticação com JWT/OAuth2, versionamento com Git e boas práticas de testes automatizados.
-
-**Minha entrega:**  
-Implementei uma API REST completa para gerenciamento de receitas, com autenticação robusta (JWT + OAuth2), controle de permissões por perfil, CI/CD com GitHub Actions e 100% de cobertura de testes automatizados com JUnit 5 e Mockito.  
-A aplicação foi totalmente conteinerizada com Docker, preparada para produção e validada com testes manuais e automatizados via Postman e Swagger.
+- **Coleção completa de endpoints + variáveis de ambiente:**  
+  [![Run in Postman](https://run.pstmn.io/button.svg)](https://nawszera.postman.co/workspace/nawszera's-Workspace~ea6779bc-203d-4c77-8395-e87a3f1091fa/collection/45108000-4940dac4-9643-4a53-b591-5ad13ab61698?action=share&creator=45108000&active-environment=45108000-ee357952-f911-405a-9337-066beac8e080)
 
 
-## 🐳 Imagem Docker Pública
+#### Ou via Swagger no navegador!
+
+- Acesse a interface interativa da API:  
+  [![Abrir Swagger UI](https://img.shields.io/badge/Abrir-Swagger%20UI-brightgreen)](http://localhost:8080/swagger-ui/index.html)
+
+- Utilize o botão **Authorize** para inserir o token OAuth2 e testar rotas protegidas (necessário obter o token pelo Postman).
+
+---
+
+### Visão geral do projeto:
+
+- Esse projeto foi um marco na minha carreira como Desenvolvedor pois foi a primeira vez que eu criei algo robusto do zero, seguindo regras de negócio que eu mesmo defini e tirei a ideia do papel para o código.
+
+- Apesar de não seguir as melhores práticas, esse projeto me fez refletir bastante e obter mais maturidade, principalmente pensando em legibilidade e decisões que impactam no projeto.
+
+
+## 🐳 Docker Hub caso queira conferir
 
 [![DockerHub - Minhareceita](https://img.shields.io/badge/DockerHub-minhareceita-blue?logo=docker)](https://hub.docker.com/repository/docker/nawszera/minhareceita)
 
-📬 **Conecte-se comigo:**  
-[LinkedIn](https://www.linkedin.com/in/gustavokowalski/) | [Email](mailto:kkowalskigustavo@gmail.com)
+<p>
+  <a href="https://www.linkedin.com/in/gustavokowalski/" target="_blank" style="margin-right: 20px;">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+
+</p>
 
 
 
